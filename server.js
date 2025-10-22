@@ -119,8 +119,15 @@ app.get('/pagespeed', async (req, res) => {
         return res.status(400).json({ error: 'URL parameter is required' });
     }
 
+    const apiKey = process.env.PAGESPEED_API_KEY;
+    
+    if (!apiKey) {
+        return res.status(500).json({ 
+            error: 'PageSpeed API key is not configured. Please add PAGESPEED_API_KEY to environment variables.' 
+        });
+    }
+
     const apiStrategy = strategy || 'desktop';
-    const apiKey = process.env.PAGESPEED_API_KEY || 'AIzaSyBXHHEcprrJP86QauwZiYOveSIjIHVrvNw';
     const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&key=${apiKey}&strategy=${apiStrategy}`;
 
     try {
