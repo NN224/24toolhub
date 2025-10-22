@@ -79,6 +79,9 @@ The Express server provides four API endpoints for advanced features:
     - Reusable article template with Schema markup
     - 3 sample articles: YouTube Thumbnails, Image Compression, PDF Merging
     - All articles SEO-optimized with Open Graph tags and social sharing buttons
+  - **Navigation Enhancement**: Added Blog, Contact, and About links to header across all 81 pages
+    - Consistent navigation across homepage, tools, blog, and info pages
+    - Easy access to key sections from anywhere in the site
 
 ## Running the Application
 
