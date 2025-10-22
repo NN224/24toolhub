@@ -272,19 +272,65 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+    /* Blog index page */
     .blog-grid {
         grid-template-columns: 1fr;
-    }
-    
-    .article-title {
-        font-size: 2rem;
-    }
-    
-    .social-share {
-        flex-wrap: wrap;
+        gap: 20px;
     }
     
     .blog-header h1 {
         font-size: 2rem;
+    }
+
+    .blog-header p {
+        font-size: 1rem;
+    }
+
+    .blog-container {
+        padding: 20px 15px;
+    }
+    
+    /* Article page */
+    .article-container {
+        padding: 20px 15px;
+    }
+
+    .article-title {
+        font-size: 1.75rem;
+        line-height: 1.2;
+    }
+
+    .article-excerpt {
+        font-size: 1rem;
+    }
+
+    .article-content {
+        font-size: 1rem;
+    }
+
+    .article-content h2 {
+        font-size: 1.5rem;
+        margin-top: 30px;
+    }
+
+    .article-content h3 {
+        font-size: 1.25rem;
+        margin-top: 25px;
+    }
+    
+    /* Social share */
+    .social-share {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .share-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Related tools */
+    .related-tools {
+        padding: 20px 15px;
     }
 }
