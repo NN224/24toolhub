@@ -66,6 +66,13 @@ The Express server provides four API endpoints for advanced features:
   - Added /pagespeed endpoint for secure PageSpeed API access
   - **SEO Enhancement**: Added Open Graph meta tags to all main pages
   - **Social Media Image**: Added custom og:image (images/og-image.jpg) for better social sharing appearance
+  - **New High-Traffic Tools Added**:
+    1. YouTube Thumbnail Downloader - Extract thumbnails from YouTube videos
+    2. Image Compressor - Compress images with quality control
+    3. PDF Merger - Combine multiple PDF files using pdf-lib CDN
+    4. Grammar Checker - Check grammar, spelling, and punctuation errors
+  - All new tools are client-side, SEO-optimized with Open Graph tags, and include AdSense ad slots
+  - Removed Background Remover tool after review (algorithm too basic for production quality)
 
 ## Running the Application
 
