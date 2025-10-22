@@ -119,27 +119,75 @@ app.get('/ping', async (req, res) => {
         return res.status(400).json({ error: 'Host parameter is required' });
     }
 
+    const timeoutMs = parseInt(timeout) || 2000;
+    const startTime = Date.now();
+
     try {
-        const config = {
-            timeout: parseInt(timeout) / 1000 || 2, // Convert ms to seconds
-            extra: ['-c', '1'], // Send only one packet
-        };
+        // Try HTTP/HTTPS connection test as an alternative to ICMP ping
+        let testUrl = host;
+        if (!host.startsWith('http://') && !host.startsWith('https://')) {
+            testUrl = 'https://' + host;
+        }
 
-        const result = await ping.promise.probe(host, config);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
-        if (result.alive) {
+        try {
+            const response = await fetch(testUrl, {
+                method: 'HEAD',
+                signal: controller.signal
+            });
+            clearTimeout(timeoutId);
+            
+            const endTime = Date.now();
+            const responseTime = endTime - startTime;
+
             res.status(200).json({
-                host: result.host,
-                time: Math.round(result.time),
+                host: host,
+                time: responseTime,
                 status: 'success'
             });
-        } else {
-            res.status(200).json({
-                host: result.host,
-                time: config.timeout * 1000,
-                status: 'timeout',
-                error: result.output
-            });
+        } catch (fetchError) {
+            clearTimeout(timeoutId);
+            
+            if (fetchError.name === 'AbortError') {
+                res.status(200).json({
+                    host: host,
+                    time: timeoutMs,
+                    status: 'timeout',
+                    error: 'Request timed out'
+                });
+            } else {
+                // Try with http if https failed
+                try {
+                    const httpUrl = 'http://' + host.replace(/^https?:\/\//, '');
+                    const controller2 = new AbortController();
+                    const timeoutId2 = setTimeout(() => controller2.abort(), timeoutMs);
+                    
+                    const response2 = await fetch(httpUrl, {
+                        method: 'HEAD',
+                        signal: controller2.signal
+                    });
+                    clearTimeout(timeoutId2);
+                    
+                    const endTime = Date.now();
+                    const responseTime = endTime - startTime;
+
+                    res.status(200).json({
+                        host: host,
+                        time: responseTime,
+                        status: 'success'
+                    });
+                } catch (error2) {
+                    const endTime = Date.now();
+                    res.status(200).json({
+                        host: host,
+                        time: endTime - startTime,
+                        status: 'error',
+                        error: 'Host unreachable or does not respond to HTTP/HTTPS'
+                    });
+                }
+            }
         }
     } catch (error) {
         res.status(500).json({ error: `Ping failed: ${error.message}` });
