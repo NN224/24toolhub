@@ -4,12 +4,15 @@ const cheerio = require('cheerio');
 const cors = require('cors');
 const dns = require('dns').promises;
 const ping = require('ping');
+const path = require('path');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
-app.use(cors()); // Allow requests from your main website
+app.use(cors());
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname)));
 
 app.get('/analyze-seo', async (req, res) => {
     const url = req.query.url;
@@ -143,6 +146,6 @@ app.get('/ping', async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Backend server for tools listening at http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => {
+    console.log(`24ToolHub server listening at http://0.0.0.0:${port}`);
 });

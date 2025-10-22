@@ -1,8 +1,7 @@
 // Ping Test Tool
 
 // Configuration for the backend API
-// For production on Hostinger, change this to your Node.js app's public URL
-const PING_API_ENDPOINT = 'http://localhost:3000/ping';
+const PING_API_ENDPOINT = '/ping';
 
 class PingTest {
     constructor() {

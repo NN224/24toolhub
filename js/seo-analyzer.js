@@ -1,9 +1,7 @@
 // SEO Analyzer Tool
 
 // Configuration for the backend API
-// For local testing, run the server.js file (node server.js)
-// For production on Hostinger, change this to your Node.js app's public URL
-const SEO_API_ENDPOINT = 'http://localhost:3000/analyze-seo';
+const SEO_API_ENDPOINT = '/analyze-seo';
 
 class SEOAnalyzer {
     constructor() {

@@ -1,8 +1,7 @@
 // DNS Lookup Tool
 
 // Configuration for the backend API
-// For production on Hostinger, change this to your Node.js app's public URL
-const DNS_API_ENDPOINT = 'http://localhost:3000/dns-lookup';
+const DNS_API_ENDPOINT = '/dns-lookup';
 
 class DNSLookup {
     constructor() {
