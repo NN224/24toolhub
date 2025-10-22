@@ -74,14 +74,18 @@ The Express server provides four API endpoints for advanced features:
   - All new tools are client-side, SEO-optimized with Open Graph tags, and include AdSense ad slots
   - Removed Background Remover tool after review (algorithm too basic for production quality)
   - **Google Analytics Integration**: Added Google Analytics tracking (G-2ELW7FZKDW) to all 71 pages (homepage + 70 tool pages)
-  - **Blog System**: Created blog section with article template, 3 sample articles, and SEO optimization
+  - **Blog System**: Created blog section with article template, 5 comprehensive articles, and SEO optimization
     - Blog homepage at /blog/index.html
     - Reusable article template with Schema markup
-    - 3 sample articles: YouTube Thumbnails, Image Compression, PDF Merging
+    - 5 articles: YouTube Thumbnails, Image Compression, PDF Merging, Web Dev Tools Guide, Digital Security (Arabic)
     - All articles SEO-optimized with Open Graph tags and social sharing buttons
-  - **Navigation Enhancement**: Added Blog, Contact, and About links to header across all 81 pages
-    - Consistent navigation across homepage, tools, blog, and info pages
+    - Arabic article with full RTL support
+  - **Navigation Enhancement**: Added unified header navigation (Home, Blog, Contact, About, العربية) across all 87 pages
+    - Consistent navigation across homepage, tools, blog articles, and info pages
     - Easy access to key sections from anywhere in the site
+  - **Latest Blog Articles** (October 22, 2025):
+    - "The Ultimate Guide to Web Development Tools and Utilities" (12-min read, English)
+    - "الدليل الشامل للأمن الرقمي: حماية هويتك وبياناتك في العصر الرقمي" (15-min read, Arabic with RTL)
 
 ## Running the Application
 
