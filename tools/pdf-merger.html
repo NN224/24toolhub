@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Merger - Combine PDF Files Online Free | 24ToolHub</title>
+    <meta name="description" content="Merge multiple PDF files into one document online for free. Combine PDF files in your desired order. Fast, secure, and easy PDF merger tool.">
+    <meta name="keywords" content="pdf merger, combine pdf, merge pdf online, join pdf files, pdf combiner, merge multiple pdf">
+    <meta name="author" content="24ToolHub">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="PDF Merger - Combine PDF Files | 24ToolHub">
+    <meta property="og:description" content="Merge multiple PDF files into one document for free. Easy, fast, and secure.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://24toolhub.com/tools/pdf-merger">
+    <meta property="og:image" content="https://24toolhub.com/images/og-image.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PDF Merger - 24ToolHub">
+    <meta name="twitter:description" content="Merge multiple PDF files into one document for free.">
+    <meta name="twitter:image" content="https://24toolhub.com/images/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png" />
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- PDF-LIB from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2446710277775155" crossorigin="anonymous"></script>
+
+<style>
+.upload-area {
+    border: 3px dashed #667eea;
+    border-radius: 12px;
+    padding: 40px 20px;
+    text-align: center;
+    background: var(--bg-secondary, #f8f9fa);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 20px 0;
+}
+
+.upload-area:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-color: #764ba2;
+}
+
+.upload-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.files-list {
+    margin: 20px 0;
+}
+
+.file-item {
+    background: var(--bg-secondary, #f8f9fa);
+    border: 2px solid var(--border-color, #e0e0e0);
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.file-item:hover {
+    border-color: #667eea;
+    box-shadow: 0 4px 10px rgba(102, 126, 234, 0.1);
+}
+
+.file-icon {
+    font-size: 32px;
+}
+
+.file-info {
+    flex: 1;
+}
+
+.file-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--text-primary, #333);
+}
+
+.file-size {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.file-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-icon {
+    padding: 8px 12px;
+    background: #e9ecef;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-icon:hover {
+    background: #dee2e6;
+}
+
+.btn-remove {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-remove:hover {
+    background: #c82333;
+}
+
+.merge-section {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.merge-btn {
+    padding: 15px 40px;
+    font-size: 18px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.merge-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.merge-btn:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 30px;
+    background: #e9ecef;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 20px 0;
+    display: none;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transition: width 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.drag-handle {
+    cursor: move;
+    font-size: 24px;
+    color: #6c757d;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6c757d;
+}
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-branding">
+                <a href="../index.html" class="logo-link">
+                    <img src="../images/logo.png" alt="24ToolHub" class="logo">
+                </a>
+                <h1 class="site-title">24ToolHub</h1>
+            </div>
+            <div class="header-actions">
+                <button id="langSwitcher" class="lang-switcher">العربية</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Ad Space -->
+    <div class="ad-space ad-leaderboard" aria-label="Advertisement"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="tool-container">
+            <div class="tool-header">
+                <h1>📄 PDF Merger</h1>
+                <p class="tool-description">Combine multiple PDF files into one document. Upload PDF files, arrange them in order, and merge them instantly.</p>
+            </div>
+
+            <!-- Upload Area -->
+            <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                <div class="upload-icon">📤</div>
+                <h3>Click to upload or drag & drop PDF files</h3>
+                <p>Select multiple PDF files to merge</p>
+                <input type="file" id="fileInput" accept=".pdf,application/pdf" multiple>
+            </div>
+
+            <!-- Files List -->
+            <div id="filesContainer">
+                <div class="empty-state" id="emptyState">
+                    <p>No PDF files added yet. Upload files to get started.</p>
+                </div>
+                <div class="files-list" id="filesList" style="display: none;"></div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill" id="progressFill">0%</div>
+            </div>
+
+            <!-- Merge Section -->
+            <div class="merge-section">
+                <button id="mergeBtn" class="merge-btn" onclick="mergePDFs()" disabled>
+                    📑 Merge PDFs
+                </button>
+                <p style="color: #6c757d; margin-top: 15px;">Drag files to reorder them before merging</p>
+            </div>
+
+            <!-- Ad Space -->
+            <div class="ad-space ad-rectangle" aria-label="Advertisement"></div>
+
+            <!-- How to Use -->
+            <div class="tool-section">
+                <h2>📖 How to Use</h2>
+                <ol>
+                    <li>Click the upload area or drag & drop your PDF files</li>
+                    <li>Arrange the files in your desired order by dragging</li>
+                    <li>Click "Merge PDFs" to combine them</li>
+                    <li>Download your merged PDF file</li>
+                </ol>
+            </div>
+
+            <!-- Features -->
+            <div class="tool-section">
+                <h2>✨ Features</h2>
+                <ul>
+                    <li><strong>Multiple Files:</strong> Merge unlimited PDF files</li>
+                    <li><strong>Drag to Reorder:</strong> Easily arrange files in any order</li>
+                    <li><strong>Fast Processing:</strong> Instant merging in your browser</li>
+                    <li><strong>Privacy First:</strong> All processing happens locally</li>
+                    <li><strong>No Upload:</strong> Your files never leave your device</li>
+                    <li><strong>Free Forever:</strong> No limits, no registration required</li>
+                </ul>
+            </div>
+
+            <!-- FAQ -->
+            <div class="tool-section">
+                <h2>❓ FAQ</h2>
+                
+                <h3>How many PDF files can I merge?</h3>
+                <p>You can merge unlimited PDF files. The tool processes everything in your browser.</p>
+
+                <h3>Is there a file size limit?</h3>
+                <p>While there's no hard limit, very large files (>50MB) may take longer to process depending on your device.</p>
+
+                <h3>Are my files uploaded to a server?</h3>
+                <p>No! All merging happens in your browser. Your PDFs stay on your device and are never uploaded.</p>
+
+                <h3>Can I change the order of files?</h3>
+                <p>Yes! Just drag and drop the files in the list to reorder them before merging.</p>
+
+                <h3>What happens to my original files?</h3>
+                <p>Your original files remain unchanged. The tool creates a new merged PDF file.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 24ToolHub. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="../index.html">Home</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/pdf-merger.js"></script>
+</body>
+</html>

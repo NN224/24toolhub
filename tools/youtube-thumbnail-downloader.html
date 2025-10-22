@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Thumbnail Downloader - Download HD Thumbnails | 24ToolHub</title>
+    <meta name="description" content="Download YouTube video thumbnails in HD quality. Get high-resolution thumbnail images from any YouTube video instantly. Free YouTube thumbnail grabber tool.">
+    <meta name="keywords" content="youtube thumbnail downloader, download youtube thumbnail, youtube thumbnail grabber, get youtube thumbnail, youtube image downloader">
+    <meta name="author" content="24ToolHub">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="YouTube Thumbnail Downloader - 24ToolHub">
+    <meta property="og:description" content="Download high-quality thumbnails from any YouTube video instantly. Free and easy to use.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://24toolhub.com/tools/youtube-thumbnail-downloader">
+    <meta property="og:image" content="https://24toolhub.com/images/og-image.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="YouTube Thumbnail Downloader - 24ToolHub">
+    <meta name="twitter:description" content="Download high-quality thumbnails from any YouTube video instantly.">
+    <meta name="twitter:image" content="https://24toolhub.com/images/og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png" />
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2446710277775155" crossorigin="anonymous"></script>
+
+<style>
+.thumbnail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.thumbnail-card {
+    background: var(--bg-secondary, #f8f9fa);
+    border: 2px solid var(--border-color, #e0e0e0);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.thumbnail-card:hover {
+    border-color: #667eea;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+}
+
+.thumbnail-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.thumbnail-quality {
+    font-weight: 600;
+    color: #667eea;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.thumbnail-resolution {
+    color: #6c757d;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.download-btn {
+    width: 100%;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.video-preview {
+    background: var(--bg-secondary, #f8f9fa);
+    border: 2px solid var(--border-color, #e0e0e0);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    display: none;
+}
+
+.video-preview.active {
+    display: block;
+}
+
+.video-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text-primary, #333);
+}
+
+.example-section {
+    background: var(--bg-secondary, #f8f9fa);
+    border-left: 4px solid #667eea;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+
+.example-section h3 {
+    margin-top: 0;
+    color: #667eea;
+}
+
+.example-urls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.example-btn {
+    padding: 8px 16px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.example-btn:hover {
+    background: #764ba2;
+}
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-branding">
+                <a href="../index.html" class="logo-link">
+                    <img src="../images/logo.png" alt="24ToolHub" class="logo">
+                </a>
+                <h1 class="site-title">24ToolHub</h1>
+            </div>
+            <div class="header-actions">
+                <button id="langSwitcher" class="lang-switcher">العربية</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Ad Space -->
+    <div class="ad-space ad-leaderboard" aria-label="Advertisement"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="tool-container">
+            <div class="tool-header">
+                <h1>📺 YouTube Thumbnail Downloader</h1>
+                <p class="tool-description">Download high-quality thumbnails from any YouTube video. Get HD, SD, and default resolution thumbnails instantly.</p>
+            </div>
+
+            <!-- Input Section -->
+            <div class="tool-section">
+                <label for="videoUrl" class="input-label">
+                    <strong>YouTube Video URL:</strong>
+                </label>
+                <div class="input-group">
+                    <input type="text" 
+                           id="videoUrl" 
+                           class="text-input" 
+                           placeholder="https://www.youtube.com/watch?v=VIDEO_ID or https://youtu.be/VIDEO_ID"
+                           style="flex: 1;">
+                    <button onclick="getThumbnails()" class="btn btn-primary">Get Thumbnails</button>
+                    <button onclick="clearAll()" class="btn btn-secondary">Clear</button>
+                </div>
+            </div>
+
+            <!-- Example Section -->
+            <div class="example-section">
+                <h3>💡 Try with example videos:</h3>
+                <div class="example-urls">
+                    <button class="example-btn" onclick="useExample('dQw4w9WgXcQ')">Example 1</button>
+                    <button class="example-btn" onclick="useExample('9bZkp7q19f0')">Example 2</button>
+                    <button class="example-btn" onclick="useExample('jNQXAC9IVRw')">Example 3</button>
+                </div>
+            </div>
+
+            <!-- Video Preview -->
+            <div id="videoPreview" class="video-preview">
+                <div class="video-title" id="videoTitle">Video ID: <span id="videoId"></span></div>
+            </div>
+
+            <!-- Thumbnails Grid -->
+            <div id="thumbnailsContainer"></div>
+
+            <!-- How to Use -->
+            <div class="tool-section">
+                <h2>📖 How to Use</h2>
+                <ol>
+                    <li>Copy the YouTube video URL from your browser</li>
+                    <li>Paste it in the input field above</li>
+                    <li>Click "Get Thumbnails" to see all available sizes</li>
+                    <li>Click "Download" on your preferred quality to save the image</li>
+                </ol>
+            </div>
+
+            <!-- Features -->
+            <div class="tool-section">
+                <h2>✨ Features</h2>
+                <ul>
+                    <li><strong>Multiple Resolutions:</strong> Get thumbnails in MaxRes (1280x720), SD (640x480), HQ (480x360), MQ (320x180), and Default (120x90)</li>
+                    <li><strong>Instant Download:</strong> Download any thumbnail with a single click</li>
+                    <li><strong>No Login Required:</strong> Use completely free without any registration</li>
+                    <li><strong>Works Offline:</strong> All processing happens in your browser</li>
+                    <li><strong>Privacy First:</strong> Your data never leaves your device</li>
+                </ul>
+            </div>
+
+            <!-- Ad Space -->
+            <div class="ad-space ad-rectangle" aria-label="Advertisement"></div>
+
+            <!-- FAQ -->
+            <div class="tool-section">
+                <h2>❓ Frequently Asked Questions</h2>
+                
+                <h3>What video URL formats are supported?</h3>
+                <p>We support all YouTube URL formats including:</p>
+                <ul>
+                    <li>https://www.youtube.com/watch?v=VIDEO_ID</li>
+                    <li>https://youtu.be/VIDEO_ID</li>
+                    <li>https://m.youtube.com/watch?v=VIDEO_ID</li>
+                </ul>
+
+                <h3>Are the thumbnails high quality?</h3>
+                <p>Yes! We provide access to all available thumbnail resolutions, including MaxRes (1280x720) which is the highest quality available.</p>
+
+                <h3>Is this tool free?</h3>
+                <p>Absolutely! This tool is completely free to use with no limitations.</p>
+
+                <h3>Do I need to install anything?</h3>
+                <p>No installation required. This tool works entirely in your web browser.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 24ToolHub. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="../index.html">Home</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/utils.js"></script>
+    <script src="../js/youtube-thumbnail-downloader.js"></script>
+</body>
+</html>
