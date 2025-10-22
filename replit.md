@@ -30,7 +30,7 @@
 ```
 
 ### Backend API Endpoints
-The Express server provides three API endpoints for advanced features:
+The Express server provides four API endpoints for advanced features:
 
 1. **GET /analyze-seo** - SEO analysis tool
    - Analyzes website meta tags, headings, images, and structure
@@ -41,8 +41,13 @@ The Express server provides three API endpoints for advanced features:
    - Uses Node.js dns.promises module
    
 3. **GET /ping** - Network ping test
-   - Tests connectivity to hosts
-   - Uses ping package
+   - Tests connectivity to hosts via HTTP/HTTPS (alternative to ICMP)
+   - Uses node-fetch for connection testing
+   
+4. **GET /pagespeed** - PageSpeed Insights proxy
+   - Securely proxies requests to Google PageSpeed Insights API
+   - Protects API key from client-side exposure
+   - Supports both mobile and desktop strategies
 
 ### Port Configuration
 - **Development & Production**: Port 5000
@@ -56,6 +61,9 @@ The Express server provides three API endpoints for advanced features:
   - Created .gitignore for Node.js project
   - Configured workflow to run the Express server
   - Configured deployment settings for VM deployment
+  - **Security Fix**: Moved Google PageSpeed Insights API key from client-side to server-side
+  - Updated Ping tool to work in Replit environment (HTTP/HTTPS instead of ICMP)
+  - Added /pagespeed endpoint for secure PageSpeed API access
 
 ## Running the Application
 

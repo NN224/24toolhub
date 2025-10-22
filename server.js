@@ -112,6 +112,34 @@ app.get('/dns-lookup', async (req, res) => {
     res.status(200).json(results);
 });
 
+app.get('/pagespeed', async (req, res) => {
+    const { url, strategy } = req.query;
+
+    if (!url) {
+        return res.status(400).json({ error: 'URL parameter is required' });
+    }
+
+    const apiStrategy = strategy || 'desktop';
+    const apiKey = process.env.PAGESPEED_API_KEY || 'AIzaSyBXHHEcprrJP86QauwZiYOveSIjIHVrvNw';
+    const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&key=${apiKey}&strategy=${apiStrategy}`;
+
+    try {
+        const response = await fetch(apiUrl);
+        
+        if (!response.ok) {
+            const errorData = await response.json();
+            return res.status(response.status).json({ 
+                error: errorData.error?.message || 'Failed to fetch PageSpeed data' 
+            });
+        }
+        
+        const data = await response.json();
+        res.status(200).json(data);
+    } catch (error) {
+        res.status(500).json({ error: `PageSpeed API failed: ${error.message}` });
+    }
+});
+
 app.get('/ping', async (req, res) => {
     const { host, timeout } = req.query;
 

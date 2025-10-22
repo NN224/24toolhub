@@ -1,7 +1,7 @@
 // Website Speed Test Tool
 
-// IMPORTANT: Add your Google PageSpeed Insights API Key here
-const PSI_API_KEY = 'AIzaSyBXHHEcprrJP86QauwZiYOveSIjIHVrvNw'; // Replace with your actual API key
+// Use backend API endpoint for secure API key handling
+const PSI_API_ENDPOINT = '/pagespeed';
 
 class WebsiteSpeedTest {
     constructor() {
@@ -213,19 +213,14 @@ class WebsiteSpeedTest {
     }
 
     async performRealSpeedTest(url) {
-        if (PSI_API_KEY === 'YOUR_API_KEY_HERE') {
-            this.showNotification('API Key is not set. Please configure it in the script file.', 'error');
-            throw new Error('API Key not configured');
-        }
-
         const strategy = this.detectMobile() ? 'mobile' : 'desktop';
-        const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&key=${PSI_API_KEY}&strategy=${strategy}`;
+        const apiUrl = `${PSI_API_ENDPOINT}?url=${encodeURIComponent(url)}&strategy=${strategy}`;
 
         try {
             const response = await fetch(apiUrl);
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.error.message || 'Failed to fetch PageSpeed data.');
+                throw new Error(errorData.error || 'Failed to fetch PageSpeed data.');
             }
             const data = await response.json();
             return this.parsePsiResponse(data);
