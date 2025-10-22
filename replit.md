@@ -64,6 +64,8 @@ The Express server provides four API endpoints for advanced features:
   - **Security Fix**: Moved Google PageSpeed Insights API key from client-side to server-side
   - Updated Ping tool to work in Replit environment (HTTP/HTTPS instead of ICMP)
   - Added /pagespeed endpoint for secure PageSpeed API access
+  - **SEO Enhancement**: Added Open Graph meta tags to all main pages
+  - **Social Media Image**: Added custom og:image (images/og-image.jpg) for better social sharing appearance
 
 ## Running the Application
 
