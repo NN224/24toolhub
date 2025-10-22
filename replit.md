@@ -73,6 +73,7 @@ The Express server provides four API endpoints for advanced features:
     4. Grammar Checker - Check grammar, spelling, and punctuation errors
   - All new tools are client-side, SEO-optimized with Open Graph tags, and include AdSense ad slots
   - Removed Background Remover tool after review (algorithm too basic for production quality)
+  - **Google Analytics Integration**: Added Google Analytics tracking (G-2ELW7FZKDW) to all 71 pages (homepage + 70 tool pages)
 
 ## Running the Application
 
