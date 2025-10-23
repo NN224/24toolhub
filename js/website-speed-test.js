@@ -276,13 +276,18 @@ class WebsiteSpeedTest {
         const diagnostics = [];
         Object.keys(audits).forEach(auditId => {
             const audit = audits[auditId];
-            if (audit.details && audit.details.type !== 'opportunity' && audit.score !== null && audit.score < 1 && audit.scoreDisplayMode !== 'notApplicable') {
+            // Include all diagnostics with details, even if score is null (informational audits)
+            // Exclude opportunities (already extracted) and notApplicable audits
+            if (audit.details && 
+                audit.details.type !== 'opportunity' && 
+                audit.scoreDisplayMode !== 'notApplicable' &&
+                (audit.score === null || audit.score < 1)) {
                 diagnostics.push({
                     id: auditId,
                     title: audit.title,
                     description: this.cleanDescription(audit.description),
                     displayValue: audit.displayValue || '',
-                    score: audit.score,
+                    score: audit.score !== null ? audit.score : 0,
                     details: audit.details
                 });
             }
