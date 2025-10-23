@@ -581,12 +581,120 @@ class WebsiteSpeedTest {
         this.updateMetric('cls', results.metrics.cls);
         this.updateMetric('fid', results.metrics.fid);
         
-        // Update recommendations
-        this.updateRecommendations(results.recommendations);
+        // Display detailed audits
+        this.displayOpportunities(results.opportunities);
+        this.displayDiagnostics(results.diagnostics);
+        this.displayPassedAudits(results.passedAudits);
         
         // Show results
         resultsSection.style.display = 'block';
         resultsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    displayOpportunities(opportunities) {
+        const section = document.getElementById('opportunitiesSection');
+        const list = document.getElementById('opportunitiesList');
+        const count = document.getElementById('opportunitiesCount');
+        
+        if (!opportunities || opportunities.length === 0) {
+            section.style.display = 'none';
+            return;
+        }
+        
+        count.textContent = opportunities.length;
+        list.innerHTML = '';
+        
+        opportunities.forEach(opp => {
+            const item = document.createElement('div');
+            item.className = 'audit-item';
+            
+            const savings = opp.displayValue || '';
+            const savingsClass = opp.score < 0.5 ? '' : 'warning';
+            
+            item.innerHTML = `
+                <div class="audit-header">
+                    <span class="audit-icon">⚡</span>
+                    <div class="audit-content">
+                        <h5 class="audit-title">
+                            ${this.escapeHtml(opp.title)}
+                            ${savings ? `<span class="audit-savings ${savingsClass}">${this.escapeHtml(savings)}</span>` : ''}
+                        </h5>
+                        <p class="audit-description">${this.escapeHtml(opp.description)}</p>
+                    </div>
+                </div>
+            `;
+            
+            list.appendChild(item);
+        });
+        
+        section.style.display = 'block';
+    }
+
+    displayDiagnostics(diagnostics) {
+        const section = document.getElementById('diagnosticsSection');
+        const list = document.getElementById('diagnosticsList');
+        const count = document.getElementById('diagnosticsCount');
+        
+        if (!diagnostics || diagnostics.length === 0) {
+            section.style.display = 'none';
+            return;
+        }
+        
+        count.textContent = diagnostics.length;
+        list.innerHTML = '';
+        
+        diagnostics.forEach(diag => {
+            const item = document.createElement('div');
+            item.className = 'audit-item';
+            
+            item.innerHTML = `
+                <div class="audit-header">
+                    <span class="audit-icon">🔍</span>
+                    <div class="audit-content">
+                        <h5 class="audit-title">${this.escapeHtml(diag.title)}</h5>
+                        <p class="audit-description">${this.escapeHtml(diag.description)}</p>
+                        ${diag.displayValue ? `<p class="audit-description"><strong>${this.escapeHtml(diag.displayValue)}</strong></p>` : ''}
+                    </div>
+                </div>
+            `;
+            
+            list.appendChild(item);
+        });
+        
+        section.style.display = 'block';
+    }
+
+    displayPassedAudits(passedAudits) {
+        const section = document.getElementById('passedSection');
+        const list = document.getElementById('passedList');
+        const count = document.getElementById('passedCount');
+        
+        if (!passedAudits || passedAudits.length === 0) {
+            section.style.display = 'none';
+            return;
+        }
+        
+        count.textContent = passedAudits.length;
+        list.innerHTML = '';
+        
+        // Start collapsed
+        section.classList.add('collapsed');
+        
+        passedAudits.forEach(audit => {
+            const item = document.createElement('div');
+            item.className = 'passed-audit-item';
+            item.innerHTML = `<h6 class="passed-audit-title">✓ ${this.escapeHtml(audit.title)}</h6>`;
+            list.appendChild(item);
+        });
+        
+        section.style.display = 'block';
+    }
+
+    escapeHtml(text) {
+        if (!text) return '';
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
     }
 
     updateScoreCircle(score) {
