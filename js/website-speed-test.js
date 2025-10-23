@@ -236,14 +236,6 @@ class WebsiteSpeedTest {
         const audits = lighthouse.audits;
         const categories = lighthouse.categories;
 
-        const getMetric = (id) => {
-            const audit = audits[id];
-            return {
-                value: audit.numericValue,
-                grade: this.getGrade(audit.numericValue, [audit.score * 100, audit.score * 100 + 10]) // Simplified grading
-            };
-        };
-
         const coreWebVitals = {
             fcp: {
                 value: audits['first-contentful-paint'].numericValue,
@@ -254,22 +246,76 @@ class WebsiteSpeedTest {
                 grade: this.getGrade(audits['largest-contentful-paint'].score * 100, [90, 50], true)
             },
             cls: {
-                value: parseFloat(audits['cumulative-layout-shift'].displayValue),
+                value: parseFloat(audits['cumulative-layout-shift'].displayValue) || 0,
                 grade: this.getGrade(audits['cumulative-layout-shift'].score * 100, [90, 50], true)
             },
             fid: {
-                value: audits['max-potential-fid'].numericValue, // Using Max Potential FID as a proxy
-                grade: this.getGrade(audits['max-potential-fid'].score * 100, [90, 50], true)
+                value: audits['max-potential-fid']?.numericValue || 0,
+                grade: this.getGrade((audits['max-potential-fid']?.score || 1) * 100, [90, 50], true)
             }
         };
+
+        // Extract detailed opportunities (things to fix with savings)
+        const opportunities = [];
+        Object.keys(audits).forEach(auditId => {
+            const audit = audits[auditId];
+            if (audit.details && audit.details.type === 'opportunity' && audit.score !== null && audit.score < 1) {
+                opportunities.push({
+                    id: auditId,
+                    title: audit.title,
+                    description: this.cleanDescription(audit.description),
+                    displayValue: audit.displayValue || '',
+                    score: audit.score,
+                    numericValue: audit.numericValue,
+                    details: audit.details
+                });
+            }
+        });
+
+        // Extract diagnostics (issues that need attention)
+        const diagnostics = [];
+        Object.keys(audits).forEach(auditId => {
+            const audit = audits[auditId];
+            if (audit.details && audit.details.type !== 'opportunity' && audit.score !== null && audit.score < 1 && audit.scoreDisplayMode !== 'notApplicable') {
+                diagnostics.push({
+                    id: auditId,
+                    title: audit.title,
+                    description: this.cleanDescription(audit.description),
+                    displayValue: audit.displayValue || '',
+                    score: audit.score,
+                    details: audit.details
+                });
+            }
+        });
+
+        // Extract passed audits
+        const passedAudits = [];
+        Object.keys(audits).forEach(auditId => {
+            const audit = audits[auditId];
+            if (audit.score === 1 && audit.scoreDisplayMode !== 'notApplicable') {
+                passedAudits.push({
+                    id: auditId,
+                    title: audit.title,
+                    description: this.cleanDescription(audit.description)
+                });
+            }
+        });
 
         return {
             url: data.id,
             overallScore: Math.round(categories.performance.score * 100),
             isMobile: lighthouse.configSettings.emulatedFormFactor === 'mobile',
             metrics: coreWebVitals,
-            recommendations: this.generateRealRecommendations(audits)
+            opportunities: opportunities.sort((a, b) => (b.numericValue || 0) - (a.numericValue || 0)), // Sort by potential savings
+            diagnostics: diagnostics.sort((a, b) => a.score - b.score), // Sort by severity
+            passedAudits: passedAudits
         };
+    }
+
+    cleanDescription(description) {
+        if (!description) return '';
+        // Remove markdown links [text](url) -> text
+        return description.replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1').trim();
     }
 
     async measureResponseTime(url) {
