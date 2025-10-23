@@ -337,10 +337,35 @@
                         </div>
                     </div>
 
-                    <!-- Recommendations -->
-                    <div class="recommendations-section">
-                        <h4 class="recommendations-heading" data-en="Optimization Recommendations" data-ar="توصيات التحسين">Optimization Recommendations</h4>
-                        <div id="recommendationsList" class="recommendations-list"></div>
+                    <!-- Opportunities (Things to fix with savings) -->
+                    <div class="detailed-section" id="opportunitiesSection" style="display: none;">
+                        <h4 class="section-heading">
+                            <span class="section-icon">💡</span>
+                            <span data-en="Opportunities" data-ar="فرص التحسين">Opportunities</span>
+                            <span class="section-count" id="opportunitiesCount">0</span>
+                        </h4>
+                        <div id="opportunitiesList" class="audit-list"></div>
+                    </div>
+
+                    <!-- Diagnostics (Issues that need attention) -->
+                    <div class="detailed-section" id="diagnosticsSection" style="display: none;">
+                        <h4 class="section-heading">
+                            <span class="section-icon">⚠️</span>
+                            <span data-en="Diagnostics" data-ar="التشخيصات">Diagnostics</span>
+                            <span class="section-count" id="diagnosticsCount">0</span>
+                        </h4>
+                        <div id="diagnosticsList" class="audit-list"></div>
+                    </div>
+
+                    <!-- Passed Audits -->
+                    <div class="detailed-section" id="passedSection" style="display: none;">
+                        <h4 class="section-heading section-heading-collapsible" onclick="this.parentElement.classList.toggle('collapsed')">
+                            <span class="section-icon">✅</span>
+                            <span data-en="Passed Audits" data-ar="الفحوصات الناجحة">Passed Audits</span>
+                            <span class="section-count" id="passedCount">0</span>
+                            <span class="collapse-arrow">▼</span>
+                        </h4>
+                        <div id="passedList" class="audit-list"></div>
                     </div>
                 </div>
             </div>
