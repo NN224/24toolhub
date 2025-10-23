@@ -546,17 +546,38 @@ class WebsiteSpeedTest {
     updateScoreCircle(score) {
         const scoreCircle = document.querySelector('.score-circle');
         const percentage = (score / 100) * 360;
-        scoreCircle.style.background = `conic-gradient(var(--accent-primary) 0deg, var(--accent-primary) ${percentage}deg, #e5e7eb ${percentage}deg)`;
+        
+        // Color based on score
+        let color = '#ef4444'; // Poor (red)
+        if (score >= 90) {
+            color = '#10b981'; // Good (green)
+        } else if (score >= 50) {
+            color = '#f59e0b'; // Needs improvement (orange)
+        }
+        
+        scoreCircle.style.background = `conic-gradient(${color} 0deg, ${color} ${percentage}deg, #e5e7eb ${percentage}deg)`;
     }
 
     updateMetric(metric, data) {
         const valueElement = document.getElementById(`${metric}Value`);
         const gradeElement = document.getElementById(`${metric}Grade`);
         
+        // Format values professionally
         if (metric === 'cls') {
-            valueElement.textContent = data.value;
+            // CLS is a score, not a time - format to 3 decimal places
+            const clsValue = parseFloat(data.value);
+            valueElement.textContent = clsValue.toFixed(3);
         } else {
-            valueElement.textContent = `${data.value}ms`;
+            // Time-based metrics - convert to appropriate unit
+            const timeValue = parseFloat(data.value);
+            
+            if (timeValue >= 1000) {
+                // Convert to seconds for values >= 1s (more readable)
+                valueElement.textContent = `${(timeValue / 1000).toFixed(2)}s`;
+            } else {
+                // Keep as milliseconds for values < 1s
+                valueElement.textContent = `${Math.round(timeValue)}ms`;
+            }
         }
         
         gradeElement.textContent = this.formatGrade(data.grade);

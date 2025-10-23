@@ -55,6 +55,21 @@ The Express server provides four API endpoints for advanced features:
 - Frontend and backend run on the same server
 
 ## Recent Changes
+- **October 23, 2025**: PageSpeed Tool Enhancements & Contact Page Fixes
+  - **Website Speed Test Improvements**:
+    - Professional number formatting (1.02s instead of 1015.91031394397ms)
+    - Automatic unit conversion (seconds for values >= 1s, milliseconds for < 1s)
+    - Color-coded score circle (green 90+, orange 50-89, red <50)
+    - Fixed CLS display to 3 decimal places (0.001 instead of long decimals)
+  - **Contact Page Fixes**:
+    - Removed public-facing setup instructions (📧 إعداد نموذج الاتصال section)
+    - Added Google Analytics tracking
+    - Fixed duplicate field names (changed 'subject' to 'inquiry_topic')
+  - **Security Enhancement**:
+    - Removed hardcoded PageSpeed API key from server.js
+    - Now uses PAGESPEED_API_KEY environment variable only
+    - Added proper error message when API key is missing
+  
 - **October 22, 2025**: Initial import from GitHub and Replit setup
   - Updated server.js to serve static files and bind to port 5000
   - Changed API endpoint URLs in JavaScript files from localhost:3000 to relative paths
