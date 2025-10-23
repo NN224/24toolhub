@@ -56,11 +56,13 @@ The Express server provides four API endpoints for advanced features:
 
 ## Recent Changes
 - **October 23, 2025**: PageSpeed Tool Enhancements & Contact Page Fixes
-  - **Website Speed Test Improvements**:
-    - Professional number formatting (1.02s instead of 1015.91031394397ms)
-    - Automatic unit conversion (seconds for values >= 1s, milliseconds for < 1s)
-    - Color-coded score circle (green 90+, orange 50-89, red <50)
-    - Fixed CLS display to 3 decimal places (0.001 instead of long decimals)
+  - **Website Speed Test - Major Feature Update**:
+    - **Detailed Results Like Google PageSpeed**: Added comprehensive audit sections (Opportunities, Diagnostics, Passed Audits)
+    - **Professional Number Formatting**: Times show as 1.02s instead of 1015ms; CLS displays as 0.001
+    - **Color-Coded Score Circle**: Green for 90+, orange for 50-89, red for <50
+    - **Complete Audit Data**: Extracts all opportunities with potential savings, all diagnostics (including informational), and all passed audits
+    - **Collapsible Sections**: Passed audits start collapsed; all sections show audit count badges
+    - **Professional UI**: Matches Google PageSpeed design with icons, color coding, and hover effects
   - **Contact Page Fixes**:
     - Removed public-facing setup instructions (📧 إعداد نموذج الاتصال section)
     - Added Google Analytics tracking
