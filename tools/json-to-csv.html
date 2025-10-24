@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Convert JSON data to CSV format instantly. Free online JSON to CSV converter with download option. Perfect for data export and analysis.">
+    <meta name="keywords" content="json to csv, json converter, csv converter, json to csv online, data converter">
+    <meta property="og:title" content="JSON to CSV Converter - Convert JSON to CSV Online | 24ToolHub" />
+    <meta property="og:description" content="Convert JSON data to CSV format instantly with our free online tool" />
+    <meta property="og:url" content="https://24toolhub.com/tools/json-to-csv.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://24toolhub.com/images/og-image.jpg" />
+    <title>JSON to CSV Converter - Convert JSON to CSV Online | 24ToolHub</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2446710277775155" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ELW7FZKDW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2ELW7FZKDW');
+    </script>
+    <style>
+      .converter-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin: 30px 0;
+      }
+      @media (max-width: 768px) {
+        .converter-container {
+          grid-template-columns: 1fr;
+        }
+      }
+      .input-section, .output-section {
+        background: var(--bg-secondary);
+        padding: 25px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+      }
+      .input-section h3, .output-section h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+        color: var(--text-primary);
+      }
+      .converter-textarea {
+        width: 100%;
+        min-height: 300px;
+        padding: 15px;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        resize: vertical;
+      }
+      .options-section {
+        background: var(--bg-secondary);
+        padding: 20px;
+        border-radius: 12px;
+        margin: 20px 0;
+      }
+      .option-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 10px 0;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+        margin: 20px 0;
+      }
+      .stat-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+      }
+      .stat-number {
+        font-size: 1.8rem;
+        font-weight: bold;
+        display: block;
+      }
+      .stat-label {
+        font-size: 0.85rem;
+        opacity: 0.9;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <div class="header-branding">
+          <a href="../index.html" class="logo-link">
+            <img src="../images/logo.png" alt="24ToolHub" class="logo">
+          </a>
+          <h1 class="site-title">24ToolHub</h1>
+        </div>
+        <div class="header-actions">
+          <a href="../index.html" class="btn btn-secondary">Home</a>
+          <a href="../blog/index.html" class="btn btn-secondary">Blog</a>
+          <a href="../contact.html" class="btn btn-secondary">Contact</a>
+          <a href="../about.html" class="btn btn-secondary">About</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="ad-space ad-leaderboard"></div>
+
+    <main class="main-content">
+      <a href="../index.html" class="back-link">← Back to Home</a>
+      
+      <h1>📊 JSON to CSV Converter</h1>
+      <p class="tool-description">Convert JSON data to CSV format instantly. Perfect for data export, Excel import, and data analysis.</p>
+
+      <div class="stats" id="stats" style="display: none;">
+        <div class="stat-box">
+          <span class="stat-number" id="rowCount">0</span>
+          <span class="stat-label">Rows</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number" id="columnCount">0</span>
+          <span class="stat-label">Columns</span>
+        </div>
+      </div>
+
+      <div class="converter-container">
+        <div class="input-section">
+          <h3>JSON Input</h3>
+          <textarea id="jsonInput" class="converter-textarea" placeholder='[{"name": "John", "age": 30, "city": "New York"}, {"name": "Jane", "age": 25, "city": "London"}]'></textarea>
+        </div>
+
+        <div class="output-section">
+          <h3>CSV Output</h3>
+          <textarea id="csvOutput" class="converter-textarea" readonly placeholder="CSV output will appear here..."></textarea>
+        </div>
+      </div>
+
+      <div class="options-section">
+        <div class="option-group">
+          <input type="checkbox" id="includeHeaders" checked>
+          <label for="includeHeaders">Include Column Headers</label>
+        </div>
+        <div class="option-group">
+          <label for="delimiter">Delimiter:</label>
+          <select id="delimiter">
+            <option value=",">Comma (,)</option>
+            <option value=";">Semicolon (;)</option>
+            <option value="\t">Tab</option>
+            <option value="|">Pipe (|)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button id="convertBtn" class="btn btn-primary">Convert to CSV</button>
+        <button id="downloadBtn" class="btn btn-primary" style="display: none;">Download CSV</button>
+        <button id="copyBtn" class="btn btn-secondary" style="display: none;">Copy CSV</button>
+        <button id="clearBtn" class="btn btn-secondary">Clear</button>
+      </div>
+
+      <div class="ad-space ad-rectangle"></div>
+    </main>
+
+    <script src="../js/json-to-csv.js"></script>
+  </body>
+</html>

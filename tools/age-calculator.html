@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Calculate your exact age in years, months, days, hours, and minutes. Free online age calculator with detailed breakdown and next birthday countdown.">
+    <meta name="keywords" content="age calculator, calculate age, age in days, age in months, birthday calculator, how old am i">
+    <meta property="og:title" content="Age Calculator - Calculate Your Exact Age Online | 24ToolHub" />
+    <meta property="og:description" content="Calculate your age in years, months, days with detailed breakdown" />
+    <meta property="og:url" content="https://24toolhub.com/tools/age-calculator.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://24toolhub.com/images/og-image.jpg" />
+    <title>Age Calculator - Calculate Your Exact Age | 24ToolHub</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2446710277775155" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ELW7FZKDW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2ELW7FZKDW');
+    </script>
+    <style>
+      .calculator-container {
+        background: var(--bg-secondary);
+        padding: 30px;
+        border-radius: 12px;
+        margin: 30px 0;
+        border: 1px solid var(--border-color);
+      }
+      .date-inputs {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+      }
+      .input-group {
+        display: flex;
+        flex-direction: column;
+      }
+      .input-group label {
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--text-primary);
+      }
+      .input-group input {
+        padding: 12px;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 16px;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+      }
+      .results-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+        display: none;
+      }
+      .results-grid.active {
+        display: grid;
+      }
+      .result-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 25px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      }
+      .result-number {
+        font-size: 3rem;
+        font-weight: bold;
+        display: block;
+        margin: 10px 0;
+      }
+      .result-label {
+        font-size: 1rem;
+        opacity: 0.9;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .summary-card {
+        background: var(--bg-secondary);
+        padding: 25px;
+        border-radius: 12px;
+        margin: 20px 0;
+        border-left: 4px solid #667eea;
+        display: none;
+      }
+      .summary-card.active {
+        display: block;
+      }
+      .summary-card h3 {
+        margin-top: 0;
+        color: #667eea;
+      }
+      .summary-text {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: var(--text-primary);
+      }
+      .birthday-countdown {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+        margin: 20px 0;
+        display: none;
+      }
+      .birthday-countdown.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <div class="header-branding">
+          <a href="../index.html" class="logo-link">
+            <img src="../images/logo.png" alt="24ToolHub" class="logo">
+          </a>
+          <h1 class="site-title">24ToolHub</h1>
+        </div>
+        <div class="header-actions">
+          <a href="../index.html" class="btn btn-secondary">Home</a>
+          <a href="../blog/index.html" class="btn btn-secondary">Blog</a>
+          <a href="../contact.html" class="btn btn-secondary">Contact</a>
+          <a href="../about.html" class="btn btn-secondary">About</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="ad-space ad-leaderboard"></div>
+
+    <main class="main-content">
+      <a href="../index.html" class="back-link">← Back to Home</a>
+      
+      <h1>🎂 Age Calculator</h1>
+      <p class="tool-description">Calculate your exact age in years, months, days, hours, and minutes. Find out how old you are with precision!</p>
+
+      <div class="calculator-container">
+        <div class="date-inputs">
+          <div class="input-group">
+            <label for="birthDate">Date of Birth:</label>
+            <input type="date" id="birthDate" max="">
+          </div>
+          <div class="input-group">
+            <label for="currentDate">Calculate Age On:</label>
+            <input type="date" id="currentDate">
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button id="calculateBtn" class="btn btn-primary">Calculate Age</button>
+          <button id="clearBtn" class="btn btn-secondary">Clear</button>
+        </div>
+      </div>
+
+      <div class="results-grid" id="resultsGrid">
+        <div class="result-card">
+          <span class="result-number" id="years">0</span>
+          <span class="result-label">Years</span>
+        </div>
+        <div class="result-card">
+          <span class="result-number" id="months">0</span>
+          <span class="result-label">Months</span>
+        </div>
+        <div class="result-card">
+          <span class="result-number" id="days">0</span>
+          <span class="result-label">Days</span>
+        </div>
+        <div class="result-card">
+          <span class="result-number" id="hours">0</span>
+          <span class="result-label">Hours</span>
+        </div>
+        <div class="result-card">
+          <span class="result-number" id="minutes">0</span>
+          <span class="result-label">Minutes</span>
+        </div>
+      </div>
+
+      <div class="summary-card" id="summaryCard">
+        <h3>Age Summary</h3>
+        <p class="summary-text" id="summaryText"></p>
+      </div>
+
+      <div class="birthday-countdown" id="birthdayCountdown">
+        <h3>🎉 Next Birthday</h3>
+        <p id="countdownText"></p>
+      </div>
+
+      <div class="ad-space ad-rectangle"></div>
+    </main>
+
+    <script src="../js/age-calculator.js"></script>
+  </body>
+</html>

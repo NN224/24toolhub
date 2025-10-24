@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Format and beautify SQL queries online. Free SQL formatter with syntax highlighting and multiple formatting styles for better code readability.">
+    <meta name="keywords" content="sql formatter, sql beautifier, format sql, sql pretty print, sql tool, online sql formatter">
+    <meta property="og:title" content="SQL Formatter - Format SQL Queries Online | 24ToolHub" />
+    <meta property="og:description" content="Format and beautify SQL queries with our free online SQL formatter" />
+    <meta property="og:url" content="https://24toolhub.com/tools/sql-formatter.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://24toolhub.com/images/og-image.jpg" />
+    <title>SQL Formatter - Format SQL Queries Online | 24ToolHub</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2446710277775155" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ELW7FZKDW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2ELW7FZKDW');
+    </script>
+    <style>
+      .formatter-container {
+        display: grid;
+        gap: 20px;
+        margin: 30px 0;
+      }
+      .sql-textarea {
+        width: 100%;
+        min-height: 300px;
+        padding: 20px;
+        border: 2px solid var(--border-color);
+        border-radius: 12px;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        line-height: 1.6;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        resize: vertical;
+      }
+      .options-panel {
+        background: var(--bg-secondary);
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+      }
+      .options-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+      }
+      .option-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .option-group label {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+      .option-group select, .option-group input {
+        padding: 10px;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+      }
+      .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .output-section {
+        background: var(--bg-secondary);
+        padding: 25px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        display: none;
+      }
+      .output-section.active {
+        display: block;
+      }
+      .output-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+      .line-numbers {
+        background: #2d2d2d;
+        color: #d4d4d4;
+        padding: 20px;
+        border-radius: 8px;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        overflow-x: auto;
+        line-height: 1.6;
+      }
+      .sql-keyword { color: #569cd6; font-weight: bold; }
+      .sql-function { color: #dcdcaa; }
+      .sql-string { color: #ce9178; }
+      .sql-number { color: #b5cea8; }
+      .sql-comment { color: #6a9955; font-style: italic; }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <div class="header-branding">
+          <a href="../index.html" class="logo-link">
+            <img src="../images/logo.png" alt="24ToolHub" class="logo">
+          </a>
+          <h1 class="site-title">24ToolHub</h1>
+        </div>
+        <div class="header-actions">
+          <a href="../index.html" class="btn btn-secondary">Home</a>
+          <a href="../blog/index.html" class="btn btn-secondary">Blog</a>
+          <a href="../contact.html" class="btn btn-secondary">Contact</a>
+          <a href="../about.html" class="btn btn-secondary">About</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="ad-space ad-leaderboard"></div>
+
+    <main class="main-content">
+      <a href="../index.html" class="back-link">← Back to Home</a>
+      
+      <h1>🗄️ SQL Formatter</h1>
+      <p class="tool-description">Format and beautify SQL queries for better readability. Supports all major SQL dialects with customizable formatting options.</p>
+
+      <div class="formatter-container">
+        <div>
+          <h3>Input SQL:</h3>
+          <textarea id="sqlInput" class="sql-textarea" placeholder="SELECT * FROM users WHERE id=1 AND status='active' ORDER BY created_at DESC"></textarea>
+        </div>
+
+        <div class="options-panel">
+          <h3>Formatting Options:</h3>
+          <div class="options-grid">
+            <div class="option-group">
+              <label for="indentSize">Indent Size:</label>
+              <select id="indentSize">
+                <option value="2">2 spaces</option>
+                <option value="4" selected>4 spaces</option>
+                <option value="8">8 spaces</option>
+                <option value="\t">Tab</option>
+              </select>
+            </div>
+            <div class="option-group">
+              <label for="keywordCase">Keyword Case:</label>
+              <select id="keywordCase">
+                <option value="upper" selected>UPPERCASE</option>
+                <option value="lower">lowercase</option>
+                <option value="capitalize">Capitalize</option>
+              </select>
+            </div>
+            <div class="checkbox-group">
+              <input type="checkbox" id="newlineBeforeKeywords" checked>
+              <label for="newlineBeforeKeywords">New line before keywords</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button id="formatBtn" class="btn btn-primary">Format SQL</button>
+          <button id="minifyBtn" class="btn btn-secondary">Minify SQL</button>
+          <button id="copyBtn" class="btn btn-secondary">Copy Output</button>
+          <button id="clearBtn" class="btn btn-secondary">Clear</button>
+        </div>
+      </div>
+
+      <div class="output-section" id="outputSection">
+        <div class="output-header">
+          <h3>Formatted SQL:</h3>
+        </div>
+        <div class="line-numbers" id="formattedOutput"></div>
+      </div>
+
+      <div class="ad-space ad-rectangle"></div>
+    </main>
+
+    <script src="../js/sql-formatter.js"></script>
+  </body>
+</html>
