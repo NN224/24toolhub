@@ -108,9 +108,22 @@ class Chatbot {
         const contentDiv = document.createElement('div');
         contentDiv.className = 'message-content';
         
-        // Convert markdown-style links to HTML
-        const formattedContent = content.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
-        contentDiv.innerHTML = formattedContent;
+        if (!isUser) {
+            // Format bot messages with proper structure
+            let formattedContent = content
+                // Convert markdown-style links to HTML with styling
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+                // Convert bullet points to proper list items
+                .replace(/\*\s+\*\*([^*]+)\*\*:/g, '<br><strong>• $1:</strong>')
+                .replace(/^\*\s+/gm, '• ')
+                // Convert line breaks to <br> tags
+                .replace(/\n/g, '<br>');
+            
+            contentDiv.innerHTML = formattedContent;
+        } else {
+            // User messages - simple text
+            contentDiv.textContent = content;
+        }
         
         messageDiv.appendChild(contentDiv);
         this.messagesContainer.appendChild(messageDiv);

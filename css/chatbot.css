@@ -149,8 +149,15 @@
   padding: 12px 16px;
   border-radius: 16px;
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.6;
   word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.message-content br {
+  display: block;
+  content: "";
+  margin: 0.3em 0;
 }
 
 .chatbot-message.user .message-content {
@@ -176,6 +183,15 @@
 .chatbot-message.bot .message-content a:hover {
   color: #764ba2;
   border-bottom-color: #764ba2;
+}
+
+.chatbot-message.bot .message-content strong {
+  color: #444;
+  font-weight: 600;
+}
+
+.chatbot-message.user .message-content strong {
+  font-weight: 700;
 }
 
 .typing-indicator {
