@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Convert JSON data to XML format instantly. Free online JSON to XML converter with custom formatting, nested object support, and download option.">
+    <meta name="keywords" content="json to xml, json converter, xml converter, json to xml online, data converter">
+    <meta property="og:title" content="JSON to XML Converter - Convert JSON to XML Online | 24ToolHub" />
+    <meta property="og:description" content="Convert JSON data to XML format instantly with our free online tool. Support for nested objects and arrays." />
+    <meta property="og:url" content="https://24toolhub.com/tools/json-to-xml.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://24toolhub.com/images/og-image.jpg" />
+    <title>JSON to XML Converter - Convert JSON to XML Online | 24ToolHub</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2446710277775155" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ELW7FZKDW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2ELW7FZKDW');
+    </script>
+    <style>
+      .converter-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin: 30px 0;
+      }
+      @media (max-width: 768px) {
+        .converter-container {
+          grid-template-columns: 1fr;
+        }
+      }
+      .input-section, .output-section {
+        background: var(--bg-secondary);
+        padding: 25px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+      }
+      .input-section h3, .output-section h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+        color: var(--text-primary);
+      }
+      .converter-textarea {
+        width: 100%;
+        min-height: 300px;
+        padding: 15px;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        resize: vertical;
+      }
+      .options-section {
+        background: var(--bg-secondary);
+        padding: 20px;
+        border-radius: 12px;
+        margin: 20px 0;
+      }
+      .option-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 10px 0;
+      }
+      .option-group label {
+        color: var(--text-primary);
+      }
+      .option-group input[type="text"] {
+        padding: 8px;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        color: var(--text-primary);
+        width: 200px;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+        margin: 20px 0;
+      }
+      .stat-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+      }
+      .stat-number {
+        font-size: 1.8rem;
+        font-weight: bold;
+        display: block;
+      }
+      .stat-label {
+        font-size: 0.85rem;
+        opacity: 0.9;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <div class="header-branding">
+          <a href="../index.html" class="logo-link">
+            <img src="../images/logo.png" alt="24ToolHub" class="logo">
+          </a>
+          <h1 class="site-title">24ToolHub</h1>
+        </div>
+        <div class="header-actions">
+          <a href="../index.html" class="btn btn-secondary">Home</a>
+          <a href="../blog/index.html" class="btn btn-secondary">Blog</a>
+          <a href="../contact.html" class="btn btn-secondary">Contact</a>
+          <a href="../about.html" class="btn btn-secondary">About</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="ad-space ad-leaderboard"></div>
+
+    <main class="main-content">
+      <a href="../index.html" class="back-link">← Back to Home</a>
+      
+      <h1>🔄 JSON to XML Converter</h1>
+      <p class="tool-description">Convert JSON data to XML format instantly. Perfect for data transformation, API integration, and XML generation.</p>
+
+      <div class="stats" id="stats" style="display: none;">
+        <div class="stat-box">
+          <span class="stat-number" id="elementCount">0</span>
+          <span class="stat-label">Elements</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number" id="depthLevel">0</span>
+          <span class="stat-label">Depth</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number" id="byteSize">0</span>
+          <span class="stat-label">Bytes</span>
+        </div>
+      </div>
+
+      <div class="converter-container">
+        <div class="input-section">
+          <h3>JSON Input</h3>
+          <textarea id="jsonInput" class="converter-textarea" placeholder='{"name": "John", "age": 30, "city": "New York"}'></textarea>
+        </div>
+
+        <div class="output-section">
+          <h3>XML Output</h3>
+          <textarea id="xmlOutput" class="converter-textarea" readonly placeholder="XML output will appear here..."></textarea>
+        </div>
+      </div>
+
+      <div class="options-section">
+        <div class="option-group">
+          <label for="rootElement">Root Element Name:</label>
+          <input type="text" id="rootElement" value="root" placeholder="root">
+        </div>
+        <div class="option-group">
+          <input type="checkbox" id="prettyPrint" checked>
+          <label for="prettyPrint">Pretty Print (Formatted)</label>
+        </div>
+        <div class="option-group">
+          <input type="checkbox" id="includeDeclaration" checked>
+          <label for="includeDeclaration">Include XML Declaration</label>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button id="convertBtn" class="btn btn-primary">Convert to XML</button>
+        <button id="downloadBtn" class="btn btn-primary" style="display: none;">Download XML</button>
+        <button id="copyBtn" class="btn btn-secondary" style="display: none;">Copy XML</button>
+        <button id="clearBtn" class="btn btn-secondary">Clear</button>
+      </div>
+
+      <div class="ad-space ad-rectangle"></div>
+
+      <div class="seo-content">
+        <div class="seo-section">
+          <h2>Transform JSON to XML Instantly</h2>
+          <p>Our JSON to XML converter makes it easy to transform your JSON data into well-formatted XML. Whether you're working with APIs, data migration, or system integration, this tool handles nested objects and arrays seamlessly.</p>
+          
+          <h3>Key Features</h3>
+          <ul>
+            <li><strong>Nested Object Support:</strong> Handles complex JSON structures with nested objects and arrays</li>
+            <li><strong>Custom Root Element:</strong> Define your own root element name for the XML output</li>
+            <li><strong>Pretty Print:</strong> Choose between formatted or compact XML output</li>
+            <li><strong>XML Declaration:</strong> Option to include or exclude the XML declaration header</li>
+            <li><strong>Instant Conversion:</strong> Client-side processing ensures fast, secure conversion</li>
+          </ul>
+
+          <h3>Common Use Cases</h3>
+          <ul>
+            <li>API data transformation between JSON and XML formats</li>
+            <li>Converting configuration files from JSON to XML</li>
+            <li>Data migration between different systems</li>
+            <li>Generating XML for legacy systems that don't support JSON</li>
+            <li>Creating XML feeds from JSON data sources</li>
+          </ul>
+
+          <h3>How It Works</h3>
+          <p>Simply paste your JSON data into the input field, customize your conversion options, and click convert. The tool will automatically transform your JSON into properly formatted XML with support for all data types including strings, numbers, booleans, arrays, and nested objects.</p>
+        </div>
+      </div>
+    </main>
+
+    <script src="../js/json-to-xml.js"></script>
+  </body>
+</html>

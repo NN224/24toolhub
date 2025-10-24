@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Free online speech to text converter. Convert your voice to text with real-time transcription using Web Speech API. Support for multiple languages.">
+    <meta name="keywords" content="speech to text, voice to text, transcription, voice recognition, speech recognition, dictation">
+    <meta property="og:title" content="Speech to Text Converter - Free Voice to Text Online | 24ToolHub" />
+    <meta property="og:description" content="Convert speech to text instantly with our free online voice recognition tool. Real-time transcription with multiple language support." />
+    <meta property="og:url" content="https://24toolhub.com/tools/speech-to-text.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://24toolhub.com/images/og-image.jpg" />
+    <title>Speech to Text Converter - Free Voice to Text Online | 24ToolHub</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2446710277775155" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ELW7FZKDW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2ELW7FZKDW');
+    </script>
+    <style>
+      .speech-interface {
+        background: var(--bg-secondary);
+        padding: 30px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        margin: 30px 0;
+      }
+      .language-selector {
+        margin-bottom: 20px;
+      }
+      .language-selector select {
+        width: 100%;
+        padding: 12px;
+        background: var(--bg-primary);
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        color: var(--text-primary);
+        font-size: 14px;
+      }
+      .microphone-button {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: none;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        font-size: 48px;
+        cursor: pointer;
+        margin: 20px auto;
+        display: block;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      }
+      .microphone-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+      }
+      .microphone-button.recording {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        animation: pulse 1.5s infinite;
+      }
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+      }
+      .status-text {
+        text-align: center;
+        color: var(--text-secondary);
+        margin: 10px 0;
+        font-size: 16px;
+        font-weight: 500;
+      }
+      .status-text.recording {
+        color: #f5576c;
+      }
+      .transcript-area {
+        width: 100%;
+        min-height: 200px;
+        padding: 15px;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-size: 16px;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        resize: vertical;
+        margin: 20px 0;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+        margin: 20px 0;
+      }
+      .stat-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+      }
+      .stat-number {
+        font-size: 1.8rem;
+        font-weight: bold;
+        display: block;
+      }
+      .stat-label {
+        font-size: 0.85rem;
+        opacity: 0.9;
+      }
+      .error-message {
+        background: #f5576c;
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px 0;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <div class="header-branding">
+          <a href="../index.html" class="logo-link">
+            <img src="../images/logo.png" alt="24ToolHub" class="logo">
+          </a>
+          <h1 class="site-title">24ToolHub</h1>
+        </div>
+        <div class="header-actions">
+          <a href="../index.html" class="btn btn-secondary">Home</a>
+          <a href="../blog/index.html" class="btn btn-secondary">Blog</a>
+          <a href="../contact.html" class="btn btn-secondary">Contact</a>
+          <a href="../about.html" class="btn btn-secondary">About</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="ad-space ad-leaderboard"></div>
+
+    <main class="main-content">
+      <a href="../index.html" class="back-link">← Back to Home</a>
+      
+      <h1>🎤 Speech to Text Converter</h1>
+      <p class="tool-description">Convert your voice to text instantly with real-time transcription. Perfect for dictation, note-taking, and content creation.</p>
+
+      <div class="error-message" id="errorMessage"></div>
+
+      <div class="speech-interface">
+        <div class="language-selector">
+          <label for="languageSelect" style="color: var(--text-primary); display: block; margin-bottom: 10px;">Select Language:</label>
+          <select id="languageSelect">
+            <option value="en-US">English (United States)</option>
+            <option value="en-GB">English (United Kingdom)</option>
+            <option value="es-ES">Spanish (Spain)</option>
+            <option value="fr-FR">French (France)</option>
+            <option value="de-DE">German (Germany)</option>
+            <option value="it-IT">Italian (Italy)</option>
+            <option value="pt-BR">Portuguese (Brazil)</option>
+            <option value="ru-RU">Russian (Russia)</option>
+            <option value="ja-JP">Japanese (Japan)</option>
+            <option value="ko-KR">Korean (South Korea)</option>
+            <option value="zh-CN">Chinese (Mandarin)</option>
+            <option value="ar-SA">Arabic (Saudi Arabia)</option>
+            <option value="hi-IN">Hindi (India)</option>
+          </select>
+        </div>
+
+        <button id="micButton" class="microphone-button">🎤</button>
+        <p class="status-text" id="statusText">Click the microphone to start</p>
+
+        <textarea id="transcriptArea" class="transcript-area" placeholder="Your transcribed text will appear here..."></textarea>
+
+        <div class="stats">
+          <div class="stat-box">
+            <span class="stat-number" id="wordCount">0</span>
+            <span class="stat-label">Words</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number" id="charCount">0</span>
+            <span class="stat-label">Characters</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-number" id="sentenceCount">0</span>
+            <span class="stat-label">Sentences</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button id="downloadBtn" class="btn btn-primary">Download Transcript</button>
+        <button id="copyBtn" class="btn btn-secondary">Copy Text</button>
+        <button id="clearBtn" class="btn btn-secondary">Clear</button>
+      </div>
+
+      <div class="ad-space ad-rectangle"></div>
+
+      <div class="seo-content">
+        <div class="seo-section">
+          <h2>Convert Speech to Text in Real-Time</h2>
+          <p>Our Speech to Text converter uses advanced Web Speech API technology to transcribe your voice into text instantly. Perfect for writers, students, journalists, and anyone who needs to convert spoken words into written content quickly and accurately.</p>
+          
+          <h3>Key Features</h3>
+          <ul>
+            <li><strong>Real-Time Transcription:</strong> See your words appear as you speak</li>
+            <li><strong>Multiple Languages:</strong> Support for 13+ languages and dialects</li>
+            <li><strong>High Accuracy:</strong> Advanced speech recognition for clear transcription</li>
+            <li><strong>Word & Character Count:</strong> Track your content length in real-time</li>
+            <li><strong>Download & Copy:</strong> Save your transcription or copy to clipboard</li>
+          </ul>
+
+          <h3>Common Use Cases</h3>
+          <ul>
+            <li>Dictating emails, documents, and articles</li>
+            <li>Transcribing meetings and interviews</li>
+            <li>Creating voice notes and memos</li>
+            <li>Accessibility for users who prefer voice input</li>
+            <li>Language learning and pronunciation practice</li>
+          </ul>
+
+          <h3>How to Use</h3>
+          <p>1. Select your preferred language from the dropdown menu<br>
+          2. Click the microphone button to start recording<br>
+          3. Speak clearly into your device's microphone<br>
+          4. Click the microphone again to stop recording<br>
+          5. Download or copy your transcribed text</p>
+
+          <h3>Browser Compatibility</h3>
+          <p>This tool uses the Web Speech API and works best in modern browsers like Google Chrome, Microsoft Edge, and Safari. Make sure to grant microphone permissions when prompted.</p>
+        </div>
+      </div>
+    </main>
+
+    <script src="../js/speech-to-text.js"></script>
+  </body>
+</html>

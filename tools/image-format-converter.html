@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Free online image format converter. Convert images between PNG, JPG, and WebP formats instantly. Adjust quality, compare file sizes, and download.">
+    <meta name="keywords" content="image converter, png to jpg, jpg to png, webp converter, image format, convert images online">
+    <meta property="og:title" content="Image Format Converter - Convert PNG, JPG, WebP Online | 24ToolHub" />
+    <meta property="og:description" content="Convert images between PNG, JPG, and WebP formats instantly. Free online tool with quality control and file size comparison." />
+    <meta property="og:url" content="https://24toolhub.com/tools/image-format-converter.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://24toolhub.com/images/og-image.jpg" />
+    <title>Image Format Converter - Convert PNG, JPG, WebP Online | 24ToolHub</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2446710277775155" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ELW7FZKDW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2ELW7FZKDW');
+    </script>
+    <style>
+      .converter-interface {
+        background: var(--bg-secondary);
+        padding: 30px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        margin: 30px 0;
+      }
+      .upload-zone {
+        border: 3px dashed var(--border-color);
+        border-radius: 12px;
+        padding: 40px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: var(--bg-primary);
+      }
+      .upload-zone:hover, .upload-zone.drag-over {
+        border-color: #667eea;
+        background: var(--bg-tertiary);
+      }
+      .upload-icon {
+        font-size: 48px;
+        margin-bottom: 15px;
+      }
+      .upload-text {
+        color: var(--text-primary);
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+      .upload-subtext {
+        color: var(--text-secondary);
+        font-size: 14px;
+      }
+      .preview-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin: 30px 0;
+      }
+      @media (max-width: 768px) {
+        .preview-container {
+          grid-template-columns: 1fr;
+        }
+      }
+      .preview-box {
+        background: var(--bg-primary);
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+      }
+      .preview-box h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+        color: var(--text-primary);
+      }
+      .preview-image {
+        max-width: 100%;
+        max-height: 300px;
+        border-radius: 8px;
+        display: block;
+        margin: 0 auto;
+      }
+      .format-selector {
+        margin: 20px 0;
+      }
+      .format-selector select {
+        width: 100%;
+        padding: 12px;
+        background: var(--bg-primary);
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        color: var(--text-primary);
+        font-size: 14px;
+      }
+      .quality-slider {
+        margin: 20px 0;
+      }
+      .quality-slider label {
+        display: block;
+        color: var(--text-primary);
+        margin-bottom: 10px;
+      }
+      .quality-slider input[type="range"] {
+        width: 100%;
+      }
+      .quality-value {
+        color: #667eea;
+        font-weight: bold;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+        margin: 20px 0;
+      }
+      .stat-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+      }
+      .stat-number {
+        font-size: 1.8rem;
+        font-weight: bold;
+        display: block;
+      }
+      .stat-label {
+        font-size: 0.85rem;
+        opacity: 0.9;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <div class="header-branding">
+          <a href="../index.html" class="logo-link">
+            <img src="../images/logo.png" alt="24ToolHub" class="logo">
+          </a>
+          <h1 class="site-title">24ToolHub</h1>
+        </div>
+        <div class="header-actions">
+          <a href="../index.html" class="btn btn-secondary">Home</a>
+          <a href="../blog/index.html" class="btn btn-secondary">Blog</a>
+          <a href="../contact.html" class="btn btn-secondary">Contact</a>
+          <a href="../about.html" class="btn btn-secondary">About</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="ad-space ad-leaderboard"></div>
+
+    <main class="main-content">
+      <a href="../index.html" class="back-link">← Back to Home</a>
+      
+      <h1>🖼️ Image Format Converter</h1>
+      <p class="tool-description">Convert images between PNG, JPG, and WebP formats. Adjust quality, compare file sizes, and optimize your images.</p>
+
+      <div class="converter-interface">
+        <div class="upload-zone" id="uploadZone">
+          <div class="upload-icon">📁</div>
+          <div class="upload-text">Drop an image here or click to browse</div>
+          <div class="upload-subtext">Supports: PNG, JPG, JPEG, WebP</div>
+          <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp" style="display: none;">
+        </div>
+
+        <div id="converterOptions" class="hidden">
+          <div class="format-selector">
+            <label for="outputFormat" style="display: block; color: var(--text-primary); margin-bottom: 10px;">Convert to:</label>
+            <select id="outputFormat">
+              <option value="image/png">PNG</option>
+              <option value="image/jpeg">JPG</option>
+              <option value="image/webp">WebP</option>
+            </select>
+          </div>
+
+          <div class="quality-slider" id="qualitySlider">
+            <label>Quality: <span class="quality-value" id="qualityValue">90</span>%</label>
+            <input type="range" id="qualityInput" min="1" max="100" value="90">
+          </div>
+
+          <button id="convertBtn" class="btn btn-primary" style="width: 100%; margin: 20px 0;">Convert Image</button>
+        </div>
+
+        <div id="previewSection" class="hidden">
+          <div class="stats">
+            <div class="stat-box">
+              <span class="stat-number" id="originalSize">0</span>
+              <span class="stat-label">Original Size</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number" id="convertedSize">0</span>
+              <span class="stat-label">Converted Size</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-number" id="sizeReduction">0%</span>
+              <span class="stat-label">Size Change</span>
+            </div>
+          </div>
+
+          <div class="preview-container">
+            <div class="preview-box">
+              <h3>Original Image</h3>
+              <img id="originalPreview" class="preview-image" alt="Original">
+            </div>
+            <div class="preview-box">
+              <h3>Converted Image</h3>
+              <img id="convertedPreview" class="preview-image" alt="Converted">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-group" id="actionButtons" style="display: none;">
+        <button id="downloadBtn" class="btn btn-primary">Download Converted Image</button>
+        <button id="resetBtn" class="btn btn-secondary">Convert Another</button>
+      </div>
+
+      <div class="ad-space ad-rectangle"></div>
+
+      <div class="seo-content">
+        <div class="seo-section">
+          <h2>Convert Images Between Formats Instantly</h2>
+          <p>Our Image Format Converter makes it easy to convert your images between PNG, JPG, and WebP formats. Whether you need transparency support with PNG, smaller file sizes with JPG, or modern web optimization with WebP, our tool handles it all with ease.</p>
+          
+          <h3>Key Features</h3>
+          <ul>
+            <li><strong>Multiple Formats:</strong> Convert between PNG, JPG, and WebP seamlessly</li>
+            <li><strong>Quality Control:</strong> Adjust compression quality for JPG and WebP formats</li>
+            <li><strong>Size Comparison:</strong> See before and after file sizes instantly</li>
+            <li><strong>Drag & Drop:</strong> Easy file upload with drag and drop support</li>
+            <li><strong>Preview:</strong> Compare original and converted images side by side</li>
+          </ul>
+
+          <h3>Format Guide</h3>
+          <ul>
+            <li><strong>PNG:</strong> Best for graphics with transparency, screenshots, and images requiring lossless quality</li>
+            <li><strong>JPG:</strong> Ideal for photographs and images where smaller file size is important</li>
+            <li><strong>WebP:</strong> Modern format offering superior compression and quality for web use</li>
+          </ul>
+
+          <h3>When to Use Each Format</h3>
+          <p><strong>Use PNG when:</strong> You need transparency, lossless quality, or have text/graphics with sharp edges.</p>
+          <p><strong>Use JPG when:</strong> You're working with photographs and want to balance quality with smaller file sizes.</p>
+          <p><strong>Use WebP when:</strong> You're optimizing images for modern websites and want the best compression with good quality.</p>
+        </div>
+      </div>
+    </main>
+
+    <script src="../js/image-format-converter.js"></script>
+  </body>
+</html>
