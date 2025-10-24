@@ -299,6 +299,9 @@ class Chatbot {
             this.addBotMessage(data.response);
             this.conversationHistory.push({ role: 'model', content: data.response });
 
+            // Extract and track tool mentions
+            this.extractAndTrackTools(data.response);
+
             // Cache the response
             this.setCachedResponse(message, data.response);
             
@@ -583,6 +586,26 @@ class Chatbot {
             
         } catch (e) {
             console.warn('Failed to save rating:', e);
+        }
+    }
+
+    extractAndTrackTools(response) {
+        try {
+            // Extract tool links from markdown format [Tool Name](url)
+            const toolRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+            let match;
+            
+            while ((match = toolRegex.exec(response)) !== null) {
+                const toolName = match[1];
+                const toolUrl = match[2];
+                
+                // Only track if it's an internal tool link
+                if (toolUrl.startsWith('/tools/') || toolUrl.includes('/tools/')) {
+                    this.trackToolRequest(toolName, toolUrl);
+                }
+            }
+        } catch (e) {
+            console.warn('Failed to extract tools:', e);
         }
     }
 
