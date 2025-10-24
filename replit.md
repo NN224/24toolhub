@@ -62,6 +62,25 @@ The Express server provides five API endpoints for advanced features:
 - Frontend and backend run on the same server
 
 ## Recent Changes
+- **October 24, 2025**: AI Chatbot Phase 2 - Intelligence & Personalization
+  - **Context-Aware Suggestions**:
+    - Chatbot detects current tool page and suggests related tools
+    - Example: On JSON Formatter page → suggests JSON to CSV, JSON to XML
+    - Smart detection of tool categories for better recommendations
+  - **Conversation History with localStorage**:
+    - Saves conversations throughout the day (cleared at midnight)
+    - Shows "📜 Previous conversation" separator when resuming chat
+    - Users can continue where they left off on same day
+  - **Smart Caching System**:
+    - Caches common queries for instant responses
+    - Reduces API calls and improves response time
+    - Cache persists for the day (same as conversation history)
+  - **Multi-Tool Workflow Recommendations**:
+    - AI suggests complete workflows for complex tasks
+    - Example: "optimize my website" → CSS Minifier → HTML Minifier → Image Compressor → PageSpeed Test
+    - Step-by-step guidance with direct tool links
+    - Helps users accomplish complex goals efficiently
+
 - **October 24, 2025**: AI Chatbot Phase 1 Enhancements (Quick Wins & UX)
   - **Quick Reply Buttons**:
     - Added 6 category buttons: Text Tools, Converters, Generators, Encryption, Website Analysis, Image Tools
