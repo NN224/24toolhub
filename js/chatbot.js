@@ -44,6 +44,15 @@ class Chatbot {
             });
         });
 
+        // Rating buttons (event delegation for dynamically added buttons)
+        this.messagesContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('rating-btn')) {
+                const messageId = e.target.getAttribute('data-message-id');
+                const rating = e.target.getAttribute('data-rating');
+                this.handleRating(messageId, rating);
+            }
+        });
+
         // Enhanced welcome message
         this.showEnhancedWelcome();
         
@@ -131,7 +140,7 @@ class Chatbot {
         }
     }
 
-    addMessage(content, isUser = false) {
+    addMessage(content, isUser = false, messageId = null) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `chatbot-message ${isUser ? 'user' : 'bot'}`;
         
@@ -150,6 +159,22 @@ class Chatbot {
                 .replace(/\n/g, '<br>');
             
             contentDiv.innerHTML = formattedContent;
+            
+            // Add rating buttons for bot messages
+            if (messageId) {
+                const ratingDiv = document.createElement('div');
+                ratingDiv.className = 'message-rating';
+                ratingDiv.innerHTML = `
+                    <span class="rating-prompt">Was this helpful?</span>
+                    <button class="rating-btn thumbs-up" data-message-id="${messageId}" data-rating="positive" title="Helpful">
+                        👍
+                    </button>
+                    <button class="rating-btn thumbs-down" data-message-id="${messageId}" data-rating="negative" title="Not helpful">
+                        👎
+                    </button>
+                `;
+                messageDiv.appendChild(ratingDiv);
+            }
         } else {
             // User messages - simple text
             contentDiv.textContent = content;
@@ -163,7 +188,8 @@ class Chatbot {
     }
 
     addBotMessage(content) {
-        this.addMessage(content, false);
+        const messageId = 'msg_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        this.addMessage(content, false, messageId);
     }
 
     addUserMessage(content) {
@@ -327,8 +353,9 @@ class Chatbot {
             greeting = 'مساء الخير! 🌜';
         }
 
-        // Popular tools
-        const popularTools = [
+        // Get trending tools from analytics or use defaults
+        const trendingTools = this.getTrendingTools();
+        let popularTools = trendingTools.length >= 3 ? trendingTools.slice(0, 3) : [
             { name: 'JSON Formatter', url: '/tools/json-formatter.html' },
             { name: 'Image Compressor', url: '/tools/image-compressor.html' },
             { name: 'QR Code Generator', url: '/tools/qr-code-generator.html' }
@@ -338,7 +365,13 @@ class Chatbot {
             `<a href="${tool.url}" target="_blank" rel="noopener">${tool.name}</a>`
         ).join(', ');
 
-        let welcomeMessage = `${greeting}\n\nأنا مساعدك الذكي في 24ToolHub. لدي أكثر من 70 أداة مجانية!\n\nI'm your AI assistant at 24ToolHub. I have 70+ free tools!\n\n🔥 Trending Today: ${toolsList}`;
+        let welcomeMessage = `${greeting}\n\nأنا مساعدك الذكي في 24ToolHub. لدي أكثر من 70 أداة مجانية!\n\nI'm your AI assistant at 24ToolHub. I have 70+ free tools!\n\n🔥 ${trendingTools.length > 0 ? 'Your Trending Tools' : 'Trending Today'}: ${toolsList}`;
+
+        // Show analytics summary if available
+        const analytics = this.getAnalytics();
+        if (analytics.totalRatings > 0) {
+            welcomeMessage += `\n\n📊 Satisfaction Rate: ${analytics.satisfactionRate}% (${analytics.totalRatings} ratings)`;
+        }
 
         // Context-aware suggestions based on current page
         const contextSuggestion = this.getContextAwareSuggestion();
@@ -508,6 +541,113 @@ class Chatbot {
             localStorage.setItem(this.cacheKey, JSON.stringify(this.cache));
         } catch (e) {
             console.warn('Failed to save cache:', e);
+        }
+    }
+
+    // Analytics & Learning System
+    handleRating(messageId, rating) {
+        try {
+            // Get or create analytics data
+            let analytics = JSON.parse(localStorage.getItem('chatbot_analytics') || '{}');
+            
+            if (!analytics.ratings) analytics.ratings = {};
+            if (!analytics.ratingCount) analytics.ratingCount = { positive: 0, negative: 0 };
+            
+            // Save rating
+            analytics.ratings[messageId] = {
+                rating: rating,
+                timestamp: Date.now(),
+                date: new Date().toDateString()
+            };
+            
+            // Update counts
+            analytics.ratingCount[rating]++;
+            
+            // Save to localStorage
+            localStorage.setItem('chatbot_analytics', JSON.stringify(analytics));
+            
+            // Visual feedback
+            const ratingDiv = document.querySelector(`[data-message-id="${messageId}"]`)?.closest('.message-rating');
+            if (ratingDiv) {
+                ratingDiv.innerHTML = `<span class="rating-thanks">✨ شكراً على التقييم! / Thanks for the feedback!</span>`;
+            }
+            
+            // Track with Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'chatbot_rating', {
+                    event_category: 'engagement',
+                    event_label: rating,
+                    value: rating === 'positive' ? 1 : 0
+                });
+            }
+            
+        } catch (e) {
+            console.warn('Failed to save rating:', e);
+        }
+    }
+
+    trackToolRequest(toolName, toolUrl) {
+        try {
+            let analytics = JSON.parse(localStorage.getItem('chatbot_analytics') || '{}');
+            
+            if (!analytics.toolRequests) analytics.toolRequests = {};
+            
+            if (!analytics.toolRequests[toolName]) {
+                analytics.toolRequests[toolName] = {
+                    count: 0,
+                    url: toolUrl,
+                    lastRequested: null
+                };
+            }
+            
+            analytics.toolRequests[toolName].count++;
+            analytics.toolRequests[toolName].lastRequested = Date.now();
+            
+            localStorage.setItem('chatbot_analytics', JSON.stringify(analytics));
+        } catch (e) {
+            console.warn('Failed to track tool request:', e);
+        }
+    }
+
+    getTrendingTools() {
+        try {
+            const analytics = JSON.parse(localStorage.getItem('chatbot_analytics') || '{}');
+            const toolRequests = analytics.toolRequests || {};
+            
+            // Sort tools by request count
+            const sorted = Object.entries(toolRequests)
+                .sort((a, b) => b[1].count - a[1].count)
+                .slice(0, 5);
+            
+            return sorted.map(([name, data]) => ({
+                name: name,
+                url: data.url,
+                count: data.count
+            }));
+        } catch (e) {
+            return [];
+        }
+    }
+
+    getAnalytics() {
+        try {
+            const analytics = JSON.parse(localStorage.getItem('chatbot_analytics') || '{}');
+            return {
+                totalRatings: (analytics.ratingCount?.positive || 0) + (analytics.ratingCount?.negative || 0),
+                positiveRatings: analytics.ratingCount?.positive || 0,
+                negativeRatings: analytics.ratingCount?.negative || 0,
+                satisfactionRate: analytics.ratingCount ? 
+                    Math.round((analytics.ratingCount.positive / ((analytics.ratingCount.positive + analytics.ratingCount.negative) || 1)) * 100) : 0,
+                trendingTools: this.getTrendingTools()
+            };
+        } catch (e) {
+            return {
+                totalRatings: 0,
+                positiveRatings: 0,
+                negativeRatings: 0,
+                satisfactionRate: 0,
+                trendingTools: []
+            };
         }
     }
 }
