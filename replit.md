@@ -1,9 +1,9 @@
 # 24ToolHub - Free Online Tools
 
 ## Overview
-24ToolHub is a comprehensive collection of 50+ free online tools for text processing, conversion, generation, encoding, and more. The project provides both client-side tools that run entirely in the browser and server-side tools that leverage backend APIs for advanced functionality.
+24ToolHub is a comprehensive collection of 70+ free online tools for text processing, conversion, generation, encoding, and more. The project provides both client-side tools that run entirely in the browser and server-side tools that leverage backend APIs for advanced functionality.
 
-**Last Updated**: October 22, 2025
+**Last Updated**: October 24, 2025
 
 ## Project Architecture
 
@@ -22,7 +22,7 @@
 ├── server.js                 # Express server (serves static files + APIs)
 ├── index.html               # Homepage
 ├── package.json             # Node.js dependencies
-├── tools/                   # Individual tool pages (50+ HTML files)
+├── tools/                   # Individual tool pages (70+ HTML files)
 ├── js/                      # JavaScript modules for each tool
 ├── css/                     # Stylesheets
 ├── images/                  # Images and assets
@@ -55,6 +55,41 @@ The Express server provides four API endpoints for advanced features:
 - Frontend and backend run on the same server
 
 ## Recent Changes
+- **October 24, 2025**: Tool Expansion - Added 17 New Tools (Phases 1-5)
+  - **Total Tools Now**: 70+ free online tools (up from 53)
+  - **New Tools by Category**:
+    - **Conversion & Calculator Tools** (4 new):
+      1. Age Calculator - Calculate exact age in years, months, days, hours, and minutes
+      2. Time Zone Converter - Convert time between different time zones worldwide
+      3. Tip Calculator - Calculate tip amount and split bills among multiple people
+      4. RGB to HEX Converter - Convert colors between RGB and HEX formats with live preview
+    - **Generator & Formatter Tools** (8 new):
+      1. JSON to CSV Converter - Convert JSON arrays to CSV format with custom delimiters
+      2. JSON to XML Converter - Convert JSON data to XML format
+      3. XML to JSON Converter - Convert XML data to JSON format
+      4. SQL Formatter - Format and beautify SQL queries with syntax highlighting
+      5. YAML to JSON Converter - Convert YAML configuration files to JSON (uses js-yaml CDN)
+      6. CSS Minifier - Compress CSS code to reduce file size
+      7. HTML Minifier - Compress HTML code to reduce file size
+      8. JavaScript Minifier - Compress JavaScript code to reduce file size
+    - **Website Analysis Tools** (1 new):
+      1. Speech to Text - Convert speech to text using browser's Web Speech API
+    - **Utility & Misc Tools** (4 new):
+      1. Image Format Converter - Convert images between PNG, JPG, and WebP formats
+      2. SVG to PNG Converter - Convert SVG vector graphics to PNG raster images
+      3. Image Cropper - Crop images with custom dimensions and aspect ratios
+      4. What is My IP - Display user's IP address, location, and browser information
+  - **Documentation Updates**:
+    - Updated index.html meta description to "70+ free online tools"
+    - Updated sitemap.xml with all 17 new tool URLs (dated 2025-10-24)
+    - All new tools include SEO optimization, Open Graph tags, and AdSense integration
+  - **Tool Design Pattern**: All new tools follow established design standards:
+    - Client-side processing (no data sent to servers)
+    - Professional gradient UI matching existing tools
+    - Mobile-responsive design
+    - Google Analytics tracking
+    - Unified header navigation
+
 - **October 23, 2025**: PageSpeed Tool Enhancements & Contact Page Fixes
   - **Website Speed Test - Major Feature Update**:
     - **Detailed Results Like Google PageSpeed**: Added comprehensive audit sections (Opportunities, Diagnostics, Passed Audits)
