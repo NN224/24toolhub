@@ -316,6 +316,14 @@
   background: white;
   border-top: 1px solid #e5e7eb;
   flex-shrink: 0;
+  transition: opacity 0.3s ease, max-height 0.3s ease;
+  overflow: hidden;
+}
+
+.quick-replies[style*="display: none"] {
+  max-height: 0;
+  padding: 0;
+  opacity: 0;
 }
 
 .quick-reply-btn {

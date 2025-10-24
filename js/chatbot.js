@@ -356,6 +356,12 @@ class Chatbot {
         this.addUserMessage(message);
         this.conversationHistory.push({ role: 'user', content: message });
         
+        // Hide quick replies after first message
+        const quickReplies = document.getElementById('quick-replies');
+        if (quickReplies) {
+            quickReplies.style.display = 'none';
+        }
+        
         // Clear input
         this.input.value = '';
         this.sendBtn.disabled = true;
