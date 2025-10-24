@@ -308,20 +308,21 @@
 .quick-replies {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  padding: 12px 16px;
-  background: #f8f9fa;
-  border-top: 1px solid #e0e0e0;
+  gap: 6px;
+  padding: 10px 14px;
+  background: white;
+  border-top: 2px solid #e8e8e8;
+  flex-shrink: 0;
 }
 
 .quick-reply-btn {
-  background: white;
-  border: 2px solid #e0e0e0;
-  border-radius: 20px;
-  padding: 8px 14px;
-  font-size: 13px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8ebf0 100%);
+  border: 1px solid #d0d5dd;
+  border-radius: 16px;
+  padding: 6px 12px;
+  font-size: 12px;
   font-weight: 500;
-  color: #555;
+  color: #667eea;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
@@ -333,9 +334,9 @@
 .quick-reply-btn:hover {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  border-color: transparent;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  border-color: #667eea;
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 }
 
 .quick-reply-btn:active {
@@ -666,14 +667,20 @@
   background: #888;
 }
 
+.chatbot-container.dark-mode .quick-replies {
+  background: #1a1a1a;
+  border-top-color: #333;
+}
+
 .chatbot-container.dark-mode .quick-reply-btn {
-  background: #2a2a2a;
-  color: #e0e0e0;
+  background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+  color: #8b9cff;
   border-color: #444;
 }
 
 .chatbot-container.dark-mode .quick-reply-btn:hover {
-  background: #333;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
   border-color: #667eea;
 }
 
