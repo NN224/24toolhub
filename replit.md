@@ -30,7 +30,7 @@
 ```
 
 ### Backend API Endpoints
-The Express server provides four API endpoints for advanced features:
+The Express server provides five API endpoints for advanced features:
 
 1. **GET /analyze-seo** - SEO analysis tool
    - Analyzes website meta tags, headings, images, and structure
@@ -49,12 +49,42 @@ The Express server provides four API endpoints for advanced features:
    - Protects API key from client-side exposure
    - Supports both mobile and desktop strategies
 
+5. **POST /chat** - AI Chatbot Assistant
+   - Powered by Google Gemini AI (free tier)
+   - Helps users find the right tool based on natural language queries
+   - Supports bilingual responses (English + Arabic)
+   - Rate limiting: 5 messages per minute per visitor
+   - Increases user engagement and session duration for better AdSense revenue
+
 ### Port Configuration
 - **Development & Production**: Port 5000
 - Server binds to 0.0.0.0 to work in the Replit environment
 - Frontend and backend run on the same server
 
 ## Recent Changes
+- **October 24, 2025**: AI Chatbot Assistant Integration
+  - **Chatbot Features**:
+    - Powered by Google Gemini AI (free tier - 60 requests/minute)
+    - Helps users find tools using natural language queries
+    - Bilingual support (English + Arabic)
+    - Rate limiting: 5 messages per minute per visitor
+    - Deployed across ALL pages (homepage + 87 tool pages)
+  - **Technical Implementation**:
+    - Backend endpoint: POST /chat with Gemini AI integration
+    - Frontend: Floating chat button + chat widget UI
+    - Tools database (tools-database.json) with all 70+ tools
+    - Client-side rate limiting with visitor tracking
+    - Professional gradient UI matching site design
+  - **Business Impact**:
+    - Increases user engagement and session duration
+    - Helps users discover relevant tools
+    - Improves user experience and navigation
+    - Higher session duration = Better AdSense revenue
+  - **Files Added**:
+    - css/chatbot.css - Chatbot UI styling
+    - js/chatbot.js - Chatbot frontend logic
+    - tools-database.json - Complete tools catalog
+
 - **October 24, 2025**: Tool Expansion - Added 17 New Tools (Phases 1-5)
   - **Total Tools Now**: 70+ free online tools (up from 53)
   - **New Tools by Category**:
