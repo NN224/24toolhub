@@ -127,6 +127,9 @@ class Chatbot {
                         <button class="quick-reply-btn" data-query="I need image tools">🖼️ Image Tools</button>
                     </div>
 
+                    <!-- Suggested Questions Container -->
+                    <div id="suggested-questions-container"></div>
+
                     <!-- Input Area -->
                     <div class="chatbot-input-area">
                         <input 
@@ -237,9 +240,11 @@ class Chatbot {
     }
 
     showSuggestedQuestions(botResponse) {
-        // Remove any existing suggested questions
-        const existing = document.querySelectorAll('.suggested-questions');
-        existing.forEach(el => el.remove());
+        const container = document.getElementById('suggested-questions-container');
+        if (!container) return;
+
+        // Clear existing suggestions
+        container.innerHTML = '';
 
         // Generate smart suggestions based on response content
         const suggestions = this.generateSmartSuggestions(botResponse);
@@ -249,11 +254,6 @@ class Chatbot {
         const suggestionsDiv = document.createElement('div');
         suggestionsDiv.className = 'suggested-questions';
         
-        const header = document.createElement('div');
-        header.className = 'suggestions-header';
-        header.textContent = '💡 Suggested questions:';
-        suggestionsDiv.appendChild(header);
-
         const buttonsContainer = document.createElement('div');
         buttonsContainer.className = 'suggestions-buttons';
         
@@ -264,14 +264,12 @@ class Chatbot {
             btn.addEventListener('click', () => {
                 this.input.value = question;
                 this.sendMessage();
-                suggestionsDiv.remove();
             });
             buttonsContainer.appendChild(btn);
         });
         
         suggestionsDiv.appendChild(buttonsContainer);
-        this.messagesContainer.appendChild(suggestionsDiv);
-        this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+        container.appendChild(suggestionsDiv);
     }
 
     generateSmartSuggestions(response) {
