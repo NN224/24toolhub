@@ -62,13 +62,37 @@ The Express server provides five API endpoints for advanced features:
 - Frontend and backend run on the same server
 
 ## Recent Changes
+- **October 24, 2025**: AI Chatbot Phase 1 Enhancements (Quick Wins & UX)
+  - **Quick Reply Buttons**:
+    - Added 6 category buttons: Text Tools, Converters, Generators, Encryption, Website Analysis, Image Tools
+    - One-click access to tool categories
+    - Reduces friction and speeds up tool discovery
+  - **Enhanced Welcome Message**:
+    - Time-based greetings (صباح الخير/مساء الخير based on hour)
+    - Shows 3 trending tools: JSON Formatter, Image Compressor, QR Generator
+    - More engaging first impression
+  - **Rate Limit Counter**:
+    - Real-time display of remaining messages (5 per minute)
+    - Visual warning when approaching limit
+    - Prevents unexpected blocking
+  - **Mobile Optimization**:
+    - Larger button on mobile (70px vs 60px)
+    - Full-screen responsive design
+    - Optimized text sizes and spacing
+    - Better touch targets for mobile users
+  - **Improved Message Formatting**:
+    - Proper line breaks and spacing
+    - Styled links with hover effects
+    - Bold text support
+    - Bullet points for lists
+
 - **October 24, 2025**: AI Chatbot Assistant Integration
   - **Chatbot Features**:
     - Powered by Google Gemini AI (free tier - 60 requests/minute)
     - Helps users find tools using natural language queries
     - Bilingual support (English + Arabic)
     - Rate limiting: 5 messages per minute per visitor
-    - Deployed across ALL pages (homepage + 87 tool pages)
+    - Deployed across ALL pages (homepage + 101 pages total)
   - **Technical Implementation**:
     - Backend endpoint: POST /chat with Gemini AI integration
     - Frontend: Floating chat button + chat widget UI
@@ -80,9 +104,9 @@ The Express server provides five API endpoints for advanced features:
     - Helps users discover relevant tools
     - Improves user experience and navigation
     - Higher session duration = Better AdSense revenue
-  - **Files Added**:
-    - css/chatbot.css - Chatbot UI styling
-    - js/chatbot.js - Chatbot frontend logic
+  - **Files Modified**:
+    - css/chatbot.css - Enhanced UI styling with quick replies
+    - js/chatbot.js - Added Phase 1 features
     - tools-database.json - Complete tools catalog
 
 - **October 24, 2025**: Tool Expansion - Added 17 New Tools (Phases 1-5)
