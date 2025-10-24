@@ -185,6 +185,22 @@ class Chatbot {
             
             contentDiv.innerHTML = formattedContent;
             
+            // Add copy button for bot messages
+            const copyBtn = document.createElement('button');
+            copyBtn.className = 'copy-message-btn';
+            copyBtn.innerHTML = '📋';
+            copyBtn.title = 'Copy message / نسخ الرسالة';
+            copyBtn.addEventListener('click', () => {
+                const textContent = contentDiv.textContent;
+                navigator.clipboard.writeText(textContent).then(() => {
+                    copyBtn.innerHTML = '✅';
+                    setTimeout(() => {
+                        copyBtn.innerHTML = '📋';
+                    }, 2000);
+                });
+            });
+            messageDiv.appendChild(copyBtn);
+            
             // Add rating buttons for bot messages
             if (messageId) {
                 const ratingDiv = document.createElement('div');
@@ -215,6 +231,72 @@ class Chatbot {
     addBotMessage(content) {
         const messageId = 'msg_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
         this.addMessage(content, false, messageId);
+        
+        // Add suggested questions after bot response
+        this.showSuggestedQuestions(content);
+    }
+
+    showSuggestedQuestions(botResponse) {
+        // Remove any existing suggested questions
+        const existing = document.querySelectorAll('.suggested-questions');
+        existing.forEach(el => el.remove());
+
+        // Generate smart suggestions based on response content
+        const suggestions = this.generateSmartSuggestions(botResponse);
+        
+        if (suggestions.length === 0) return;
+
+        const suggestionsDiv = document.createElement('div');
+        suggestionsDiv.className = 'suggested-questions';
+        
+        const header = document.createElement('div');
+        header.className = 'suggestions-header';
+        header.textContent = '💡 Suggested questions:';
+        suggestionsDiv.appendChild(header);
+
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.className = 'suggestions-buttons';
+        
+        suggestions.forEach(question => {
+            const btn = document.createElement('button');
+            btn.className = 'suggestion-btn';
+            btn.textContent = question;
+            btn.addEventListener('click', () => {
+                this.input.value = question;
+                this.sendMessage();
+                suggestionsDiv.remove();
+            });
+            buttonsContainer.appendChild(btn);
+        });
+        
+        suggestionsDiv.appendChild(buttonsContainer);
+        this.messagesContainer.appendChild(suggestionsDiv);
+        this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+    }
+
+    generateSmartSuggestions(response) {
+        const suggestions = [];
+        const responseLower = response.toLowerCase();
+
+        // Tool-specific follow-ups
+        if (responseLower.includes('json')) {
+            suggestions.push('How to validate JSON?', 'JSON to CSV conversion?');
+        } else if (responseLower.includes('image') || responseLower.includes('compress')) {
+            suggestions.push('Best image formats?', 'How to resize images?');
+        } else if (responseLower.includes('encrypt') || responseLower.includes('hash')) {
+            suggestions.push('What is SHA-256?', 'Base64 encoding?');
+        } else if (responseLower.includes('seo') || responseLower.includes('website')) {
+            suggestions.push('PageSpeed optimization?', 'DNS lookup tool?');
+        } else if (responseLower.includes('text') || responseLower.includes('string')) {
+            suggestions.push('Case converter?', 'Word counter?');
+        } else if (responseLower.includes('qr')) {
+            suggestions.push('Generate QR code?', 'Barcode generator?');
+        } else {
+            // Generic helpful questions
+            suggestions.push('What tools do you have?', 'Most popular tools?');
+        }
+
+        return suggestions.slice(0, 2); // Max 2 suggestions
     }
 
     addUserMessage(content) {
