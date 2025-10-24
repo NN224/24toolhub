@@ -5,9 +5,22 @@ const cors = require('cors');
 const dns = require('dns').promises;
 const ping = require('ping');
 const path = require('path');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
+const fs = require('fs');
 
 const app = express();
 const port = process.env.PORT || 5000;
+
+// Initialize Gemini AI
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+// Load tools database
+const toolsData = JSON.parse(fs.readFileSync('tools-database.json', 'utf8'));
+
+// Rate limiting: Simple in-memory store (IP -> {count, resetTime})
+const rateLimits = new Map();
+const RATE_LIMIT = 5; // messages per minute
+const RATE_WINDOW = 60 * 1000; // 1 minute
 
 app.use(cors());
 app.use(express.json());
@@ -226,6 +239,92 @@ app.get('/ping', async (req, res) => {
         }
     } catch (error) {
         res.status(500).json({ error: `Ping failed: ${error.message}` });
+    }
+});
+
+// Chat endpoint for AI Assistant
+app.post('/chat', async (req, res) => {
+    const { message, conversationHistory } = req.body;
+    const clientIp = req.ip || req.connection.remoteAddress;
+
+    if (!message) {
+        return res.status(400).json({ error: 'Message is required' });
+    }
+
+    // Rate limiting check
+    const now = Date.now();
+    const limitData = rateLimits.get(clientIp);
+    
+    if (limitData) {
+        if (now < limitData.resetTime) {
+            if (limitData.count >= RATE_LIMIT) {
+                return res.status(429).json({ 
+                    error: 'Too many requests. Please wait a moment before sending another message.',
+                    errorAr: 'عدد كبير جداً من الرسائل. يرجى الانتظار قليلاً قبل إرسال رسالة أخرى.'
+                });
+            }
+            limitData.count++;
+        } else {
+            // Reset window
+            limitData.count = 1;
+            limitData.resetTime = now + RATE_WINDOW;
+        }
+    } else {
+        rateLimits.set(clientIp, { count: 1, resetTime: now + RATE_WINDOW });
+    }
+
+    try {
+        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+
+        // Build system instruction with tools database
+        const systemInstruction = `You are a helpful assistant for 24ToolHub, a website with 70+ free online tools.
+
+Your role:
+- Help users find the right tool for their needs
+- Explain how to use tools
+- Answer questions in Arabic or English (match the user's language)
+- Be friendly, concise, and helpful
+- When suggesting tools, provide the tool name and a brief description
+- You can suggest multiple tools if relevant
+
+Available tools database:
+${JSON.stringify(toolsData.tools, null, 2)}
+
+Guidelines:
+- Always search through the tools database to find relevant tools
+- Provide direct links when suggesting tools (use the 'url' field)
+- If user asks in Arabic, respond in Arabic
+- If user asks in English, respond in English
+- Keep responses concise (2-4 sentences unless more detail is needed)
+- Be encouraging and helpful`;
+
+        // Build conversation history
+        const history = conversationHistory || [];
+        const contents = [
+            { role: 'user', parts: [{ text: systemInstruction }] },
+            { role: 'model', parts: [{ text: 'I understand. I will help users find and use the tools on 24ToolHub, responding in their language.' }] },
+            ...history.map(msg => ({
+                role: msg.role,
+                parts: [{ text: msg.content }]
+            })),
+            { role: 'user', parts: [{ text: message }] }
+        ];
+
+        const chat = model.startChat({ history: contents.slice(0, -1) });
+        const result = await chat.sendMessage(message);
+        const response = result.response.text();
+
+        res.json({
+            response: response,
+            timestamp: new Date().toISOString()
+        });
+
+    } catch (error) {
+        console.error('Chat error:', error);
+        res.status(500).json({ 
+            error: 'Sorry, something went wrong. Please try again.',
+            errorAr: 'عذراً، حدث خطأ. يرجى المحاولة مرة أخرى.'
+        });
     }
 });
 

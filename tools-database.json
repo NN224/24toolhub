@@ -1,0 +1,337 @@
+{
+  "tools": [
+    {
+      "name": "Word Counter",
+      "nameAr": "عداد الكلمات",
+      "category": "Text & String",
+      "url": "/tools/word-counter.html",
+      "description": "Count words, characters, sentences, and paragraphs",
+      "descriptionAr": "عد الكلمات والأحرف والجمل والفقرات",
+      "keywords": ["count", "words", "characters", "text", "عد", "كلمات"]
+    },
+    {
+      "name": "Text Case Converter",
+      "nameAr": "محول حالة النص",
+      "category": "Text & String",
+      "url": "/tools/text-case-converter.html",
+      "description": "Convert text to uppercase, lowercase, title case",
+      "descriptionAr": "تحويل النص لأحرف كبيرة أو صغيرة",
+      "keywords": ["case", "uppercase", "lowercase", "convert", "text", "تحويل", "أحرف"]
+    },
+    {
+      "name": "Age Calculator",
+      "nameAr": "حاسبة العمر",
+      "category": "Conversion & Calculator",
+      "url": "/tools/age-calculator.html",
+      "description": "Calculate exact age in years, months, days, hours",
+      "descriptionAr": "احسب عمرك بالسنوات والشهور والأيام",
+      "keywords": ["age", "birthday", "calculate", "years", "عمر", "تاريخ", "ميلاد"]
+    },
+    {
+      "name": "Temperature Converter",
+      "nameAr": "محول درجات الحرارة",
+      "category": "Conversion & Calculator",
+      "url": "/tools/temperature-converter.html",
+      "description": "Convert Celsius, Fahrenheit, Kelvin",
+      "descriptionAr": "تحويل بين سلسيوس وفهرنهايت وكلفن",
+      "keywords": ["temperature", "celsius", "fahrenheit", "convert", "حرارة", "درجة"]
+    },
+    {
+      "name": "Time Zone Converter",
+      "nameAr": "محول المناطق الزمنية",
+      "category": "Conversion & Calculator",
+      "url": "/tools/time-zone-converter.html",
+      "description": "Convert time between different time zones",
+      "descriptionAr": "حول الوقت بين المناطق الزمنية المختلفة",
+      "keywords": ["time", "zone", "timezone", "convert", "وقت", "منطقة", "زمنية"]
+    },
+    {
+      "name": "Tip Calculator",
+      "nameAr": "حاسبة الإكرامية",
+      "category": "Conversion & Calculator",
+      "url": "/tools/tip-calculator.html",
+      "description": "Calculate tip and split bills",
+      "descriptionAr": "احسب الإكرامية وقسم الفاتورة",
+      "keywords": ["tip", "restaurant", "bill", "split", "إكرامية", "حساب", "مطعم"]
+    },
+    {
+      "name": "RGB to HEX Converter",
+      "nameAr": "محول RGB إلى HEX",
+      "category": "Conversion & Calculator",
+      "url": "/tools/rgb-to-hex.html",
+      "description": "Convert colors between RGB and HEX formats",
+      "descriptionAr": "حول الألوان بين صيغ RGB و HEX",
+      "keywords": ["color", "rgb", "hex", "convert", "لون", "تحويل"]
+    },
+    {
+      "name": "JSON to CSV Converter",
+      "nameAr": "محول JSON إلى CSV",
+      "category": "Generator & Formatter",
+      "url": "/tools/json-to-csv.html",
+      "description": "Convert JSON data to CSV format",
+      "descriptionAr": "حول بيانات JSON إلى صيغة CSV",
+      "keywords": ["json", "csv", "convert", "data", "بيانات", "تحويل"]
+    },
+    {
+      "name": "JSON to XML Converter",
+      "nameAr": "محول JSON إلى XML",
+      "category": "Generator & Formatter",
+      "url": "/tools/json-to-xml.html",
+      "description": "Convert JSON to XML format",
+      "descriptionAr": "حول JSON إلى XML",
+      "keywords": ["json", "xml", "convert", "تحويل"]
+    },
+    {
+      "name": "XML to JSON Converter",
+      "nameAr": "محول XML إلى JSON",
+      "category": "Generator & Formatter",
+      "url": "/tools/xml-to-json.html",
+      "description": "Convert XML to JSON format",
+      "descriptionAr": "حول XML إلى JSON",
+      "keywords": ["xml", "json", "convert", "تحويل"]
+    },
+    {
+      "name": "SQL Formatter",
+      "nameAr": "منسق SQL",
+      "category": "Generator & Formatter",
+      "url": "/tools/sql-formatter.html",
+      "description": "Format and beautify SQL queries",
+      "descriptionAr": "نسق وجمّل استعلامات SQL",
+      "keywords": ["sql", "format", "beautify", "query", "تنسيق", "استعلام"]
+    },
+    {
+      "name": "YAML to JSON Converter",
+      "nameAr": "محول YAML إلى JSON",
+      "category": "Generator & Formatter",
+      "url": "/tools/yaml-to-json.html",
+      "description": "Convert YAML to JSON format",
+      "descriptionAr": "حول YAML إلى JSON",
+      "keywords": ["yaml", "json", "convert", "تحويل", "config"]
+    },
+    {
+      "name": "CSS Minifier",
+      "nameAr": "مضغط CSS",
+      "category": "Generator & Formatter",
+      "url": "/tools/css-minifier.html",
+      "description": "Compress CSS code to reduce file size",
+      "descriptionAr": "اضغط كود CSS لتقليل حجم الملف",
+      "keywords": ["css", "minify", "compress", "optimize", "ضغط", "تحسين"]
+    },
+    {
+      "name": "HTML Minifier",
+      "nameAr": "مضغط HTML",
+      "category": "Generator & Formatter",
+      "url": "/tools/html-minifier.html",
+      "description": "Compress HTML code to reduce file size",
+      "descriptionAr": "اضغط كود HTML لتقليل حجم الملف",
+      "keywords": ["html", "minify", "compress", "optimize", "ضغط"]
+    },
+    {
+      "name": "JavaScript Minifier",
+      "nameAr": "مضغط JavaScript",
+      "category": "Generator & Formatter",
+      "url": "/tools/javascript-minifier.html",
+      "description": "Compress JavaScript code to reduce file size",
+      "descriptionAr": "اضغط كود JavaScript لتقليل حجم الملف",
+      "keywords": ["javascript", "js", "minify", "compress", "ضغط"]
+    },
+    {
+      "name": "JSON Formatter",
+      "nameAr": "منسق JSON",
+      "category": "Generator & Formatter",
+      "url": "/tools/json-formatter.html",
+      "description": "Format and validate JSON data",
+      "descriptionAr": "نسق والتحقق من بيانات JSON",
+      "keywords": ["json", "format", "validate", "تنسيق", "تحقق"]
+    },
+    {
+      "name": "Password Generator",
+      "nameAr": "مولد كلمات المرور",
+      "category": "Generator & Formatter",
+      "url": "/tools/password-generator.html",
+      "description": "Generate secure random passwords",
+      "descriptionAr": "ولّد كلمات مرور قوية وآمنة",
+      "keywords": ["password", "generate", "secure", "random", "كلمة", "مرور", "آمن"]
+    },
+    {
+      "name": "UUID Generator",
+      "nameAr": "مولد UUID",
+      "category": "Generator & Formatter",
+      "url": "/tools/uuid-generator.html",
+      "description": "Generate unique UUIDs",
+      "descriptionAr": "ولّد معرفات UUID فريدة",
+      "keywords": ["uuid", "generate", "unique", "id", "معرف", "فريد"]
+    },
+    {
+      "name": "QR Code Generator",
+      "nameAr": "مولد رموز QR",
+      "category": "Generator & Formatter",
+      "url": "/tools/qr-code-generator.html",
+      "description": "Generate QR codes from text or URLs",
+      "descriptionAr": "ولّد رموز QR من النص أو الروابط",
+      "keywords": ["qr", "code", "generate", "barcode", "رمز", "باركود"]
+    },
+    {
+      "name": "Base64 Encoder/Decoder",
+      "nameAr": "مشفر/فك تشفير Base64",
+      "category": "Encoder & Crypto",
+      "url": "/tools/base64-encoder.html",
+      "description": "Encode and decode Base64 strings",
+      "descriptionAr": "شفّر وفك تشفير نصوص Base64",
+      "keywords": ["base64", "encode", "decode", "تشفير", "فك"]
+    },
+    {
+      "name": "URL Encoder/Decoder",
+      "nameAr": "مشفر/فك تشفير URL",
+      "category": "Encoder & Crypto",
+      "url": "/tools/url-encoder.html",
+      "description": "Encode and decode URL strings",
+      "descriptionAr": "شفّر وفك تشفير روابط URL",
+      "keywords": ["url", "encode", "decode", "link", "رابط"]
+    },
+    {
+      "name": "MD5 Hash",
+      "nameAr": "تشفير MD5",
+      "category": "Encoder & Crypto",
+      "url": "/tools/md5-hash.html",
+      "description": "Generate MD5 hashes",
+      "descriptionAr": "ولّد تشفير MD5",
+      "keywords": ["md5", "hash", "encrypt", "تشفير"]
+    },
+    {
+      "name": "SHA256 Hash",
+      "nameAr": "تشفير SHA256",
+      "category": "Encoder & Crypto",
+      "url": "/tools/sha256-hash.html",
+      "description": "Generate SHA256 hashes",
+      "descriptionAr": "ولّد تشفير SHA256",
+      "keywords": ["sha256", "hash", "encrypt", "secure", "تشفير", "آمن"]
+    },
+    {
+      "name": "Website Speed Test",
+      "nameAr": "فحص سرعة الموقع",
+      "category": "Website Analysis",
+      "url": "/tools/website-speed-test.html",
+      "description": "Test website loading speed and performance",
+      "descriptionAr": "افحص سرعة وأداء الموقع",
+      "keywords": ["speed", "performance", "test", "website", "سرعة", "أداء", "موقع"]
+    },
+    {
+      "name": "SEO Analyzer",
+      "nameAr": "محلل SEO",
+      "category": "Website Analysis",
+      "url": "/tools/seo-analyzer.html",
+      "description": "Analyze website SEO performance",
+      "descriptionAr": "حلل أداء SEO للموقع",
+      "keywords": ["seo", "analyze", "optimize", "website", "تحسين", "محركات", "بحث"]
+    },
+    {
+      "name": "DNS Lookup",
+      "nameAr": "فحص DNS",
+      "category": "Website Analysis",
+      "url": "/tools/dns-lookup.html",
+      "description": "Look up DNS records for domains",
+      "descriptionAr": "ابحث عن سجلات DNS للنطاقات",
+      "keywords": ["dns", "lookup", "domain", "records", "نطاق", "سجلات"]
+    },
+    {
+      "name": "Ping Test",
+      "nameAr": "فحص الاتصال",
+      "category": "Website Analysis",
+      "url": "/tools/ping-test.html",
+      "description": "Test network connectivity and latency",
+      "descriptionAr": "افحص الاتصال بالشبكة والتأخير",
+      "keywords": ["ping", "network", "test", "latency", "شبكة", "اتصال"]
+    },
+    {
+      "name": "Speech to Text",
+      "nameAr": "تحويل الصوت لنص",
+      "category": "Website Analysis",
+      "url": "/tools/speech-to-text.html",
+      "description": "Convert speech to text using voice recognition",
+      "descriptionAr": "حول الصوت إلى نص باستخدام التعرف الصوتي",
+      "keywords": ["speech", "voice", "text", "recognition", "صوت", "نص", "تعرف"]
+    },
+    {
+      "name": "Image Format Converter",
+      "nameAr": "محول صيغ الصور",
+      "category": "Utility & Misc",
+      "url": "/tools/image-format-converter.html",
+      "description": "Convert images between PNG, JPG, WebP",
+      "descriptionAr": "حول الصور بين PNG و JPG و WebP",
+      "keywords": ["image", "convert", "png", "jpg", "webp", "صورة", "تحويل"]
+    },
+    {
+      "name": "SVG to PNG Converter",
+      "nameAr": "محول SVG إلى PNG",
+      "category": "Utility & Misc",
+      "url": "/tools/svg-to-png.html",
+      "description": "Convert SVG to PNG images",
+      "descriptionAr": "حول SVG إلى صور PNG",
+      "keywords": ["svg", "png", "convert", "vector", "صورة", "تحويل"]
+    },
+    {
+      "name": "Image Cropper",
+      "nameAr": "قص الصور",
+      "category": "Utility & Misc",
+      "url": "/tools/image-cropper.html",
+      "description": "Crop images with custom dimensions",
+      "descriptionAr": "قص الصور بأبعاد مخصصة",
+      "keywords": ["crop", "image", "resize", "cut", "قص", "صورة"]
+    },
+    {
+      "name": "Image Compressor",
+      "nameAr": "ضاغط الصور",
+      "category": "Utility & Misc",
+      "url": "/tools/image-compressor.html",
+      "description": "Compress images to reduce file size",
+      "descriptionAr": "اضغط الصور لتقليل حجم الملف",
+      "keywords": ["compress", "image", "optimize", "size", "ضغط", "صورة", "تحسين"]
+    },
+    {
+      "name": "Image Resizer",
+      "nameAr": "تغيير حجم الصور",
+      "category": "Utility & Misc",
+      "url": "/tools/image-resizer.html",
+      "description": "Resize images with custom dimensions",
+      "descriptionAr": "غير حجم الصور بأبعاد مخصصة",
+      "keywords": ["resize", "image", "dimensions", "scale", "صورة", "حجم"]
+    },
+    {
+      "name": "What is My IP",
+      "nameAr": "ما هو IP الخاص بي",
+      "category": "Utility & Misc",
+      "url": "/tools/what-is-my-ip.html",
+      "description": "Find your IP address and location",
+      "descriptionAr": "اعرف عنوان IP والموقع الخاص بك",
+      "keywords": ["ip", "address", "location", "find", "عنوان", "موقع"]
+    },
+    {
+      "name": "YouTube Thumbnail Downloader",
+      "nameAr": "تحميل صور يوتيوب",
+      "category": "Utility & Misc",
+      "url": "/tools/youtube-thumbnail-downloader.html",
+      "description": "Download YouTube video thumbnails",
+      "descriptionAr": "حمّل صور مصغرة من يوتيوب",
+      "keywords": ["youtube", "thumbnail", "download", "video", "يوتيوب", "صورة", "تحميل"]
+    },
+    {
+      "name": "PDF Merger",
+      "nameAr": "دمج ملفات PDF",
+      "category": "Utility & Misc",
+      "url": "/tools/pdf-merger.html",
+      "description": "Combine multiple PDF files into one",
+      "descriptionAr": "ادمج عدة ملفات PDF في ملف واحد",
+      "keywords": ["pdf", "merge", "combine", "join", "دمج", "ملف"]
+    },
+    {
+      "name": "Grammar Checker",
+      "nameAr": "مدقق القواعد",
+      "category": "Utility & Misc",
+      "url": "/tools/grammar-checker.html",
+      "description": "Check grammar, spelling, and punctuation",
+      "descriptionAr": "تحقق من القواعد والإملاء والترقيم",
+      "keywords": ["grammar", "spell", "check", "writing", "قواعد", "إملاء", "تدقيق"]
+    }
+  ]
+}
