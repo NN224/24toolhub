@@ -42,3 +42,32 @@ The platform features a professional gradient UI, consistent across all tools, w
 - **Google Analytics**: Implemented for tracking user behavior, engagement, and chatbot interactions.
 - **js-yaml CDN**: Used for YAML to JSON conversion.
 - **pdf-lib CDN**: Used for PDF merging functionality.
+
+## Recent Changes
+
+### October 24, 2025: AI Chatbot Phase 4 - Advanced Features
+- **Export Conversation**: Download conversation history as .txt file with timestamp
+- **Dark Mode**: Toggle button in header with localStorage persistence
+- **Clear History**: Clear button with confirmation dialog
+- **Smart Suggested Questions**: Context-aware follow-up questions (max 2 per response)
+- **Copy Message Button**: Copy bot messages to clipboard on hover
+- **Header Actions Bar**: Compact icon-based design with tooltips
+
+### October 24, 2025: AI Chatbot Phase 3 - Analytics & Learning System
+- **Rating System**: 👍/👎 buttons on bot messages with localStorage tracking
+- **Tool Request Tracking**: Auto-extracts and counts tool mentions
+- **Dynamic Trending Tools**: Shows user's most requested tools in welcome
+- **Analytics Summary**: Total ratings, satisfaction rate, top 5 trending tools
+
+### October 24, 2025: AI Chatbot Phase 2 - Intelligence & Personalization  
+- **Context-Aware Suggestions**: Detects current page and suggests related tools
+- **Conversation History**: Saves to localStorage until midnight
+- **Smart Caching**: Caches common queries for instant responses
+- **Multi-Tool Workflows**: AI suggests step-by-step workflows for complex tasks
+
+### October 24, 2025: AI Chatbot Phase 1 - Quick Wins & UX
+- **Quick Reply Buttons**: 6 category buttons for instant access
+- **Enhanced Welcome**: Time-based greetings and trending tools
+- **Rate Limit Counter**: Visual display of remaining messages
+- **Mobile Optimization**: Responsive design with optimized touch targets
+- **Message Formatting**: Proper line breaks, styled links, bold text support
