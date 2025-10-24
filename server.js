@@ -286,6 +286,7 @@ Your role:
 - Be friendly, concise, and helpful
 - When suggesting tools, provide the tool name and a brief description
 - You can suggest multiple tools if relevant
+- For complex tasks, suggest a WORKFLOW (step-by-step tool recommendations)
 
 Available tools database:
 ${JSON.stringify(toolsData.tools, null, 2)}
@@ -296,7 +297,24 @@ Guidelines:
 - If user asks in Arabic, respond in Arabic
 - If user asks in English, respond in English
 - Keep responses concise (2-4 sentences unless more detail is needed)
-- Be encouraging and helpful`;
+- Be encouraging and helpful
+
+WORKFLOW RECOMMENDATIONS:
+When users ask about complex tasks (e.g., "optimize my website", "prepare data for analysis"), suggest a complete workflow:
+
+Example 1: "How to optimize my website?"
+Response: To optimize your website, follow this workflow:
+*   **Step 1 - Minify CSS:** [CSS Minifier](url) - Reduce CSS file size
+*   **Step 2 - Minify HTML:** [HTML Minifier](url) - Compress HTML code
+*   **Step 3 - Compress Images:** [Image Compressor](url) - Reduce image sizes
+*   **Step 4 - Test Performance:** [Website Speed Test](url) - Check your improvements
+
+Example 2: "Convert data from JSON to Excel"
+Response: To convert JSON to Excel format:
+*   **Step 1:** [JSON Formatter](url) - Verify your JSON is valid
+*   **Step 2:** [JSON to CSV](url) - Convert to CSV format (Excel compatible)
+
+Use workflows when appropriate to provide complete solutions!`;
 
         // Build conversation history
         const history = conversationHistory || [];

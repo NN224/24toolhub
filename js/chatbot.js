@@ -6,7 +6,11 @@ class Chatbot {
         this.messageCount = 0;
         this.maxMessages = 5;
         this.resetTime = Date.now() + 60000; // Reset after 1 minute
+        this.cacheKey = 'chatbot_cache';
+        this.historyKey = 'chatbot_history';
         this.init();
+        this.loadConversationHistory();
+        this.initCache();
     }
 
     init() {
@@ -225,6 +229,17 @@ class Chatbot {
         this.input.value = '';
         this.sendBtn.disabled = true;
 
+        // Check cache first
+        const cachedResponse = this.getCachedResponse(message);
+        if (cachedResponse) {
+            this.addBotMessage(cachedResponse + '\n\n💾 (Cached response)');
+            this.conversationHistory.push({ role: 'model', content: cachedResponse });
+            this.saveConversationHistory();
+            this.sendBtn.disabled = false;
+            this.input.focus();
+            return;
+        }
+
         // Show typing indicator
         this.showTyping();
 
@@ -257,6 +272,12 @@ class Chatbot {
             // Add bot response
             this.addBotMessage(data.response);
             this.conversationHistory.push({ role: 'model', content: data.response });
+
+            // Cache the response
+            this.setCachedResponse(message, data.response);
+            
+            // Save conversation history
+            this.saveConversationHistory();
 
             // Track message sent
             if (typeof gtag !== 'undefined') {
@@ -317,9 +338,177 @@ class Chatbot {
             `<a href="${tool.url}" target="_blank" rel="noopener">${tool.name}</a>`
         ).join(', ');
 
-        const welcomeMessage = `${greeting}\n\nأنا مساعدك الذكي في 24ToolHub. لدي أكثر من 70 أداة مجانية!\n\nI'm your AI assistant at 24ToolHub. I have 70+ free tools!\n\n🔥 Trending Today: ${toolsList}\n\nClick a category below or ask me anything!`;
+        let welcomeMessage = `${greeting}\n\nأنا مساعدك الذكي في 24ToolHub. لدي أكثر من 70 أداة مجانية!\n\nI'm your AI assistant at 24ToolHub. I have 70+ free tools!\n\n🔥 Trending Today: ${toolsList}`;
+
+        // Context-aware suggestions based on current page
+        const contextSuggestion = this.getContextAwareSuggestion();
+        if (contextSuggestion) {
+            welcomeMessage += `\n\n${contextSuggestion}`;
+        }
+
+        welcomeMessage += '\n\nClick a category below or ask me anything!';
 
         this.addBotMessage(welcomeMessage);
+    }
+
+    getContextAwareSuggestion() {
+        const currentPath = window.location.pathname;
+        
+        // Define related tools for each category
+        const relatedTools = {
+            'json-formatter': {
+                message: '💡 Since you\'re viewing JSON Formatter, you might also like:',
+                tools: [
+                    { name: 'JSON to CSV', url: '/tools/json-to-csv.html' },
+                    { name: 'JSON to XML', url: '/tools/json-to-xml.html' },
+                    { name: 'JSON Path Finder', url: '/tools/json-path-finder.html' }
+                ]
+            },
+            'image-compressor': {
+                message: '💡 Also check out these image tools:',
+                tools: [
+                    { name: 'Image Resizer', url: '/tools/image-resizer.html' },
+                    { name: 'Image Format Converter', url: '/tools/image-format-converter.html' },
+                    { name: 'Image Cropper', url: '/tools/image-cropper.html' }
+                ]
+            },
+            'csv-to-json': {
+                message: '💡 Related conversion tools:',
+                tools: [
+                    { name: 'JSON to CSV', url: '/tools/json-to-csv.html' },
+                    { name: 'XML to JSON', url: '/tools/xml-to-json.html' },
+                    { name: 'YAML to JSON', url: '/tools/yaml-to-json.html' }
+                ]
+            },
+            'base64': {
+                message: '💡 More encoding tools:',
+                tools: [
+                    { name: 'URL Encoder', url: '/tools/url-encoder.html' },
+                    { name: 'HTML Entity Encoder', url: '/tools/html-entity-encoder.html' },
+                    { name: 'Escape/Unescape', url: '/tools/escape-unescape.html' }
+                ]
+            },
+            'minifier': {
+                message: '💡 Optimize your code with:',
+                tools: [
+                    { name: 'CSS Minifier', url: '/tools/css-minifier.html' },
+                    { name: 'HTML Minifier', url: '/tools/html-minifier.html' },
+                    { name: 'JavaScript Minifier', url: '/tools/javascript-minifier.html' }
+                ]
+            }
+        };
+
+        // Check if current page matches any tool category
+        for (const [key, data] of Object.entries(relatedTools)) {
+            if (currentPath.includes(key)) {
+                const toolLinks = data.tools.map(tool => 
+                    `<a href="${tool.url}" target="_blank" rel="noopener">${tool.name}</a>`
+                ).join(', ');
+                return `${data.message} ${toolLinks}`;
+            }
+        }
+
+        return null;
+    }
+
+    // Conversation History Management
+    loadConversationHistory() {
+        try {
+            const saved = localStorage.getItem(this.historyKey);
+            if (saved) {
+                const data = JSON.parse(saved);
+                // Only load if it's from today
+                if (data.date === new Date().toDateString()) {
+                    this.conversationHistory = data.history || [];
+                    
+                    // Restore previous messages in UI (max 10)
+                    const recentMessages = data.messages?.slice(-10) || [];
+                    if (recentMessages.length > 0) {
+                        // Add a separator
+                        const separator = document.createElement('div');
+                        separator.className = 'history-separator';
+                        separator.textContent = '📜 Previous conversation';
+                        this.messagesContainer.appendChild(separator);
+                        
+                        recentMessages.forEach(msg => {
+                            this.addMessage(msg.content, msg.isUser);
+                        });
+                    }
+                }
+            }
+        } catch (e) {
+            console.warn('Failed to load conversation history:', e);
+        }
+    }
+
+    saveConversationHistory() {
+        try {
+            const messages = Array.from(this.messagesContainer.children)
+                .filter(el => el.classList.contains('chatbot-message'))
+                .map(el => ({
+                    content: el.querySelector('.message-content').textContent,
+                    isUser: el.classList.contains('user')
+                }));
+
+            localStorage.setItem(this.historyKey, JSON.stringify({
+                date: new Date().toDateString(),
+                history: this.conversationHistory,
+                messages: messages.slice(-20) // Keep last 20 messages
+            }));
+        } catch (e) {
+            console.warn('Failed to save conversation history:', e);
+        }
+    }
+
+    clearHistory() {
+        localStorage.removeItem(this.historyKey);
+        this.conversationHistory = [];
+    }
+
+    // Smart Caching System
+    initCache() {
+        try {
+            const saved = localStorage.getItem(this.cacheKey);
+            this.cache = saved ? JSON.parse(saved) : {};
+            
+            // Clean old cache (older than 24 hours)
+            const now = Date.now();
+            for (const key in this.cache) {
+                if (now - this.cache[key].timestamp > 24 * 60 * 60 * 1000) {
+                    delete this.cache[key];
+                }
+            }
+            this.saveCache();
+        } catch (e) {
+            this.cache = {};
+        }
+    }
+
+    getCachedResponse(query) {
+        const normalizedQuery = query.toLowerCase().trim();
+        const cached = this.cache[normalizedQuery];
+        
+        if (cached && (Date.now() - cached.timestamp < 24 * 60 * 60 * 1000)) {
+            return cached.response;
+        }
+        return null;
+    }
+
+    setCachedResponse(query, response) {
+        const normalizedQuery = query.toLowerCase().trim();
+        this.cache[normalizedQuery] = {
+            response: response,
+            timestamp: Date.now()
+        };
+        this.saveCache();
+    }
+
+    saveCache() {
+        try {
+            localStorage.setItem(this.cacheKey, JSON.stringify(this.cache));
+        } catch (e) {
+            console.warn('Failed to save cache:', e);
+        }
     }
 }
 

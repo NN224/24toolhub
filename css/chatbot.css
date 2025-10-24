@@ -270,6 +270,17 @@
   transform: translateY(0);
 }
 
+/* History Separator */
+.history-separator {
+  text-align: center;
+  color: #999;
+  font-size: 12px;
+  padding: 8px;
+  margin: 8px 0;
+  border-bottom: 1px dashed #ddd;
+  font-weight: 500;
+}
+
 .chatbot-input-area {
   padding: 16px;
   background: white;
