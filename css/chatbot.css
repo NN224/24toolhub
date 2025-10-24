@@ -84,6 +84,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  position: relative;
 }
 
 .chatbot-avatar {
@@ -103,10 +104,45 @@
   font-weight: 600;
 }
 
+.chatbot-title {
+  flex: 1;
+}
+
 .chatbot-title p {
   margin: 4px 0 0 0;
   font-size: 12px;
   opacity: 0.9;
+}
+
+.chatbot-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.action-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0;
+}
+
+.action-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.action-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: white;
 }
 
 .chatbot-messages {
@@ -484,7 +520,83 @@
   background: #999;
 }
 
-/* Dark mode support */
+/* Dark Mode Styles */
+.chatbot-container.dark-mode .chatbot-window {
+  background: #1a1a1a;
+}
+
+.chatbot-container.dark-mode .chatbot-messages {
+  background: #0d0d0d;
+}
+
+.chatbot-container.dark-mode .chatbot-message.bot .message-content {
+  background: #2a2a2a;
+  color: #e0e0e0;
+}
+
+.chatbot-container.dark-mode .chatbot-message.user .message-content {
+  background: #667eea;
+  color: white;
+}
+
+.chatbot-container.dark-mode .chatbot-input-area {
+  background: #1a1a1a;
+  border-top-color: #333;
+}
+
+.chatbot-container.dark-mode .chatbot-input {
+  background: #2a2a2a;
+  color: #e0e0e0;
+  border-color: #333;
+}
+
+.chatbot-container.dark-mode .chatbot-input::placeholder {
+  color: #888;
+}
+
+.chatbot-container.dark-mode .chatbot-input:focus {
+  border-color: #667eea;
+}
+
+.chatbot-container.dark-mode .typing-indicator {
+  background: #2a2a2a;
+}
+
+.chatbot-container.dark-mode .typing-dot {
+  background: #888;
+}
+
+.chatbot-container.dark-mode .quick-reply-btn {
+  background: #2a2a2a;
+  color: #e0e0e0;
+  border-color: #444;
+}
+
+.chatbot-container.dark-mode .quick-reply-btn:hover {
+  background: #333;
+  border-color: #667eea;
+}
+
+.chatbot-container.dark-mode .history-separator {
+  color: #888;
+  border-bottom-color: #333;
+}
+
+.chatbot-container.dark-mode .rating-btn {
+  background: #2a2a2a;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+.chatbot-container.dark-mode .rating-btn:hover {
+  background: #333;
+}
+
+.chatbot-container.dark-mode .message-content a {
+  color: #8b9cff;
+}
+
+/* System Dark Mode Support */
 @media (prefers-color-scheme: dark) {
   .chatbot-window {
     background: #1a1a1a;

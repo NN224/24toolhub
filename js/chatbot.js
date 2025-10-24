@@ -53,11 +53,19 @@ class Chatbot {
             }
         });
 
+        // Action buttons
+        document.getElementById('export-btn').addEventListener('click', () => this.exportConversation());
+        document.getElementById('clear-history-btn').addEventListener('click', () => this.confirmClearHistory());
+        document.getElementById('dark-mode-btn').addEventListener('click', () => this.toggleDarkMode());
+
         // Enhanced welcome message
         this.showEnhancedWelcome();
         
         // Update rate limit counter
         this.updateRateLimitCounter();
+        
+        // Load dark mode preference
+        this.loadDarkModePreference();
     }
 
     createChatbotHTML() {
@@ -84,6 +92,23 @@ class Chatbot {
                         <div class="chatbot-title">
                             <h3>AI Assistant</h3>
                             <p id="chatbot-subtitle">Always here to help</p>
+                        </div>
+                        <div class="chatbot-actions">
+                            <button id="export-btn" class="action-btn" title="Export conversation / تصدير المحادثة">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2z"/>
+                                </svg>
+                            </button>
+                            <button id="clear-history-btn" class="action-btn" title="Clear history / مسح السجل">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                                </svg>
+                            </button>
+                            <button id="dark-mode-btn" class="action-btn" title="Toggle dark mode / تبديل الوضع الداكن">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
 
@@ -671,6 +696,97 @@ class Chatbot {
                 satisfactionRate: 0,
                 trendingTools: []
             };
+        }
+    }
+
+    // Advanced Features (Phase 4)
+    exportConversation() {
+        try {
+            const messages = Array.from(this.messagesContainer.children)
+                .filter(el => el.classList.contains('chatbot-message'))
+                .map(el => {
+                    const isUser = el.classList.contains('user');
+                    const content = el.querySelector('.message-content').textContent;
+                    return `${isUser ? 'You' : 'AI Assistant'}: ${content}`;
+                })
+                .join('\n\n');
+
+            if (!messages) {
+                this.showError('No conversation to export / لا توجد محادثة للتصدير');
+                return;
+            }
+
+            const header = `24ToolHub AI Assistant - Conversation Export\nDate: ${new Date().toLocaleString()}\n${'='.repeat(50)}\n\n`;
+            const fullContent = header + messages;
+
+            // Create download
+            const blob = new Blob([fullContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `chatbot-conversation-${Date.now()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            // Show success message
+            this.showError('✅ Conversation exported! / تم تصدير المحادثة!');
+
+            // Track export
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'chatbot_export', {
+                    event_category: 'engagement'
+                });
+            }
+        } catch (e) {
+            console.warn('Export failed:', e);
+            this.showError('Export failed / فشل التصدير');
+        }
+    }
+
+    confirmClearHistory() {
+        if (confirm('Are you sure you want to clear the conversation history?\n\nهل أنت متأكد من حذف سجل المحادثات؟')) {
+            this.clearHistory();
+            
+            // Clear messages UI
+            const messages = this.messagesContainer.querySelectorAll('.chatbot-message, .history-separator');
+            messages.forEach(msg => msg.remove());
+            
+            // Show welcome message again
+            this.showEnhancedWelcome();
+            
+            this.showError('✅ History cleared! / تم مسح السجل!');
+            
+            // Track clear
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'chatbot_clear_history', {
+                    event_category: 'engagement'
+                });
+            }
+        }
+    }
+
+    toggleDarkMode() {
+        const container = document.querySelector('.chatbot-container');
+        const isDark = container.classList.toggle('dark-mode');
+        
+        // Save preference
+        localStorage.setItem('chatbot_dark_mode', isDark);
+        
+        // Track toggle
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'chatbot_dark_mode', {
+                event_category: 'engagement',
+                event_label: isDark ? 'enabled' : 'disabled'
+            });
+        }
+    }
+
+    loadDarkModePreference() {
+        const isDark = localStorage.getItem('chatbot_dark_mode') === 'true';
+        if (isDark) {
+            document.querySelector('.chatbot-container').classList.add('dark-mode');
         }
     }
 }
