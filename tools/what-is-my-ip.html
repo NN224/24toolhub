@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="What is my IP address? Find your public IP, location, ISP, browser info, and operating system. Free IP lookup tool with detailed information.">
+    <meta name="keywords" content="what is my ip, ip address, ip lookup, my ip location, check ip, public ip, ip info">
+    <meta property="og:title" content="What is My IP Address - IP Lookup Tool | 24ToolHub" />
+    <meta property="og:description" content="Find your IP address, location, ISP, and browser information instantly. Free IP lookup tool." />
+    <meta property="og:url" content="https://24toolhub.com/tools/what-is-my-ip.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://24toolhub.com/images/og-image.jpg" />
+    <title>What is My IP Address - IP Lookup Tool | 24ToolHub</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2446710277775155" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ELW7FZKDW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2ELW7FZKDW');
+    </script>
+    <style>
+      .ip-container {
+        background: var(--bg-secondary);
+        padding: 30px;
+        border-radius: 12px;
+        margin: 30px 0;
+        border: 1px solid var(--border-color);
+      }
+      .ip-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px;
+        border-radius: 12px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      }
+      .ip-hero h2 {
+        margin: 0 0 10px 0;
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+      .ip-address {
+        font-size: 3rem;
+        font-weight: bold;
+        margin: 20px 0;
+        word-break: break-all;
+      }
+      .loading {
+        font-size: 2rem;
+      }
+      .copy-ip-btn {
+        background: white;
+        color: #667eea;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        margin-top: 15px;
+      }
+      .copy-ip-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+      }
+      .info-card {
+        background: var(--bg-primary);
+        padding: 25px;
+        border-radius: 12px;
+        border: 2px solid var(--border-color);
+      }
+      .info-card h3 {
+        margin: 0 0 15px 0;
+        color: #667eea;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .info-card .icon {
+        font-size: 1.5rem;
+      }
+      .info-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .info-item:last-child {
+        border-bottom: none;
+      }
+      .info-label {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+      }
+      .info-value {
+        color: var(--text-primary);
+        font-weight: 600;
+        text-align: right;
+      }
+      .action-buttons {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin: 30px 0;
+        flex-wrap: wrap;
+      }
+      .status-message {
+        text-align: center;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px 0;
+        display: none;
+      }
+      .status-message.success {
+        background: rgba(102, 126, 234, 0.1);
+        color: #667eea;
+        display: block;
+      }
+      .status-message.error {
+        background: rgba(245, 87, 108, 0.1);
+        color: #f5576c;
+        display: block;
+      }
+      .skeleton {
+        background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-tertiary) 50%, var(--bg-secondary) 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s ease-in-out infinite;
+        border-radius: 4px;
+        height: 20px;
+      }
+      @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <div class="header-branding">
+          <a href="../index.html" class="logo-link">
+            <img src="../images/logo.png" alt="24ToolHub" class="logo">
+          </a>
+          <h1 class="site-title">24ToolHub</h1>
+        </div>
+        <div class="header-actions">
+          <a href="../index.html" class="btn btn-secondary">Home</a>
+          <a href="../blog/index.html" class="btn btn-secondary">Blog</a>
+          <a href="../contact.html" class="btn btn-secondary">Contact</a>
+          <a href="../about.html" class="btn btn-secondary">About</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="ad-space ad-leaderboard"></div>
+
+    <main class="main-content">
+      <a href="../index.html" class="back-link">← Back to Home</a>
+      
+      <h1>🌐 What is My IP Address</h1>
+      <p class="tool-description">Discover your public IP address, location, ISP, and detailed connection information.</p>
+
+      <div class="ip-container">
+        <div class="ip-hero">
+          <h2>Your IP Address</h2>
+          <div class="ip-address" id="ipAddress">
+            <span class="loading">Loading...</span>
+          </div>
+          <button class="copy-ip-btn" id="copyIpBtn" style="display: none;">📋 Copy IP Address</button>
+        </div>
+
+        <div class="status-message" id="statusMessage"></div>
+
+        <div class="action-buttons">
+          <button id="refreshBtn" class="btn btn-primary">🔄 Refresh Information</button>
+          <button id="getIpv6Btn" class="btn btn-secondary">Get IPv6 Address</button>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <h3><span class="icon">📍</span> Location</h3>
+            <div class="info-item">
+              <span class="info-label">Country:</span>
+              <span class="info-value" id="country">--</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Region:</span>
+              <span class="info-value" id="region">--</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">City:</span>
+              <span class="info-value" id="city">--</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Postal Code:</span>
+              <span class="info-value" id="postal">--</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Timezone:</span>
+              <span class="info-value" id="timezone">--</span>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3><span class="icon">🌐</span> Network</h3>
+            <div class="info-item">
+              <span class="info-label">ISP:</span>
+              <span class="info-value" id="isp">--</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Organization:</span>
+              <span class="info-value" id="org">--</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">ASN:</span>
+              <span class="info-value" id="asn">--</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Latitude:</span>
+              <span class="info-value" id="latitude">--</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Longitude:</span>
+              <span class="info-value" id="longitude">--</span>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3><span class="icon">💻</span> Browser</h3>
+            <div class="info-item">
+              <span class="info-label">Browser:</span>
+              <span class="info-value" id="browser">--</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Version:</span>
+              <span class="info-value" id="browserVersion">--</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Platform:</span>
+              <span class="info-value" id="platform">--</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Language:</span>
+              <span class="info-value" id="language">--</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Screen:</span>
+              <span class="info-value" id="screen">--</span>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3><span class="icon">⚙️</span> System</h3>
+            <div class="info-item">
+              <span class="info-label">OS:</span>
+              <span class="info-value" id="os">--</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Cookies:</span>
+              <span class="info-value" id="cookies">--</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Java:</span>
+              <span class="info-value" id="java">--</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">User Agent:</span>
+              <span class="info-value" id="userAgent" style="font-size: 0.75rem; word-break: break-all;">--</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-space ad-rectangle"></div>
+    </main>
+
+    <script src="../js/what-is-my-ip.js"></script>
+  </body>
+</html>

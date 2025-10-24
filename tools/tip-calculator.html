@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Free online tip calculator. Calculate tip amount, total bill, and split between people. Preset tip percentages and real-time calculations.">
+    <meta name="keywords" content="tip calculator, calculate tip, gratuity calculator, bill splitter, tip percentage, restaurant tip">
+    <meta property="og:title" content="Tip Calculator - Calculate Tip & Split Bill | 24ToolHub" />
+    <meta property="og:description" content="Calculate tip amount and split bills easily. Real-time calculations with preset percentages." />
+    <meta property="og:url" content="https://24toolhub.com/tools/tip-calculator.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://24toolhub.com/images/og-image.jpg" />
+    <title>Tip Calculator - Calculate Tip & Split Bill | 24ToolHub</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2446710277775155" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ELW7FZKDW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2ELW7FZKDW');
+    </script>
+    <style>
+      .calculator-container {
+        background: var(--bg-secondary);
+        padding: 30px;
+        border-radius: 12px;
+        margin: 30px 0;
+        border: 1px solid var(--border-color);
+      }
+      .input-section {
+        background: var(--bg-primary);
+        padding: 25px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        border: 2px solid var(--border-color);
+      }
+      .input-group {
+        margin-bottom: 20px;
+      }
+      .input-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--text-primary);
+        font-size: 14px;
+      }
+      .input-group input {
+        width: 100%;
+        padding: 14px;
+        background: var(--bg-secondary);
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        color: var(--text-primary);
+        font-size: 18px;
+        font-weight: 500;
+      }
+      .input-group input:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+      .slider-container {
+        margin: 20px 0;
+      }
+      .slider-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .slider-value {
+        font-size: 24px;
+        font-weight: bold;
+        color: #667eea;
+      }
+      .slider {
+        width: 100%;
+        height: 8px;
+        border-radius: 5px;
+        background: var(--border-color);
+        outline: none;
+        -webkit-appearance: none;
+      }
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        cursor: pointer;
+      }
+      .slider::-moz-range-thumb {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        cursor: pointer;
+        border: none;
+      }
+      .preset-buttons {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        margin: 20px 0;
+      }
+      @media (max-width: 768px) {
+        .preset-buttons {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .preset-btn {
+        padding: 12px;
+        background: var(--bg-secondary);
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        color: var(--text-primary);
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.2s;
+      }
+      .preset-btn:hover, .preset-btn.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-color: #667eea;
+        color: white;
+      }
+      .results-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+      }
+      .result-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 25px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+      }
+      .result-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .result-amount {
+        font-size: 2.5rem;
+        font-weight: bold;
+        display: block;
+      }
+      .summary-box {
+        background: var(--bg-primary);
+        padding: 25px;
+        border-radius: 12px;
+        border-left: 4px solid #667eea;
+        margin: 20px 0;
+      }
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border-color);
+        font-size: 16px;
+      }
+      .summary-row:last-child {
+        border-bottom: none;
+        font-size: 20px;
+        font-weight: bold;
+        color: #667eea;
+        padding-top: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <div class="header-branding">
+          <a href="../index.html" class="logo-link">
+            <img src="../images/logo.png" alt="24ToolHub" class="logo">
+          </a>
+          <h1 class="site-title">24ToolHub</h1>
+        </div>
+        <div class="header-actions">
+          <a href="../index.html" class="btn btn-secondary">Home</a>
+          <a href="../blog/index.html" class="btn btn-secondary">Blog</a>
+          <a href="../contact.html" class="btn btn-secondary">Contact</a>
+          <a href="../about.html" class="btn btn-secondary">About</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="ad-space ad-leaderboard"></div>
+
+    <main class="main-content">
+      <a href="../index.html" class="back-link">← Back to Home</a>
+      
+      <h1>💰 Tip Calculator</h1>
+      <p class="tool-description">Calculate tip amount and split your bill easily. Real-time calculations with customizable tip percentages.</p>
+
+      <div class="calculator-container">
+        <div class="input-section">
+          <div class="input-group">
+            <label for="billAmount">Bill Amount ($)</label>
+            <input type="number" id="billAmount" placeholder="0.00" step="0.01" min="0">
+          </div>
+
+          <div class="slider-container">
+            <div class="slider-label">
+              <label>Tip Percentage</label>
+              <span class="slider-value" id="tipPercentage">15%</span>
+            </div>
+            <input type="range" id="tipSlider" class="slider" min="0" max="30" value="15">
+          </div>
+
+          <label style="display: block; margin-bottom: 10px; font-weight: 600; color: var(--text-primary);">Quick Tip Presets:</label>
+          <div class="preset-buttons">
+            <button class="preset-btn" data-tip="10">10%</button>
+            <button class="preset-btn" data-tip="15">15%</button>
+            <button class="preset-btn" data-tip="18">18%</button>
+            <button class="preset-btn" data-tip="20">20%</button>
+            <button class="preset-btn" data-tip="25">25%</button>
+          </div>
+
+          <div class="input-group">
+            <label for="numPeople">Number of People</label>
+            <input type="number" id="numPeople" value="1" min="1">
+          </div>
+        </div>
+
+        <div class="results-grid">
+          <div class="result-card">
+            <div class="result-label">Tip Amount</div>
+            <span class="result-amount" id="tipAmount">$0.00</span>
+          </div>
+          <div class="result-card">
+            <div class="result-label">Total Bill</div>
+            <span class="result-amount" id="totalAmount">$0.00</span>
+          </div>
+          <div class="result-card">
+            <div class="result-label">Per Person</div>
+            <span class="result-amount" id="perPerson">$0.00</span>
+          </div>
+        </div>
+
+        <div class="summary-box">
+          <div class="summary-row">
+            <span>Bill Amount:</span>
+            <span id="summaryBill">$0.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Tip (<span id="summaryTipPercent">15</span>%):</span>
+            <span id="summaryTip">$0.00</span>
+          </div>
+          <div class="summary-row">
+            <span>Number of People:</span>
+            <span id="summaryPeople">1</span>
+          </div>
+          <div class="summary-row">
+            <span>Total:</span>
+            <span id="summaryTotal">$0.00</span>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button id="resetBtn" class="btn btn-secondary">Reset Calculator</button>
+        </div>
+      </div>
+
+      <div class="ad-space ad-rectangle"></div>
+    </main>
+
+    <script src="../js/tip-calculator.js"></script>
+  </body>
+</html>
