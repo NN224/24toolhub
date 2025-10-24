@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Convert YAML to JSON format online. Free YAML to JSON converter with syntax validation and instant conversion.">
+    <meta name="keywords" content="yaml to json, yaml converter, json converter, yaml to json online, yaml parser">
+    <meta property="og:title" content="YAML to JSON Converter - Convert YAML to JSON Online | 24ToolHub" />
+    <meta property="og:description" content="Convert YAML data to JSON format instantly with our free online tool" />
+    <meta property="og:url" content="https://24toolhub.com/tools/yaml-to-json.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://24toolhub.com/images/og-image.jpg" />
+    <title>YAML to JSON Converter - Convert YAML to JSON Online | 24ToolHub</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2446710277775155" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ELW7FZKDW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2ELW7FZKDW');
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+    <style>
+      .converter-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin: 30px 0;
+      }
+      @media (max-width: 768px) {
+        .converter-container {
+          grid-template-columns: 1fr;
+        }
+      }
+      .input-section, .output-section {
+        background: var(--bg-secondary);
+        padding: 25px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+      }
+      .input-section h3, .output-section h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+        color: var(--text-primary);
+      }
+      .converter-textarea {
+        width: 100%;
+        min-height: 300px;
+        padding: 15px;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        resize: vertical;
+      }
+      .options-section {
+        background: var(--bg-secondary);
+        padding: 20px;
+        border-radius: 12px;
+        margin: 20px 0;
+      }
+      .option-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 10px 0;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+        margin: 20px 0;
+      }
+      .stat-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+      }
+      .stat-number {
+        font-size: 1.8rem;
+        font-weight: bold;
+        display: block;
+      }
+      .stat-label {
+        font-size: 0.85rem;
+        opacity: 0.9;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <div class="header-branding">
+          <a href="../index.html" class="logo-link">
+            <img src="../images/logo.png" alt="24ToolHub" class="logo">
+          </a>
+          <h1 class="site-title">24ToolHub</h1>
+        </div>
+        <div class="header-actions">
+          <a href="../index.html" class="btn btn-secondary">Home</a>
+          <a href="../blog/index.html" class="btn btn-secondary">Blog</a>
+          <a href="../contact.html" class="btn btn-secondary">Contact</a>
+          <a href="../about.html" class="btn btn-secondary">About</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="ad-space ad-leaderboard"></div>
+
+    <main class="main-content">
+      <a href="../index.html" class="back-link">← Back to Home</a>
+      
+      <h1>📝 YAML to JSON Converter</h1>
+      <p class="tool-description">Convert YAML data to JSON format instantly. Perfect for configuration files, data transformation, and API development.</p>
+
+      <div class="stats" id="stats" style="display: none;">
+        <div class="stat-box">
+          <span class="stat-number" id="yamlSize">0</span>
+          <span class="stat-label">YAML Size (bytes)</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-number" id="jsonSize">0</span>
+          <span class="stat-label">JSON Size (bytes)</span>
+        </div>
+      </div>
+
+      <div class="converter-container">
+        <div class="input-section">
+          <h3>YAML Input</h3>
+          <textarea id="yamlInput" class="converter-textarea" placeholder="name: John Doe
+age: 30
+address:
+  street: 123 Main St
+  city: New York
+hobbies:
+  - reading
+  - coding
+  - gaming"></textarea>
+        </div>
+
+        <div class="output-section">
+          <h3>JSON Output</h3>
+          <textarea id="jsonOutput" class="converter-textarea" readonly placeholder="JSON output will appear here..."></textarea>
+        </div>
+      </div>
+
+      <div class="options-section">
+        <div class="option-group">
+          <input type="checkbox" id="prettyPrint" checked>
+          <label for="prettyPrint">Pretty Print (Formatted)</label>
+        </div>
+        <div class="option-group">
+          <label for="indentSize">Indent Size:</label>
+          <select id="indentSize">
+            <option value="2" selected>2 spaces</option>
+            <option value="4">4 spaces</option>
+            <option value="8">8 spaces</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button id="convertBtn" class="btn btn-primary">Convert to JSON</button>
+        <button id="downloadBtn" class="btn btn-primary" style="display: none;">Download JSON</button>
+        <button id="copyBtn" class="btn btn-secondary" style="display: none;">Copy JSON</button>
+        <button id="clearBtn" class="btn btn-secondary">Clear</button>
+      </div>
+
+      <div class="ad-space ad-rectangle"></div>
+    </main>
+
+    <script src="../js/yaml-to-json.js"></script>
+  </body>
+</html>

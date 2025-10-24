@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Convert RGB colors to HEX code online. Free RGB to HEX converter with live color preview and reverse conversion (HEX to RGB).">
+    <meta name="keywords" content="rgb to hex, hex to rgb, color converter, rgb converter, hex color, color code converter">
+    <meta property="og:title" content="RGB to HEX Converter - Convert Colors Online | 24ToolHub" />
+    <meta property="og:description" content="Convert RGB colors to HEX and vice versa with live preview" />
+    <meta property="og:url" content="https://24toolhub.com/tools/rgb-to-hex.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://24toolhub.com/images/og-image.jpg" />
+    <title>RGB to HEX Converter - Convert Colors Online | 24ToolHub</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2446710277775155" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ELW7FZKDW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2ELW7FZKDW');
+    </script>
+    <style>
+      .converter-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin: 30px 0;
+      }
+      @media (max-width: 768px) {
+        .converter-container {
+          grid-template-columns: 1fr;
+        }
+      }
+      .color-section {
+        background: var(--bg-secondary);
+        padding: 30px;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+      }
+      .color-section h3 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        color: var(--text-primary);
+      }
+      .input-group {
+        margin-bottom: 20px;
+      }
+      .input-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--text-primary);
+      }
+      .rgb-inputs {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+      .rgb-input {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .rgb-input label {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+      }
+      .rgb-input input[type="number"] {
+        padding: 12px;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 16px;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+      }
+      .hex-input {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        font-family: 'Courier New', monospace;
+        font-size: 18px;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+      }
+      .color-preview {
+        width: 100%;
+        height: 200px;
+        border-radius: 12px;
+        border: 3px solid var(--border-color);
+        margin: 20px 0;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+      .color-info {
+        background: var(--bg-primary);
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 20px;
+      }
+      .color-info-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .color-info-item:last-child {
+        border-bottom: none;
+      }
+      .color-info-label {
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+      .color-info-value {
+        font-family: 'Courier New', monospace;
+        color: var(--text-secondary);
+      }
+      .presets-section {
+        background: var(--bg-secondary);
+        padding: 25px;
+        border-radius: 12px;
+        margin: 30px 0;
+        border: 1px solid var(--border-color);
+      }
+      .color-presets {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 15px;
+        margin-top: 15px;
+      }
+      .preset-color {
+        height: 80px;
+        border-radius: 8px;
+        cursor: pointer;
+        border: 3px solid transparent;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: white;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      }
+      .preset-color:hover {
+        border-color: #667eea;
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-container">
+        <div class="header-branding">
+          <a href="../index.html" class="logo-link">
+            <img src="../images/logo.png" alt="24ToolHub" class="logo">
+          </a>
+          <h1 class="site-title">24ToolHub</h1>
+        </div>
+        <div class="header-actions">
+          <a href="../index.html" class="btn btn-secondary">Home</a>
+          <a href="../blog/index.html" class="btn btn-secondary">Blog</a>
+          <a href="../contact.html" class="btn btn-secondary">Contact</a>
+          <a href="../about.html" class="btn btn-secondary">About</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="ad-space ad-leaderboard"></div>
+
+    <main class="main-content">
+      <a href="../index.html" class="back-link">← Back to Home</a>
+      
+      <h1>🎨 RGB to HEX Converter</h1>
+      <p class="tool-description">Convert RGB colors to HEX and vice versa. Live color preview and instant conversion for web design and development.</p>
+
+      <div class="converter-container">
+        <div class="color-section">
+          <h3>RGB Input</h3>
+          <div class="rgb-inputs">
+            <div class="rgb-input">
+              <label>Red (R)</label>
+              <input type="number" id="rgbR" min="0" max="255" value="102">
+            </div>
+            <div class="rgb-input">
+              <label>Green (G)</label>
+              <input type="number" id="rgbG" min="0" max="255" value="126">
+            </div>
+            <div class="rgb-input">
+              <label>Blue (B)</label>
+              <input type="number" id="rgbB" min="0" max="255" value="234">
+            </div>
+          </div>
+          <div class="button-group" style="margin-top: 15px;">
+            <button id="rgbToHexBtn" class="btn btn-primary">Convert to HEX</button>
+          </div>
+        </div>
+
+        <div class="color-section">
+          <h3>HEX Input</h3>
+          <div class="input-group">
+            <label>HEX Code</label>
+            <input type="text" id="hexInput" class="hex-input" value="#667eea" placeholder="#000000">
+          </div>
+          <div class="button-group">
+            <button id="hexToRgbBtn" class="btn btn-primary">Convert to RGB</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="color-preview" id="colorPreview"></div>
+
+      <div class="color-info" id="colorInfo">
+        <div class="color-info-item">
+          <span class="color-info-label">RGB:</span>
+          <span class="color-info-value" id="rgbDisplay">rgb(102, 126, 234)</span>
+        </div>
+        <div class="color-info-item">
+          <span class="color-info-label">HEX:</span>
+          <span class="color-info-value" id="hexDisplay">#667eea</span>
+        </div>
+        <div class="color-info-item">
+          <span class="color-info-label">CSS RGB:</span>
+          <span class="color-info-value" id="cssRgbDisplay">rgb(102, 126, 234)</span>
+        </div>
+        <div class="color-info-item">
+          <span class="color-info-label">CSS HEX:</span>
+          <span class="color-info-value" id="cssHexDisplay">#667eea</span>
+        </div>
+      </div>
+
+      <div class="presets-section">
+        <h3>Popular Colors</h3>
+        <div class="color-presets" id="colorPresets"></div>
+      </div>
+
+      <div class="ad-space ad-rectangle"></div>
+    </main>
+
+    <script src="../js/rgb-to-hex.js"></script>
+  </body>
+</html>
