@@ -3,6 +3,9 @@ class Chatbot {
     constructor() {
         this.isOpen = false;
         this.conversationHistory = [];
+        this.messageCount = 0;
+        this.maxMessages = 5;
+        this.resetTime = Date.now() + 60000; // Reset after 1 minute
         this.init();
     }
 
@@ -27,8 +30,21 @@ class Chatbot {
             }
         });
 
-        // Welcome message
-        this.addBotMessage('مرحباً! 👋 أنا مساعدك الذكي في 24ToolHub. كيف يمكنني مساعدتك اليوم؟\n\nHello! 👋 I\'m your AI assistant at 24ToolHub. How can I help you today?');
+        // Quick reply buttons
+        this.quickReplies = document.querySelectorAll('.quick-reply-btn');
+        this.quickReplies.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const query = btn.getAttribute('data-query');
+                this.input.value = query;
+                this.sendMessage();
+            });
+        });
+
+        // Enhanced welcome message
+        this.showEnhancedWelcome();
+        
+        // Update rate limit counter
+        this.updateRateLimitCounter();
     }
 
     createChatbotHTML() {
@@ -54,13 +70,23 @@ class Chatbot {
                         <div class="chatbot-avatar">🤖</div>
                         <div class="chatbot-title">
                             <h3>AI Assistant</h3>
-                            <p>Always here to help</p>
+                            <p id="chatbot-subtitle">Always here to help</p>
                         </div>
                     </div>
 
                     <!-- Messages -->
                     <div id="chatbot-messages" class="chatbot-messages">
                         <!-- Messages will be added here dynamically -->
+                    </div>
+
+                    <!-- Quick Reply Buttons -->
+                    <div id="quick-replies" class="quick-replies">
+                        <button class="quick-reply-btn" data-query="Show me text processing tools">📝 Text Tools</button>
+                        <button class="quick-reply-btn" data-query="I need conversion tools">🔄 Converters</button>
+                        <button class="quick-reply-btn" data-query="Show me generator tools">🎨 Generators</button>
+                        <button class="quick-reply-btn" data-query="I need encryption tools">🔒 Encryption</button>
+                        <button class="quick-reply-btn" data-query="Show me website analysis tools">📊 Website Analysis</button>
+                        <button class="quick-reply-btn" data-query="I need image tools">🖼️ Image Tools</button>
                     </div>
 
                     <!-- Input Area -->
@@ -177,6 +203,20 @@ class Chatbot {
         
         if (!message) return;
 
+        // Check rate limit
+        if (Date.now() > this.resetTime) {
+            this.messageCount = 0;
+            this.resetTime = Date.now() + 60000;
+        }
+
+        if (this.messageCount >= this.maxMessages) {
+            this.showError('⏳ Rate limit reached. Please wait a moment. / تم الوصول إلى الحد الأقصى. يرجى الانتظار قليلاً.');
+            return;
+        }
+
+        this.messageCount++;
+        this.updateRateLimitCounter();
+
         // Add user message
         this.addUserMessage(message);
         this.conversationHistory.push({ role: 'user', content: message });
@@ -233,6 +273,53 @@ class Chatbot {
             this.sendBtn.disabled = false;
             this.input.focus();
         }
+    }
+
+    updateRateLimitCounter() {
+        const subtitle = document.getElementById('chatbot-subtitle');
+        const remaining = this.maxMessages - this.messageCount;
+        
+        if (remaining <= 2 && remaining > 0) {
+            subtitle.textContent = `⏳ ${remaining} messages remaining`;
+            subtitle.style.color = '#ff9800';
+        } else if (remaining === 0) {
+            subtitle.textContent = '⏳ Please wait...';
+            subtitle.style.color = '#f44336';
+        } else {
+            subtitle.textContent = 'Always here to help';
+            subtitle.style.color = 'rgba(255, 255, 255, 0.9)';
+        }
+    }
+
+    showEnhancedWelcome() {
+        // Get time-based greeting
+        const hour = new Date().getHours();
+        let greeting = 'مرحباً! 👋';
+        
+        if (hour >= 5 && hour < 12) {
+            greeting = 'صباح الخير! ☀️';
+        } else if (hour >= 12 && hour < 18) {
+            greeting = 'مساء الخير! 🌤️';
+        } else if (hour >= 18 && hour < 22) {
+            greeting = 'مساء الخير! 🌙';
+        } else {
+            greeting = 'مساء الخير! 🌜';
+        }
+
+        // Popular tools
+        const popularTools = [
+            { name: 'JSON Formatter', url: '/tools/json-formatter.html' },
+            { name: 'Image Compressor', url: '/tools/image-compressor.html' },
+            { name: 'QR Code Generator', url: '/tools/qr-code-generator.html' }
+        ];
+
+        const toolsList = popularTools.map(tool => 
+            `<a href="${tool.url}" target="_blank" rel="noopener">${tool.name}</a>`
+        ).join(', ');
+
+        const welcomeMessage = `${greeting}\n\nأنا مساعدك الذكي في 24ToolHub. لدي أكثر من 70 أداة مجانية!\n\nI'm your AI assistant at 24ToolHub. I have 70+ free tools!\n\n🔥 Trending Today: ${toolsList}\n\nClick a category below or ask me anything!`;
+
+        this.addBotMessage(welcomeMessage);
     }
 }
 
