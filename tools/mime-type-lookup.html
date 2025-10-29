@@ -14,7 +14,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta name="keywords" content="mime type lookup, content type, file extension, mime types list, web development, http headers">
     <title>MIME Type Lookup | Find Content-Type for any File Extension | 24ToolHub</title>
     <link rel="icon" type="image/png" href="../favicon.png" />
+    <link rel="canonical" href="https://24toolhub.com/tools/mime-type-lookup.html" />
     <link rel="stylesheet" href="../css/styles.css" />
+    
+    <!-- Tool Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "MIME Type Lookup",
+      "applicationCategory": "DeveloperApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "Quickly find the correct MIME type for any file extension. Our free online tool helps web developers ensure files are served and interpreted correctly by browsers.",
+      "operatingSystem": "Any",
+      "featureList": ["Find MIME type by extension", "Comprehensive MIME type database", "Instant lookup", "Free online tool", "Web developer tool"]
+    }
+    </script>
+    
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2446710277775155" crossorigin="anonymous"></script>
 <style>
 
@@ -223,13 +243,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <header class="header">
       <div class="header-container">
         <div class="header-branding">
-          <a href="../index.html" class="logo-link">
+          <a href="../" class="logo-link">
             <img src="../images/logo.png" alt="24ToolHub" class="logo">
           </a>
           <h1 class="site-title">24ToolHub</h1>
         </div>
         <div class="header-actions">
-                <a href="../index.html" class="btn btn-secondary">Home</a>
+                <a href="../" class="btn btn-secondary">Home</a>
                 <a href="../blog/index.html" class="btn btn-secondary">Blog</a>
                 <a href="../contact.html" class="btn btn-secondary">Contact</a>
                 <a href="../about.html" class="btn btn-secondary">About</a>
@@ -246,7 +266,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="tool-container">
         <!-- Tool Header -->
         <div class="tool-header">
-          <a href="../index.html" class="back-link" data-en="← Back to Home" data-ar="← العودة للرئيسية">← Back to Home</a>
+          <a href="../" class="back-link" data-en="← Back to Home" data-ar="← العودة للرئيسية">← Back to Home</a>
           <h1 class="tool-title" data-en="MIME Type Lookup" data-ar="البحث عن نوع MIME">MIME Type Lookup</h1>
           <p class="tool-description" data-en="Find MIME types for file extensions" data-ar="ابحث عن أنواع MIME لامتدادات الملفات">Find MIME types for file extensions</p>
         </div>
@@ -348,6 +368,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </details>
                 </div>
             </div>
+          </div>
+          
+          <!-- Enhanced SEO Content -->
+          <div class="seo-section">
+            <h2>📚 Understanding MIME Types</h2>
+            <p>MIME (Multipurpose Internet Mail Extensions) types are a standardized way to indicate the nature and format of a document, file, or collection of bytes transmitted over the internet. Originally designed for email attachments, MIME types have become essential for web browsers, servers, and applications to properly handle different types of content. Every file served over HTTP includes a MIME type in its Content-Type header, telling the browser whether the content is an HTML page, a JPEG image, a PDF document, or any other format. Understanding MIME types is crucial for web developers, as incorrect MIME types can cause browsers to misinterpret files, leading to security vulnerabilities, broken downloads, or improperly displayed content. Our MIME Type Lookup tool provides instant access to the correct MIME type for any file extension, helping developers ensure their web applications serve files correctly and securely.</p>
+            
+            <h2>🎯 Practical Use Cases</h2>
+            <ul>
+              <li><strong>Web Server Configuration:</strong> Configure Apache, Nginx, or IIS servers with correct MIME types to ensure browsers properly interpret files. This is essential when serving new file types or custom extensions.</li>
+              <li><strong>File Upload Systems:</strong> Validate uploaded files by checking their MIME types against expected values, preventing users from uploading malicious files disguised with incorrect extensions.</li>
+              <li><strong>API Development:</strong> Set proper Content-Type headers in REST API responses to ensure clients correctly parse JSON, XML, CSV, or other data formats.</li>
+              <li><strong>Email Attachments:</strong> Specify correct MIME types when sending email attachments programmatically to ensure email clients display or offer downloads appropriately.</li>
+              <li><strong>Content Delivery Networks:</strong> Configure CDNs with proper MIME types for static assets to ensure optimal caching and browser behavior.</li>
+              <li><strong>Mobile App Development:</strong> Handle file downloads and previews in mobile apps by using MIME types to determine how to display or process different file formats.</li>
+              <li><strong>Security Implementations:</strong> Prevent MIME-sniffing attacks by explicitly setting X-Content-Type-Options headers and ensuring MIME types match file contents.</li>
+            </ul>
+            
+            <h2>💡 Best Practices and Tips</h2>
+            <h3>Server Configuration</h3>
+            <ul>
+              <li><strong>Always Set Content-Type:</strong> Explicitly set Content-Type headers for all served files. Never rely on browsers to guess the MIME type based on file extensions.</li>
+              <li><strong>Use X-Content-Type-Options:</strong> Add the `X-Content-Type-Options: nosniff` header to prevent browsers from MIME-sniffing, which can lead to security vulnerabilities.</li>
+              <li><strong>Validate File Contents:</strong> Don't trust file extensions alone. Validate actual file contents match the declared MIME type, especially for user uploads.</li>
+              <li><strong>Keep MIME Types Updated:</strong> Regularly update your server's MIME type mappings to support new file formats like WebP, AVIF, or WOFF2.</li>
+            </ul>
+            
+            <h3>Common MIME Type Categories</h3>
+            <ul>
+              <li><strong>Text:</strong> text/plain, text/html, text/css, text/javascript</li>
+              <li><strong>Images:</strong> image/jpeg, image/png, image/gif, image/svg+xml, image/webp</li>
+              <li><strong>Application:</strong> application/json, application/pdf, application/zip, application/octet-stream</li>
+              <li><strong>Video:</strong> video/mp4, video/webm, video/ogg</li>
+              <li><strong>Audio:</strong> audio/mpeg, audio/wav, audio/ogg</li>
+            </ul>
+            
+            <h3>Troubleshooting Tips</h3>
+            <ul>
+              <li>If CSS files aren't loading, check for text/plain instead of text/css</li>
+              <li>If JavaScript isn't executing, verify it's served as application/javascript or text/javascript</li>
+              <li>If downloads start instead of displaying in browser, check if MIME type is application/octet-stream</li>
+              <li>Use browser developer tools to inspect actual Content-Type headers being sent by your server</li>
+            </ul>
           </div>
         </div>
         </div>
