@@ -25,6 +25,16 @@ const RATE_WINDOW = 60 * 1000; // 1 minute
 app.use(cors());
 app.use(express.json());
 
+// Disable caching for HTML files to ensure users always get latest version
+app.use((req, res, next) => {
+  if (req.path.endsWith('.html') || req.path === '/') {
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
+  }
+  next();
+});
+
 app.use(express.static(path.join(__dirname)));
 
 app.get('/analyze-seo', async (req, res) => {
