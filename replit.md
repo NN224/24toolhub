@@ -54,6 +54,7 @@ The platform features a professional gradient UI, consistent across all tools, w
 - **Mobile Responsive**: Adaptive sizing and touch-friendly buttons for mobile devices
 - **Analytics Integration**: Tracks slider suggestion clicks via Google Analytics (gtag slider_suggestion_clicked event)
 - **Auto-initialization**: Slider loads automatically when chatbot opens, displaying 4-8 relevant suggestions
+- **Removed Old Quick Reply Buttons**: Replaced 6-button grid (Text Tools, Converters, etc.) with the new horizontal slider for cleaner UX
 
 ### October 24, 2025: AI Chatbot Phase 4 - Advanced Features
 - **Export Conversation**: Download conversation history as .txt file with timestamp

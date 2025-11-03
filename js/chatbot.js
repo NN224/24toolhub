@@ -34,16 +34,6 @@ class Chatbot {
             }
         });
 
-        // Quick reply buttons
-        this.quickReplies = document.querySelectorAll('.quick-reply-btn');
-        this.quickReplies.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const query = btn.getAttribute('data-query');
-                this.input.value = query;
-                this.sendMessage();
-            });
-        });
-
         // Rating buttons (event delegation for dynamically added buttons)
         this.messagesContainer.addEventListener('click', (e) => {
             if (e.target.classList.contains('rating-btn')) {
@@ -139,16 +129,6 @@ class Chatbot {
                                 <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
                             </svg>
                         </button>
-                    </div>
-
-                    <!-- Quick Reply Buttons -->
-                    <div id="quick-replies" class="quick-replies">
-                        <button class="quick-reply-btn" data-query="Show me text processing tools">📝 Text Tools</button>
-                        <button class="quick-reply-btn" data-query="I need conversion tools">🔄 Converters</button>
-                        <button class="quick-reply-btn" data-query="Show me generator tools">🎨 Generators</button>
-                        <button class="quick-reply-btn" data-query="I need encryption tools">🔒 Encryption</button>
-                        <button class="quick-reply-btn" data-query="Show me website analysis tools">📊 Website Analysis</button>
-                        <button class="quick-reply-btn" data-query="I need image tools">🖼️ Image Tools</button>
                     </div>
 
                     <!-- Suggested Questions Container -->

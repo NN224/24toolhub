@@ -307,54 +307,6 @@
   }
 }
 
-/* Quick Reply Buttons */
-.quick-replies {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  padding: 12px;
-  background: white;
-  border-top: 1px solid #e5e7eb;
-  flex-shrink: 0;
-  transition: opacity 0.3s ease, max-height 0.3s ease;
-  overflow: hidden;
-}
-
-.quick-replies[style*="display: none"] {
-  max-height: 0;
-  padding: 0;
-  opacity: 0;
-}
-
-.quick-reply-btn {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 10px 8px;
-  font-size: 11px;
-  font-weight: 600;
-  color: #6b7280;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  text-align: center;
-}
-
-.quick-reply-btn:hover {
-  background: #667eea;
-  color: white;
-  border-color: #667eea;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
-}
-
-.quick-reply-btn:active {
-  transform: translateY(0);
-}
-
 /* History Separator */
 .history-separator {
   text-align: center;
@@ -628,17 +580,6 @@
     padding: 10px 14px;
   }
   
-  .quick-replies {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
-    padding: 10px;
-  }
-  
-  .quick-reply-btn {
-    font-size: 10.5px;
-    padding: 8px 6px;
-  }
-  
   #suggested-questions-container {
     padding: 6px 10px;
   }
@@ -720,23 +661,6 @@
 
 .chatbot-container.dark-mode .typing-dot {
   background: #888;
-}
-
-.chatbot-container.dark-mode .quick-replies {
-  background: #1a1a1a;
-  border-top-color: #2d2d2d;
-}
-
-.chatbot-container.dark-mode .quick-reply-btn {
-  background: #262626;
-  color: #8b9cff;
-  border-color: #3a3a3a;
-}
-
-.chatbot-container.dark-mode .quick-reply-btn:hover {
-  background: #667eea;
-  color: white;
-  border-color: #667eea;
 }
 
 .chatbot-container.dark-mode .history-separator {
