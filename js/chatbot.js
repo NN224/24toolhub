@@ -58,8 +58,15 @@ class Chatbot {
         document.getElementById('clear-history-btn').addEventListener('click', () => this.confirmClearHistory());
         document.getElementById('dark-mode-btn').addEventListener('click', () => this.toggleDarkMode());
 
+        // Slider navigation buttons
+        document.querySelector('.slider-prev').addEventListener('click', () => this.scrollSlider('prev'));
+        document.querySelector('.slider-next').addEventListener('click', () => this.scrollSlider('next'));
+
         // Enhanced welcome message
         this.showEnhancedWelcome();
+        
+        // Initialize suggestions slider with context-aware questions
+        this.initializeSuggestionsSlider();
         
         // Update rate limit counter
         this.updateRateLimitCounter();
@@ -115,6 +122,23 @@ class Chatbot {
                     <!-- Messages -->
                     <div id="chatbot-messages" class="chatbot-messages">
                         <!-- Messages will be added here dynamically -->
+                    </div>
+
+                    <!-- Horizontal Suggestions Slider -->
+                    <div id="suggestions-slider-wrapper" class="suggestions-slider-wrapper">
+                        <button class="slider-nav-btn slider-prev" aria-label="Previous">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                            </svg>
+                        </button>
+                        <div id="suggestions-slider" class="suggestions-slider">
+                            <!-- Suggestions will be added here dynamically -->
+                        </div>
+                        <button class="slider-nav-btn slider-next" aria-label="Next">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                            </svg>
+                        </button>
                     </div>
 
                     <!-- Quick Reply Buttons -->
@@ -874,6 +898,124 @@ class Chatbot {
         if (isDark) {
             document.querySelector('.chatbot-container').classList.add('dark-mode');
         }
+    }
+
+    initializeSuggestionsSlider() {
+        const slider = document.getElementById('suggestions-slider');
+        if (!slider) return;
+
+        const suggestions = this.getContextAwareSliderQuestions();
+        
+        suggestions.forEach(item => {
+            const btn = document.createElement('button');
+            btn.className = 'slider-suggestion-btn';
+            btn.innerHTML = `
+                <span class="suggestion-icon">${item.icon}</span>
+                <span class="suggestion-text">${item.text}</span>
+            `;
+            btn.setAttribute('data-query', item.query);
+            btn.addEventListener('click', () => {
+                this.input.value = item.query;
+                this.sendMessage();
+                
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'slider_suggestion_clicked', {
+                        event_category: 'chatbot',
+                        event_label: item.query
+                    });
+                }
+            });
+            slider.appendChild(btn);
+        });
+
+        this.updateSliderNavigation();
+    }
+
+    getContextAwareSliderQuestions() {
+        const currentPath = window.location.pathname;
+        let suggestions = [];
+
+        if (currentPath.includes('/tools/json')) {
+            suggestions = [
+                { icon: '✔️', text: 'How to validate JSON?', query: 'How to validate JSON?' },
+                { icon: '🔄', text: 'JSON to CSV conversion?', query: 'JSON to CSV conversion?' },
+                { icon: '📋', text: 'Format JSON online', query: 'Format JSON online' },
+                { icon: '🔍', text: 'JSON Path Finder', query: 'Show me JSON Path Finder tool' }
+            ];
+        } else if (currentPath.includes('/tools/image') || currentPath.includes('/tools/compress')) {
+            suggestions = [
+                { icon: '🖼️', text: 'Best image formats?', query: 'What are the best image formats?' },
+                { icon: '📏', text: 'How to resize images?', query: 'How to resize images online?' },
+                { icon: '🗜️', text: 'Compress images', query: 'Show me image compression tool' },
+                { icon: '✂️', text: 'Crop images', query: 'Show me image cropper' }
+            ];
+        } else if (currentPath.includes('/tools/text') || currentPath.includes('/tools/word')) {
+            suggestions = [
+                { icon: '🔤', text: 'Convert text case', query: 'Show me text case converter' },
+                { icon: '📊', text: 'Count words', query: 'Show me word counter tool' },
+                { icon: '🔍', text: 'Find & Replace', query: 'Show me find and replace tool' },
+                { icon: '✨', text: 'Remove duplicates', query: 'Show me duplicate remover' }
+            ];
+        } else if (currentPath.includes('/tools/') && currentPath.includes('hash')) {
+            suggestions = [
+                { icon: '🔐', text: 'What is SHA-256?', query: 'What is SHA-256 hashing?' },
+                { icon: '🔒', text: 'MD5 vs SHA', query: 'Difference between MD5 and SHA?' },
+                { icon: '🛡️', text: 'Best encryption', query: 'What is the best encryption method?' },
+                { icon: '🔑', text: 'Base64 encoding', query: 'Show me Base64 encoder' }
+            ];
+        } else {
+            suggestions = [
+                { icon: '📝', text: 'Text processing tools', query: 'Show me text processing tools' },
+                { icon: '🔄', text: 'Conversion tools', query: 'I need conversion tools' },
+                { icon: '🎨', text: 'Generator tools', query: 'Show me generator tools' },
+                { icon: '🔒', text: 'Encryption tools', query: 'I need encryption tools' },
+                { icon: '📊', text: 'Website analysis', query: 'Show me website analysis tools' },
+                { icon: '🖼️', text: 'Image tools', query: 'I need image tools' },
+                { icon: '⚡', text: 'Popular tools', query: 'What are the most popular tools?' },
+                { icon: '🆕', text: 'New features', query: 'What new features do you have?' }
+            ];
+        }
+
+        return suggestions;
+    }
+
+    scrollSlider(direction) {
+        const slider = document.getElementById('suggestions-slider');
+        if (!slider) return;
+
+        const scrollAmount = 250;
+        const currentScroll = slider.scrollLeft;
+        
+        if (direction === 'next') {
+            slider.scrollTo({
+                left: currentScroll + scrollAmount,
+                behavior: 'smooth'
+            });
+        } else {
+            slider.scrollTo({
+                left: currentScroll - scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+
+        setTimeout(() => this.updateSliderNavigation(), 300);
+    }
+
+    updateSliderNavigation() {
+        const slider = document.getElementById('suggestions-slider');
+        const prevBtn = document.querySelector('.slider-prev');
+        const nextBtn = document.querySelector('.slider-next');
+        
+        if (!slider || !prevBtn || !nextBtn) return;
+
+        const isAtStart = slider.scrollLeft <= 10;
+        const isAtEnd = slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth - 10);
+
+        prevBtn.style.opacity = isAtStart ? '0.3' : '1';
+        prevBtn.style.pointerEvents = isAtStart ? 'none' : 'auto';
+        
+        nextBtn.style.opacity = isAtEnd ? '0.3' : '1';
+        nextBtn.style.pointerEvents = isAtEnd ? 'none' : 'auto';
     }
 }
 
