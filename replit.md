@@ -21,7 +21,7 @@ The platform features a professional gradient UI, consistent across all tools, w
 - **Analytics**: Google Analytics tracking (G-2ELW7FZKDW) is implemented across all pages, including specific event tracking for chatbot interactions and feedback.
 
 ### Feature Specifications
-- **70+ Tools**: A wide range of tools categorized into Text & String, Conversion & Calculator, Generator & Formatter, Encoder & Crypto, Website Analysis, and Utility & Misc.
+- **85+ Tools**: A wide range of tools categorized into Text & String, Conversion & Calculator, Generator & Formatter, Encoder & Crypto, Website Analysis, and Utility & Misc.
 - **Backend-Dependent Tools**: SEO Analyzer, DNS Lookup, Ping Test, and PageSpeed Insights proxy require server-side processing.
 - **AI Chatbot Functionality**: Provides tool suggestions, conversation history (daily), and a personalized trending tools list based on user interactions.
 - **PageSpeed Tool**: Offers detailed performance audits similar to Google PageSpeed, with comprehensive metrics and color-coded visual feedback.
