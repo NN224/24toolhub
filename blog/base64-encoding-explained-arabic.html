@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TQD2P5F7');</script>
+<!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>ما هو Base64 ولماذا نستخدمه؟ (شرح شامل مع أمثلة) | 24ToolHub</title>
+    <meta name="description" content="شرح مبسط لتشفير Base64: ما هو، كيف يعمل، لماذا نستخدمه، والفرق بينه وبين التشفير الحقيقي. مع أداة مجانية للتشفير وفك التشفير.">
+    <meta name="keywords" content="Base64، تشفير Base64، شرح Base64، Base64 encoding، Base64 decoder، أداة Base64">
+    
+    <meta property="og:title" content="ما هو Base64 ولماذا نستخدمه؟ (شرح شامل مع أمثلة)">
+    <meta property="og:description" content="شرح مبسط لتشفير Base64 مع أمثلة عملية وأداة مجانية للتشفير وفك التشفير.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://24toolhub.com/blog/base64-encoding-explained-arabic.html">
+    <meta property="og:image" content="https://24toolhub.com/images/og-image.jpg">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ما هو Base64 ولماذا نستخدمه؟">
+    <meta name="twitter:description" content="شرح مبسط لتشفير Base64 مع أمثلة عملية">
+    <meta name="twitter:image" content="https://24toolhub.com/images/og-image.jpg">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "ما هو Base64 ولماذا نستخدمه؟ (شرح شامل مع أمثلة)",
+      "description": "شرح مبسط لتشفير Base64: ما هو، كيف يعمل، لماذا نستخدمه، والفرق بينه وبين التشفير الحقيقي.",
+      "author": {
+        "@type": "Organization",
+        "name": "24ToolHub"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "24ToolHub",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://24toolhub.com/images/logo.png"
+        }
+      },
+      "datePublished": "2025-11-03",
+      "dateModified": "2025-11-03",
+      "image": "https://24toolhub.com/images/og-image.jpg",
+      "inLanguage": "ar"
+    }
+    </script>
+    
+    <link rel="icon" type="image/x-icon" href="../favicon.ico" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/blog.css" />
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2446710277775155" crossorigin="anonymous"></script>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ELW7FZKDW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2ELW7FZKDW');
+    </script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TQD2P5F7"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <header class="header">
+      <div class="header-container">
+        <div class="header-branding">
+          <a href="../" class="logo-link">
+            <img src="../images/logo.png" alt="24ToolHub" class="logo">
+          </a>
+          <h1 class="site-title">24ToolHub</h1>
+        </div>
+        <div class="header-actions">
+          <a href="../" class="btn btn-secondary">الرئيسية</a>
+          <a href="./index.html" class="btn btn-secondary">المدونة</a>
+          <a href="../contact.html" class="btn btn-secondary">اتصل بنا</a>
+          <a href="../about.html" class="btn btn-secondary">عن الموقع</a>
+          <button id="langSwitcher" class="lang-switcher">English</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="ad-space ad-leaderboard" aria-label="Advertisement">
+    </div>
+
+    <main class="article-container">
+        <article>
+            <header class="article-header">
+                <div class="article-meta">
+                    <span>📅 3 نوفمبر، 2025</span>
+                    <span>⏱️ 8 دقائق قراءة</span>
+                    <span>✍️ فريق 24ToolHub</span>
+                </div>
+                <h1 class="article-title">ما هو Base64 ولماذا نستخدمه؟ (شرح شامل مع أمثلة)</h1>
+                <p class="article-excerpt">دليل مبسط لفهم تشفير Base64، استخداماته، كيفية عمله، والفرق بينه وبين التشفير الحقيقي. مع أمثلة عملية وأداة مجانية.</p>
+            </header>
+
+            <img src="../images/og-image.jpg" alt="شرح Base64" class="article-image">
+
+            <div class="article-content">
+                <p>هل سبق أن رأيت نصاً غريباً يشبه هذا؟</p>
+
+                <pre style="background: #1e1e1e; padding: 1rem; border-radius: 8px; overflow-x: auto; direction: ltr;"><code>SGVsbG8gV29ybGQh</code></pre>
+
+                <p>هذا هو <strong>Base64</strong>. وهو في كل مكان على الإنترنت - في رسائل البريد الإلكتروني، الصور المُضمّنة في صفحات الويب، الملفات المرفقة، وحتى في روابط بعض المواقع.</p>
+
+                <p>لكن ما هو بالضبط؟ ولماذا نحتاجه؟ وهل هو تشفير حقيقي؟</p>
+
+                <p>هذا الدليل سيجيب على كل هذه الأسئلة بلغة بسيطة ومباشرة.</p>
+
+                <h2>ما هو Base64؟</h2>
+
+                <p><strong>Base64</strong> هو طريقة لتحويل البيانات الثنائية (binary data) إلى نص عادي يتكون من 64 حرفاً آمناً فقط.</p>
+
+                <p>الأحرف الـ 64 هي:</p>
+                <ul>
+                    <li>أحرف كبيرة: <code>A-Z</code> (26 حرف)</li>
+                    <li>أحرف صغيرة: <code>a-z</code> (26 حرف)</li>
+                    <li>أرقام: <code>0-9</code> (10 أرقام)</li>
+                    <li>رمزان خاصان: <code>+</code> و <code>/</code></li>
+                </ul>
+
+                <p>المثال السابق <code>SGVsbG8gV29ybGQh</code> هو كلمة "Hello World!" مُحوّلة إلى Base64.</p>
+
+                <h2>لماذا نحتاج Base64؟ (المشكلة التي يحلها)</h2>
+
+                <p>قبل Base64، كانت هناك مشكلة كبيرة: <strong>كيف نرسل صورة أو ملف عبر البريد الإلكتروني؟</strong></p>
+
+                <p>البريد الإلكتروني (في الأصل) كان مصمماً لإرسال <strong>نص عادي فقط</strong>. الملفات الثنائية (مثل الصور، الفيديو، الملفات المضغوطة) تحتوي على أحرف خاصة قد تُفسَد أو تُحذف أثناء النقل.</p>
+
+                <p><strong>الحل:</strong> تحويل هذه الملفات إلى نص عادي باستخدام Base64، إرسالها، ثم تحويلها مرة أخرى إلى الشكل الأصلي.</p>
+
+                <h3>مثال بسيط:</h3>
+                <p><strong>الملف الأصلي:</strong> صورة (binary data - غير قابلة للقراءة كنص)</p>
+                <p><strong>بعد Base64:</strong> نص طويل مثل <code>iVBORw0KGgoAAAANSUhEUgAA...</code></p>
+                <p><strong>الفائدة:</strong> يمكن إرسال هذا النص في أي مكان يقبل النصوص (Email، JSON، XML، URLs)</p>
+
+                <h2>استخدامات Base64 الشائعة</h2>
+
+                <h3>1. الصور المُضمّنة في HTML (Data URLs)</h3>
+                <p>بدلاً من تحميل الصورة من ملف منفصل، يمكنك تضمينها مباشرة في كود HTML باستخدام Base64:</p>
+
+                <pre style="background: #1e1e1e; padding: 1rem; border-radius: 8px; overflow-x: auto; direction: ltr;"><code>&lt;img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..." /&gt;</code></pre>
+
+                <p><strong>الفائدة:</strong> الصفحة تُحمّل أسرع لأن الصورة موجودة داخل HTML نفسه (لا حاجة لطلب منفصل).</p>
+
+                <h3>2. رسائل البريد الإلكتروني</h3>
+                <p>المرفقات في Gmail، Outlook، وغيرها تُرسل بصيغة Base64 لضمان عدم فسادها أثناء النقل.</p>
+
+                <h3>3. نقل البيانات عبر APIs</h3>
+                <p>عند إرسال ملفات (صور، PDFs) عبر JSON API، يتم تحويلها إلى Base64 لأن JSON يدعم النصوص فقط.</p>
+
+                <h3>4. تخزين البيانات الحساسة (بشكل مؤقت)</h3>
+                <p>بعض الأنظمة تحول كلمات المرور أو المفاتيح إلى Base64 قبل إرسالها (لكن <strong>هذا ليس تشفيراً حقيقياً!</strong>).</p>
+
+                <h2>كيف يعمل Base64؟ (مثال بسيط)</h2>
+
+                <p>لنحول كلمة "Hi" إلى Base64:</p>
+
+                <ol>
+                    <li><strong>تحويل النص إلى Binary (أصفار وآحاد):</strong>
+                        <ul>
+                            <li>H = <code>01001000</code></li>
+                            <li>i = <code>01101001</code></li>
+                        </ul>
+                    </li>
+                    <li><strong>دمج الأرقام:</strong> <code>0100100001101001</code></li>
+                    <li><strong>تقسيمها إلى مجموعات من 6 bits:</strong>
+                        <ul>
+                            <li><code>010010</code> = 18 → <code>S</code></li>
+                            <li><code>000110</code> = 6 → <code>G</code></li>
+                            <li><code>100100</code> = 36 → <code>k</code></li>
+                        </ul>
+                    </li>
+                    <li><strong>النتيجة:</strong> <code>SGk=</code> (الـ <code>=</code> للتعبئة padding)</li>
+                </ol>
+
+                <p>هكذا، "Hi" تصبح "SGk=" في Base64.</p>
+
+                <h2>Base64 ليس تشفيراً! (تنبيه مهم)</h2>
+
+                <p>الكثير من الناس يخطئون ويظنون أن Base64 هو تشفير. <strong>هذا خطأ خطير!</strong></p>
+
+                <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;">
+                    <tr style="background: #2a2a2a;">
+                        <th style="padding: 12px; border: 1px solid #444; text-align: right;">الخاصية</th>
+                        <th style="padding: 12px; border: 1px solid #444; text-align: right;">Base64</th>
+                        <th style="padding: 12px; border: 1px solid #444; text-align: right;">التشفير الحقيقي (Encryption)</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #444;">الهدف</td>
+                        <td style="padding: 12px; border: 1px solid #444;">تحويل البيانات لنص آمن</td>
+                        <td style="padding: 12px; border: 1px solid #444;">حماية البيانات من الاطلاع</td>
+                    </tr>
+                    <tr style="background: #1e1e1e;">
+                        <td style="padding: 12px; border: 1px solid #444;">يحتاج مفتاح؟</td>
+                        <td style="padding: 12px; border: 1px solid #444;">❌ لا</td>
+                        <td style="padding: 12px; border: 1px solid #444;">✅ نعم</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #444;">يمكن فك التشفير؟</td>
+                        <td style="padding: 12px; border: 1px solid #444;">✅ نعم، بسهولة</td>
+                        <td style="padding: 12px; border: 1px solid #444;">❌ لا، بدون المفتاح</td>
+                    </tr>
+                    <tr style="background: #1e1e1e;">
+                        <td style="padding: 12px; border: 1px solid #444;">آمن؟</td>
+                        <td style="padding: 12px; border: 1px solid #444;">❌ لا (أي شخص يمكنه فكه)</td>
+                        <td style="padding: 12px; border: 1px solid #444;">✅ نعم (إذا تم بشكل صحيح)</td>
+                    </tr>
+                </table>
+
+                <p><strong>مثال:</strong></p>
+                <pre style="background: #1e1e1e; padding: 1rem; border-radius: 8px; overflow-x: auto; direction: ltr;"><code>كلمة المرور: password123
+Base64: cGFzc3dvcmQxMjM=</code></pre>
+
+                <p>أي شخص يمكنه نسخ <code>cGFzc3dvcmQxMjM=</code> وفك تشفيره مجاناً باستخدام أي أداة Base64!</p>
+
+                <p><strong>الخلاصة:</strong> Base64 هو <strong>ترميز (encoding)</strong> وليس <strong>تشفير (encryption)</strong>. لا تستخدمه لحماية البيانات الحساسة!</p>
+
+                <h2>كيف تشفر وتفك Base64؟</h2>
+
+                <p>يمكنك استخدام <a href="../tools/base64-encode-decode.html" style="color: #667eea; font-weight: bold;">أداتنا المجانية لـ Base64</a> للتحويل السريع:</p>
+
+                <h3>تشفير النص إلى Base64:</h3>
+                <ol>
+                    <li>اذهب إلى <a href="../tools/base64-encode-decode.html" style="color: #667eea; font-weight: bold;">أداة Base64 Encoder/Decoder</a></li>
+                    <li>اكتب أو الصق النص الذي تريده</li>
+                    <li>اضغط "Encode"</li>
+                    <li>انسخ النتيجة</li>
+                </ol>
+
+                <h3>فك تشفير Base64 إلى نص:</h3>
+                <ol>
+                    <li>الصق نص Base64 في الأداة</li>
+                    <li>اضغط "Decode"</li>
+                    <li>ستحصل على النص الأصلي</li>
+                </ol>
+
+                <p><a href="../tools/base64-encode-decode.html" class="btn btn-primary" style="display: inline-block; margin: 1rem 0;">جرب الأداة الآن →</a></p>
+
+                <h2>متى يجب استخدام Base64؟</h2>
+
+                <h3>✅ استخدم Base64 عندما:</h3>
+                <ul>
+                    <li>تحتاج إرسال ملف ثنائي (صورة، PDF) عبر نظام يقبل النصوص فقط (JSON، XML، Email)</li>
+                    <li>تريد تضمين صورة صغيرة مباشرة في HTML/CSS</li>
+                    <li>تنقل بيانات بين أنظمة مختلفة قد تفسد الأحرف الخاصة</li>
+                </ul>
+
+                <h3>❌ لا تستخدم Base64 عندما:</h3>
+                <ul>
+                    <li>تريد "إخفاء" كلمة مرور أو بيانات حساسة (استخدم تشفير حقيقي مثل AES)</li>
+                    <li>تريد حماية الملفات من الاطلاع (استخدم تشفير end-to-end)</li>
+                    <li>الملف كبير جداً (Base64 يزيد الحجم بنسبة ~33%)</li>
+                </ul>
+
+                <h2>أسئلة شائعة</h2>
+
+                <h3>س: هل Base64 آمن؟</h3>
+                <p>لا. Base64 هو ترميز وليس تشفير. أي شخص يمكنه فكه بسهولة. لا تستخدمه لحماية البيانات الحساسة.</p>
+
+                <h3>س: لماذا يزيد Base64 حجم البيانات؟</h3>
+                <p>لأنه يحول كل 3 bytes إلى 4 أحرف، مما يزيد الحجم بحوالي 33%.</p>
+
+                <h3>س: ما الفرق بين Base64 وBase32؟</h3>
+                <p>Base64 يستخدم 64 حرف، Base32 يستخدم 32 حرف فقط. Base32 أكثر أماناً للنقل لكنه أقل كفاءة (حجم أكبر).</p>
+
+                <h3>س: هل يمكن فك Base64 بدون أداة؟</h3>
+                <p>نعم، لكنه معقد. من الأسهل استخدام <a href="../tools/base64-encode-decode.html" style="color: #667eea;">أداة مجانية</a> أو سطر أوامر (command line).</p>
+
+                <h2>خلاصة</h2>
+
+                <p>Base64 هو <strong>طريقة ترميز</strong> تحول البيانات الثنائية إلى نص آمن يمكن نقله في أي مكان يقبل النصوص.</p>
+
+                <p><strong>تذكر:</strong></p>
+                <ul>
+                    <li>✅ Base64 = ترميز (Encoding)</li>
+                    <li>❌ Base64 ≠ تشفير (Encryption)</li>
+                    <li>✅ استخدمه لنقل البيانات</li>
+                    <li>❌ لا تستخدمه لحماية البيانات</li>
+                </ul>
+
+                <p><a href="../tools/base64-encode-decode.html" class="btn btn-primary" style="display: inline-block; margin-top: 1rem;">استخدم أداة Base64 المجانية →</a></p>
+            </div>
+
+            <div class="article-tags">
+                <span class="tag">Base64</span>
+                <span class="tag">Encoding</span>
+                <span class="tag">تشفير</span>
+                <span class="tag">برمجة</span>
+                <span class="tag">Web Development</span>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-grid">
+          <div class="footer-section">
+            <h3>الأدوات</h3>
+            <ul class="footer-links">
+              <li><a href="../index.html#text">أدوات النصوص</a></li>
+              <li><a href="../index.html#conversion">أدوات التحويل</a></li>
+              <li><a href="../index.html#generator">أدوات التوليد</a></li>
+              <li><a href="../index.html#encoder">أدوات التشفير</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>الشركة</h3>
+            <ul class="footer-links">
+              <li><a href="../about.html">عن الموقع</a></li>
+              <li><a href="../contact.html">اتصل بنا</a></li>
+              <li><a href="../privacy.html">سياسة الخصوصية</a></li>
+              <li><a href="../terms.html">شروط الاستخدام</a></li>
+              <li><a href="../cookie-policy.html">سياسة الكوكيز</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-branding">
+          <img src="../images/nnh-logo.png" alt="NNH Logo" class="footer-logo" />
+          <span class="footer-branding-text">BUILT BY NNH - AI STUDIO</span>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2025 24ToolHub. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <link rel="stylesheet" href="../css/chatbot.css">
+    <script src="../js/chatbot.js"></script>
+</body>
+</html>
