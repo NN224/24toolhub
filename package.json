@@ -6,7 +6,12 @@
   "scripts": {
     "start": "node server.js",
     "verify": "node verify-deployment.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:backend": "jest __tests__/backend",
+    "test:frontend": "jest __tests__/frontend",
+    "test:integration": "jest __tests__/integration"
   },
   "author": "",
   "license": "ISC",
@@ -17,5 +22,9 @@
     "express": "^4.18.2",
     "node-fetch": "^2.6.7",
     "ping": "^0.4.4"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
   }
 }
