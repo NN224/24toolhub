@@ -1,0 +1,44 @@
+{
+  "version": 2,
+  "name": "24toolhub",
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/analyze-seo",
+      "dest": "server.js"
+    },
+    {
+      "src": "/dns-lookup",
+      "dest": "server.js"
+    },
+    {
+      "src": "/pagespeed",
+      "dest": "server.js"
+    },
+    {
+      "src": "/ping",
+      "dest": "server.js"
+    },
+    {
+      "src": "/chat",
+      "dest": "server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "server.js": {
+      "maxDuration": 30
+    }
+  }
+}

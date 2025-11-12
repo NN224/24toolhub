@@ -5,22 +5,32 @@ const cors = require('cors');
 const dns = require('dns').promises;
 const ping = require('ping');
 const path = require('path');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
 const fs = require('fs');
+const { getModelForEndpoint } = require('./ai-config');
+const { callAIWithFallback } = require('./ai-service');
 
 const app = express();
 const port = process.env.PORT || 5000;
-
-// Initialize Gemini AI
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // Load tools database
 const toolsData = JSON.parse(fs.readFileSync('tools-database.json', 'utf8'));
 
 // Rate limiting: Simple in-memory store (IP -> {count, resetTime})
+// Note: For Vercel serverless, consider using external rate limiting (Redis, Vercel KV, etc.)
+// This in-memory approach works for initial deployment but has limitations in serverless
 const rateLimits = new Map();
 const RATE_LIMIT = 5; // messages per minute
 const RATE_WINDOW = 60 * 1000; // 1 minute
+
+// Cleanup old rate limit entries periodically (for memory management)
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, data] of rateLimits.entries()) {
+    if (now > data.resetTime + RATE_WINDOW) {
+      rateLimits.delete(ip);
+    }
+  }
+}, RATE_WINDOW * 2);
 
 app.use(cors());
 app.use(express.json());
@@ -284,7 +294,15 @@ app.post('/chat', async (req, res) => {
     }
 
     try {
-        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+        // Get model configuration with fallback chain
+        const modelConfig = getModelForEndpoint('/chat', process.env);
+        
+        if (!modelConfig) {
+            return res.status(500).json({ 
+                error: 'AI service not configured for this endpoint.',
+                errorAr: 'خدمة الذكاء الاصطناعي غير مُكونة لهذه النقطة.'
+            });
+        }
 
         // Build system instruction with tools database
         const systemInstruction = `You are a helpful assistant for 24ToolHub, a website with 70+ free online tools.
@@ -326,32 +344,44 @@ Response: To convert JSON to Excel format:
 
 Use workflows when appropriate to provide complete solutions!`;
 
-        // Build conversation history
-        const history = conversationHistory || [];
-        const contents = [
-            { role: 'user', parts: [{ text: systemInstruction }] },
-            { role: 'model', parts: [{ text: 'I understand. I will help users find and use the tools on 24ToolHub, responding in their language.' }] },
-            ...history.map(msg => ({
-                role: msg.role,
-                parts: [{ text: msg.content }]
-            })),
-            { role: 'user', parts: [{ text: message }] }
-        ];
+        // Build message history for AI
+        const messages = [];
+        
+        // Add conversation history
+        if (conversationHistory && Array.isArray(conversationHistory)) {
+            conversationHistory.forEach(msg => {
+                messages.push({
+                    role: msg.role === 'assistant' ? 'assistant' : 'user',
+                    content: msg.content
+                });
+            });
+        }
+        
+        // Add current message
+        messages.push({
+            role: 'user',
+            content: message
+        });
 
-        const chat = model.startChat({ history: contents.slice(0, -1) });
-        const result = await chat.sendMessage(message);
-        const response = result.response.text();
+        // Call AI with automatic fallback
+        const result = await callAIWithFallback(
+            modelConfig,
+            { messages, systemInstruction },
+            process.env
+        );
 
         res.json({
-            response: response,
-            timestamp: new Date().toISOString()
+            response: result.response,
+            timestamp: new Date().toISOString(),
+            modelUsed: result.modelUsed // Include which model was used for transparency
         });
 
     } catch (error) {
         console.error('Chat error:', error);
         res.status(500).json({ 
             error: 'Sorry, something went wrong. Please try again.',
-            errorAr: 'عذراً، حدث خطأ. يرجى المحاولة مرة أخرى.'
+            errorAr: 'عذراً، حدث خطأ. يرجى المحاولة مرة أخرى.',
+            details: error.message
         });
     }
 });
@@ -359,3 +389,6 @@ Use workflows when appropriate to provide complete solutions!`;
 app.listen(port, '0.0.0.0', () => {
     console.log(`24ToolHub server listening at http://0.0.0.0:${port}`);
 });
+
+// Export for Vercel serverless
+module.exports = app;
