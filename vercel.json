@@ -1,35 +1,31 @@
 {
   "version": 2,
-  
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
   "routes": [
     {
-      "src": "/analyze-seo",
-      "dest": "server.js"
+      "src": "/(css|js|images|blog|tools)/(.*)",
+      "dest": "/$1/$2"
     },
     {
-      "src": "/dns-lookup",
-      "dest": "server.js"
-    },
-    {
-      "src": "/pagespeed",
-      "dest": "server.js"
-    },
-    {
-      "src": "/ping",
-      "dest": "server.js"
-    },
-    {
-      "src": "/chat",
+      "src": "/(analyze-seo|dns-lookup|pagespeed|ping|chat)",
       "dest": "server.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/$1"
+      "dest": "server.js"
     }
-  ]
-  ,
+  ],
+  "functions": {
+    "api/server.js": {
+      "includeFiles": "tools-database.json"
+    }
+  },
   "env": {
     "NODE_ENV": "production"
   }
-
 }
