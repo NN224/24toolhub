@@ -5,7 +5,7 @@
  * with automatic fallback and error handling.
  */
 
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+// Note: Do not require provider SDKs at module load time — lazy-load inside init functions
 
 /**
  * Initialize Gemini AI client
@@ -16,7 +16,16 @@ function initGemini(apiKey) {
   if (!apiKey) {
     throw new Error('Gemini API key is required');
   }
-  return new GoogleGenerativeAI(apiKey);
+  // Lazy-require the Gemini SDK to avoid import-time crashes in serverless environments
+  try {
+    const { GoogleGenerativeAI } = require('@google/generative-ai');
+    return new GoogleGenerativeAI(apiKey);
+  } catch (err) {
+    if (err && err.code === 'MODULE_NOT_FOUND') {
+      throw new Error('Gemini SDK is not installed. Run: npm install @google/generative-ai');
+    }
+    throw err;
+  }
 }
 
 /**

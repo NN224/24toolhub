@@ -7,7 +7,7 @@ const ping = require('ping');
 const path = require('path');
 const fs = require('fs');
 const { getModelForEndpoint } = require('./ai-config');
-const { callAIWithFallback } = require('./ai-service');
+// Defer requiring AI service until it's needed to avoid import-time crashes
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -294,6 +294,9 @@ app.post('/chat', async (req, res) => {
     }
 
     try {
+        // Lazy-require AI service to avoid import-time failures in serverless
+        const { callAIWithFallback } = require('./ai-service');
+
         // Get model configuration with fallback chain
         const modelConfig = getModelForEndpoint('/chat', process.env);
         
