@@ -8,13 +8,11 @@ const path = require('path');
 const fs = require('fs');
 const { getModelForEndpoint } = require('./ai-config');
 
-// Initialize Express app
 const app = express();
 const port = process.env.PORT || 5000;
 
-// ✅ Safely load tools database (Vercel-safe)
+// ✅ Safely load tools database
 let toolsData = { tools: [] };
-
 try {
   const dbPath = path.join(process.cwd(), 'tools-database.json');
   const raw = fs.readFileSync(dbPath, 'utf8');
@@ -25,25 +23,18 @@ try {
   toolsData = { tools: [] };
 }
 
-// Rate limiting (in-memory, simple)
-const rateLimits = new Map();
-const RATE_LIMIT = 5; // messages per minute
-const RATE_WINDOW = 60 * 1000; // 1 minute
+// ✅ Serve static folders (important for CSS, JS, images)
+app.use('/css', express.static(path.join(__dirname, 'css')));
+app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/blog', express.static(path.join(__dirname, 'blog')));
+app.use('/tools', express.static(path.join(__dirname, 'tools')));
 
-// Cleanup old rate limit entries periodically
-setInterval(() => {
-  const now = Date.now();
-  for (const [ip, data] of rateLimits.entries()) {
-    if (now > data.resetTime + RATE_WINDOW) {
-      rateLimits.delete(ip);
-    }
-  }
-}, RATE_WINDOW * 2);
-
+// Allow CORS and JSON
 app.use(cors());
 app.use(express.json());
 
-// Disable caching for HTML files
+// Disable caching for HTML
 app.use((req, res, next) => {
   if (req.path.endsWith('.html') || req.path === '/') {
     res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
@@ -53,21 +44,29 @@ app.use((req, res, next) => {
   next();
 });
 
-// Serve static files
-app.use(express.static(path.join(__dirname)));
+// ✅ Serve static HTML pages
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
+app.get('/:page', (req, res, next) => {
+  const pageFile = path.join(__dirname, `${req.params.page}.html`);
+  if (fs.existsSync(pageFile)) {
+    res.sendFile(pageFile);
+  } else {
+    next();
+  }
+});
 
-// ==========================
-// 🔍 SEO ANALYZER ENDPOINT
-// ==========================
+// ===================================================
+// 🔍 SEO Analyzer API
+// ===================================================
 app.get('/analyze-seo', async (req, res) => {
   const url = req.query.url;
   if (!url) return res.status(400).json({ error: 'URL parameter is required' });
 
   try {
     const response = await fetch(url);
-    if (!response.ok) throw new Error(`Failed to fetch URL with status: ${response.status}`);
-
     const html = await response.text();
     const $ = cheerio.load(html);
 
@@ -89,16 +88,15 @@ app.get('/analyze-seo', async (req, res) => {
       }
     };
 
-    res.status(200).json(analysis);
+    res.json(analysis);
   } catch (error) {
     res.status(500).json({ error: `Failed to fetch or analyze URL: ${error.message}` });
   }
 });
 
-
-// ==========================
-// 🌐 DNS LOOKUP ENDPOINT
-// ==========================
+// ===================================================
+// 🌐 DNS Lookup API
+// ===================================================
 app.get('/dns-lookup', async (req, res) => {
   const { domain, recordTypes } = req.query;
   if (!domain || !recordTypes)
@@ -111,15 +109,9 @@ app.get('/dns-lookup', async (req, res) => {
     try {
       let records;
       switch (type) {
-        case 'A':
-          records = await dns.resolve4(domain, { ttl: true });
-          break;
-        case 'AAAA':
-          records = await dns.resolve6(domain, { ttl: true });
-          break;
-        case 'MX':
-          records = await dns.resolveMx(domain);
-          break;
+        case 'A': records = await dns.resolve4(domain, { ttl: true }); break;
+        case 'AAAA': records = await dns.resolve6(domain, { ttl: true }); break;
+        case 'MX': records = await dns.resolveMx(domain); break;
         case 'TXT':
           records = (await dns.resolveTxt(domain)).map(r => ({ value: r.join(' '), ttl: 300 }));
           break;
@@ -131,10 +123,8 @@ app.get('/dns-lookup', async (req, res) => {
           break;
         case 'SOA':
           const soa = await dns.resolveSoa(domain);
-          records = [{ value: `${soa.nsname} ${soa.hostmaster} ${soa.serial} ${soa.refresh} ${soa.retry} ${soa.expire} ${soa.minttl}`, ttl: soa.minttl }];
+          records = [{ value: `${soa.nsname} ${soa.hostmaster} ${soa.serial}`, ttl: soa.minttl }];
           break;
-        default:
-          return;
       }
       results[type] = records.map(r => (typeof r === 'string' ? { value: r, ttl: 300 } : r));
     } catch (error) {
@@ -143,18 +133,17 @@ app.get('/dns-lookup', async (req, res) => {
   });
 
   await Promise.all(lookupPromises);
-  res.status(200).json(results);
+  res.json(results);
 });
 
-
-// ==========================
-// ⚡ PAGE SPEED ENDPOINT
-// ==========================
+// ===================================================
+// ⚡ PageSpeed API
+// ===================================================
 app.get('/pagespeed', async (req, res) => {
   const { url, strategy } = req.query;
   if (!url) return res.status(400).json({ error: 'URL parameter is required' });
-
   const apiKey = process.env.PAGESPEED_API_KEY;
+
   if (!apiKey) {
     return res.status(500).json({
       error: 'PageSpeed API key is not configured. Please add PAGESPEED_API_KEY to environment variables.'
@@ -166,155 +155,57 @@ app.get('/pagespeed', async (req, res) => {
 
   try {
     const response = await fetch(apiUrl);
-    if (!response.ok) {
-      const errorData = await response.json();
-      return res.status(response.status).json({
-        error: errorData.error?.message || 'Failed to fetch PageSpeed data'
-      });
-    }
-
     const data = await response.json();
-    res.status(200).json(data);
+    res.json(data);
   } catch (error) {
     res.status(500).json({ error: `PageSpeed API failed: ${error.message}` });
   }
 });
 
-
-// ==========================
-// 🛰️ PING ENDPOINT
-// ==========================
-app.get('/ping', async (req, res) => {
-  const { host, timeout } = req.query;
-  if (!host) return res.status(400).json({ error: 'Host parameter is required' });
-
-  const timeoutMs = parseInt(timeout) || 2000;
-  const startTime = Date.now();
-
-  try {
-    let testUrl = host;
-    if (!host.startsWith('http://') && !host.startsWith('https://')) testUrl = 'https://' + host;
-
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
-
-    try {
-      await fetch(testUrl, { method: 'HEAD', signal: controller.signal });
-      clearTimeout(timeoutId);
-      const endTime = Date.now();
-      res.status(200).json({ host, time: endTime - startTime, status: 'success' });
-    } catch (fetchError) {
-      clearTimeout(timeoutId);
-      if (fetchError.name === 'AbortError') {
-        res.status(200).json({ host, time: timeoutMs, status: 'timeout', error: 'Request timed out' });
-      } else {
-        const httpUrl = 'http://' + host.replace(/^https?:\/\//, '');
-        try {
-          const controller2 = new AbortController();
-          const timeoutId2 = setTimeout(() => controller2.abort(), timeoutMs);
-          await fetch(httpUrl, { method: 'HEAD', signal: controller2.signal });
-          clearTimeout(timeoutId2);
-          const endTime = Date.now();
-          res.status(200).json({ host, time: endTime - startTime, status: 'success' });
-        } catch (error2) {
-          const endTime = Date.now();
-          res.status(200).json({
-            host,
-            time: endTime - startTime,
-            status: 'error',
-            error: 'Host unreachable or does not respond to HTTP/HTTPS'
-          });
-        }
-      }
-    }
-  } catch (error) {
-    res.status(500).json({ error: `Ping failed: ${error.message}` });
-  }
-});
-
-
-// ==========================
-// 💬 CHAT ENDPOINT (AI)
-// ==========================
+// ===================================================
+// 💬 Chatbot API
+// ===================================================
 app.post('/chat', async (req, res) => {
   const { message, conversationHistory } = req.body;
-  const clientIp = req.ip || req.connection.remoteAddress;
-
   if (!message) return res.status(400).json({ error: 'Message is required' });
-
-  const now = Date.now();
-  const limitData = rateLimits.get(clientIp);
-  if (limitData) {
-    if (now < limitData.resetTime) {
-      if (limitData.count >= RATE_LIMIT) {
-        return res.status(429).json({
-          error: 'Too many requests. Please wait a moment before sending another message.',
-          errorAr: 'عدد كبير جداً من الرسائل. يرجى الانتظار قليلاً قبل إرسال رسالة أخرى.'
-        });
-      }
-      limitData.count++;
-    } else {
-      limitData.count = 1;
-      limitData.resetTime = now + RATE_WINDOW;
-    }
-  } else {
-    rateLimits.set(clientIp, { count: 1, resetTime: now + RATE_WINDOW });
-  }
 
   try {
     const { callAIWithFallback } = require('./ai-service');
     const modelConfig = getModelForEndpoint('/chat', process.env);
-    if (!modelConfig) {
-      return res.status(500).json({
-        error: 'AI service not configured for this endpoint.',
-        errorAr: 'خدمة الذكاء الاصطناعي غير مُكونة لهذه النقطة.'
-      });
-    }
 
     const systemInstruction = `You are a helpful assistant for 24ToolHub, a website with 70+ free online tools.
+
 Your role:
-- Help users find the right tool for their needs
-- Explain how to use tools
-- Answer questions in Arabic or English (match the user's language)
-- Be friendly, concise, and helpful
-- When suggesting tools, provide the tool name and a brief description
-- You can suggest multiple tools if relevant
-- For complex tasks, suggest a WORKFLOW (step-by-step tool recommendations)
-Available tools database:
+- Help users find tools and explain them
+- Support Arabic and English
+- Suggest workflows for complex tasks
+Available tools:
 ${JSON.stringify(toolsData.tools, null, 2)}`;
 
     const messages = [];
-    if (conversationHistory && Array.isArray(conversationHistory)) {
-      conversationHistory.forEach(msg => messages.push({ role: msg.role === 'assistant' ? 'assistant' : 'user', content: msg.content }));
+    if (Array.isArray(conversationHistory)) {
+      conversationHistory.forEach(msg => messages.push({
+        role: msg.role === 'assistant' ? 'assistant' : 'user',
+        content: msg.content
+      }));
     }
     messages.push({ role: 'user', content: message });
 
     const result = await callAIWithFallback(modelConfig, { messages, systemInstruction }, process.env);
-
     res.json({
       response: result.response,
-      timestamp: new Date().toISOString(),
-      modelUsed: result.modelUsed
+      modelUsed: result.modelUsed,
+      timestamp: new Date().toISOString()
     });
-
   } catch (error) {
     console.error('Chat error:', error);
-    res.status(500).json({
-      error: 'Sorry, something went wrong. Please try again.',
-      errorAr: 'عذراً، حدث خطأ. يرجى المحاولة مرة أخرى.',
-      details: error.message
-    });
+    res.status(500).json({ error: 'Internal error', details: error.message });
   }
 });
 
-
-// ==========================
-// 🚀 SERVER STARTUP
-// ==========================
-// Serve index.html for root route
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
+// ===================================================
+// 🚀 Server startup
+// ===================================================
 app.listen(port, '0.0.0.0', () => {
   console.log(`✅ 24ToolHub server running on port ${port}`);
 });
