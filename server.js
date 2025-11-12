@@ -311,6 +311,10 @@ ${JSON.stringify(toolsData.tools, null, 2)}`;
 // ==========================
 // 🚀 SERVER STARTUP
 // ==========================
+// Serve index.html for root route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 app.listen(port, '0.0.0.0', () => {
   console.log(`✅ 24ToolHub server running on port ${port}`);
 });
