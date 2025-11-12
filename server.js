@@ -206,8 +206,11 @@ ${JSON.stringify(toolsData.tools, null, 2)}`;
 // ===================================================
 // 🚀 Server startup
 // ===================================================
-app.listen(port, '0.0.0.0', () => {
-  console.log(`✅ 24ToolHub server running on port ${port}`);
-});
+// Only start server if not being required for testing
+if (require.main === module) {
+  app.listen(port, '0.0.0.0', () => {
+    console.log(`✅ 24ToolHub server running on port ${port}`);
+  });
+}
 
 module.exports = app;
