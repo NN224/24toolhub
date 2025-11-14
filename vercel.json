@@ -4,12 +4,32 @@
     {
       "src": "api/server.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/(css|js|images|blog|tools)/(.*)",
-      "dest": "/$1/$2"
+      "src": "/css/(.*)",
+      "dest": "/public/css/$1"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "/public/js/$1"
+    },
+    {
+      "src": "/images/(.*)",
+      "dest": "/public/images/$1"
+    },
+    {
+      "src": "/blog/(.*)",
+      "dest": "/public/blog/$1"
+    },
+    {
+      "src": "/tools/(.*)",
+      "dest": "/public/tools/$1"
     },
     {
       "src": "/(analyze-seo|dns-lookup|pagespeed|ping|chat)",
@@ -22,7 +42,8 @@
   ],
   "functions": {
     "api/server.js": {
-      "includeFiles": "tools-database.json"
+      "includeFiles": "../tools-database.json",
+      "maxDuration": 10
     }
   },
   "env": {
