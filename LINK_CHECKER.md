@@ -73,7 +73,7 @@ To add more links to skip, edit the `SKIP_LINKS` array in:
 Example:
 ```javascript
 const SKIP_LINKS = [
-  'https://example-to-skip.com',
+  'https://your-domain-to-skip.com',
   // ... other links
 ];
 ```
@@ -109,10 +109,10 @@ Summary: 18/18 links accessible
 ### Failed Links
 
 ```
-❌ https://broken-link.com
+❌ https://invalid-domain-example.test
    Error: HTTP 404
 
-❌ https://timeout-link.com
+❌ https://slow-server-example.test
    Error: Timeout
 
 ============================================================
@@ -120,9 +120,9 @@ Summary: 16/18 links accessible
 ============================================================
 
 ❌ Failed Links Summary:
-  - https://broken-link.com
+  - https://invalid-domain-example.test
     HTTP 404
-  - https://timeout-link.com
+  - https://slow-server-example.test
     Timeout
 ```
 
