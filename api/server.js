@@ -30,6 +30,17 @@ app.use('/images', express.static(path.join(process.cwd(), 'images')));
 app.use('/blog', express.static(path.join(process.cwd(), 'blog')));
 app.use('/tools', express.static(path.join(process.cwd(), 'tools')));
 
+// Serve static files from root (robots.txt, sitemap.xml, favicons, etc.)
+app.use(express.static(process.cwd(), {
+  index: false,
+  dotfiles: 'ignore',
+  setHeaders: (res, filePath) => {
+    if (filePath.endsWith('.html')) {
+      res.set('Cache-Control', 'no-store');
+    }
+  }
+}));
+
 app.use(cors());
 app.use(express.json());
 
@@ -57,7 +68,7 @@ app.get('/:page', (req, res, next) => {
 // SEO Analyzer
 app.get('/analyze-seo', async (req, res) => {
   const url = req.query.url;
-  if (!url) return res.status(400).json({ error: 'URL required' });
+  if (!url) return res.status(400).json({ error: 'URL parameter is required' });
 
   try {
     const response = await fetch(url);
@@ -90,7 +101,7 @@ app.get('/analyze-seo', async (req, res) => {
 // DNS Lookup
 app.get('/dns-lookup', async (req, res) => {
   const { domain, recordTypes } = req.query;
-  if (!domain || !recordTypes) return res.status(400).json({ error: 'Missing params' });
+  if (!domain || !recordTypes) return res.status(400).json({ error: 'Domain and recordTypes parameters are required' });
 
   const types = Array.isArray(recordTypes) ? recordTypes : [recordTypes];
   const results = {};
@@ -107,10 +118,46 @@ app.get('/dns-lookup', async (req, res) => {
   res.json(results);
 });
 
+// PageSpeed Insights
+app.get('/pagespeed', async (req, res) => {
+  const { url, strategy = 'mobile' } = req.query;
+  if (!url) return res.status(400).json({ error: 'URL parameter is required' });
+
+  const apiKey = process.env.PAGESPEED_API_KEY;
+  if (!apiKey) return res.status(500).json({ error: 'PageSpeed API key is not configured' });
+
+  try {
+    const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=${strategy}&key=${apiKey}`;
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Ping Test
+app.get('/ping', async (req, res) => {
+  const host = req.query.host;
+  if (!host) return res.status(400).json({ error: 'Host parameter is required' });
+
+  try {
+    const result = await ping.promise.probe(host);
+    res.json({
+      host: result.host,
+      alive: result.alive,
+      time: result.time,
+      numeric_host: result.numeric_host
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Chatbot API
 app.post('/chat', async (req, res) => {
   const { message, conversationHistory } = req.body;
-  if (!message) return res.status(400).json({ error: 'Message required' });
+  if (!message) return res.status(400).json({ error: 'Message is required' });
 
   try {
     const { callAIWithFallback } = require('../ai-service');
