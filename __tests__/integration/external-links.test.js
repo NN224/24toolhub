@@ -32,6 +32,9 @@ const SKIP_LINKS = [
   'https://httpbin.org', // Testing endpoints
   'https://jsonplaceholder.typicode.com', // Testing endpoints
   'https://api.github.com/users/octocat', // Example API endpoint
+  'https://your-domain-to-skip.com', // Documentation example
+  'https://invalid-domain-example.test', // Documentation example
+  'https://slow-server-example.test', // Documentation example
 ];
 
 // Links that belong to the project itself
