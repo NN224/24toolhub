@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/server.js",
-      "use": "@vercel/node"
+  "functions": {
+    "api/server.js": {
+      "includeFiles": "tools-database.json"
     }
-  ],
+  },
   "routes": [
     {
       "src": "/(css|js|images|blog|tools)/(.*)",
@@ -20,11 +19,6 @@
       "dest": "/api/server.js"
     }
   ],
-  "functions": {
-    "api/server.js": {
-      "includeFiles": "tools-database.json"
-    }
-  },
   "env": {
     "NODE_ENV": "production"
   }
