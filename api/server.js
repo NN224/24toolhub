@@ -29,6 +29,7 @@ app.use('/js', express.static(path.join(process.cwd(), 'js')));
 app.use('/images', express.static(path.join(process.cwd(), 'images')));
 app.use('/blog', express.static(path.join(process.cwd(), 'blog')));
 app.use('/tools', express.static(path.join(process.cwd(), 'tools')));
+app.use('/public', express.static(path.join(process.cwd(), 'public')));
 
 app.use(cors());
 app.use(express.json());
@@ -51,6 +52,18 @@ app.get('/:page', (req, res, next) => {
   if (!pageName.endsWith('.html')) {
     pageName = `${pageName}.html`;
   }
+  
+  // Check if the page is in the public directory
+  const publicPages = ['about.html', 'contact.html', 'privacy.html', 'terms.html', 'cookie-policy.html'];
+  if (publicPages.includes(pageName)) {
+    const pageFile = path.join(process.cwd(), 'public', pageName);
+    if (fs.existsSync(pageFile)) {
+      res.sendFile(pageFile);
+      return;
+    }
+  }
+  
+  // Otherwise check in the root directory
   const pageFile = path.join(process.cwd(), pageName);
   if (fs.existsSync(pageFile)) {
     res.sendFile(pageFile);
