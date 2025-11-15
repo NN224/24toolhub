@@ -46,7 +46,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/:page', (req, res, next) => {
-  const pageFile = path.join(process.cwd(), `${req.params.page}.html`);
+  let pageName = req.params.page;
+  // If the page already ends with .html, use it as is, otherwise append .html
+  if (!pageName.endsWith('.html')) {
+    pageName = `${pageName}.html`;
+  }
+  const pageFile = path.join(process.cwd(), pageName);
   if (fs.existsSync(pageFile)) {
     res.sendFile(pageFile);
   } else {
