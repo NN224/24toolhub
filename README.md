@@ -196,6 +196,24 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions.
 
 ## 🧪 Testing
 
+Run all tests:
+```bash
+npm test
+```
+
+Run specific test suites:
+```bash
+npm run test:backend      # Backend unit tests
+npm run test:frontend     # Frontend tests
+npm run test:integration  # Integration tests
+npm run test:links        # External links validation
+```
+
+Check external links:
+```bash
+npm run check-links
+```
+
 Run configuration tests:
 ```bash
 node -e "const config = require('./ai-config'); console.log('Config loaded:', Object.keys(config.getModelTiers()));"
