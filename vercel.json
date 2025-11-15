@@ -2,13 +2,17 @@
   "version": 2,
   "functions": {
     "api/server.js": {
-      "includeFiles": "tools-database.json,*.html"
+      "includeFiles": "tools-database.json,*.html,public/*.html"
     }
   },
   "routes": [
     {
       "src": "/(css|js|images|blog|tools)/(.*)",
       "dest": "/$1/$2"
+    },
+    {
+      "src": "/(about|contact|privacy|terms|cookie-policy)\\.html",
+      "dest": "/public/$1.html"
     },
     {
       "src": "/(analyze-seo|dns-lookup|pagespeed|ping|chat)",
