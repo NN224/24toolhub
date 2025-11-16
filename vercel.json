@@ -28,22 +28,10 @@
       ]
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/(css|js|images|blog|tools)/(.*)",
-      "dest": "/$1/$2"
-    },
-    {
-      "src": "/(about|contact|privacy|terms|cookie-policy)\\.html",
-      "dest": "/public/$1.html"
-    },
-    {
-      "src": "/(analyze-seo|dns-lookup|pagespeed|ping|chat)",
-      "dest": "/api/server.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/api/server.js"
+      "source": "/:path*",
+      "destination": "/api/server.js"
     }
   ],
   "env": {
