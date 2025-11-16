@@ -37,6 +37,8 @@ const SKIP_LINKS = [
   'https://your-domain-to-skip.com', // Documentation example
   'https://invalid-domain-example.test', // Documentation example
   'https://slow-server-example.test', // Documentation example
+  'https://www.cdc.gov/healthyweight/assessing/bmi/',
+  'https://cdn.jsdelivr.net/npm/qrcode@',
 ];
 
 // Links that belong to the project itself

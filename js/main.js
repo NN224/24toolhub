@@ -20,6 +20,7 @@ const LanguageManager = {
       if (translation) {
         element.textContent = translation
       }
+
     })
 
     // Update all translatable elements with data-en/data-ar
@@ -510,11 +511,56 @@ const PopupUtils = {
   }
 };
 
+function normalizeInternalLinks() {
+  try {
+    const anchors = document.querySelectorAll('a[href]');
+    const origin = window.location.origin;
+    anchors.forEach((a) => {
+      const rawHref = a.getAttribute('href');
+      if (!rawHref || rawHref.startsWith('#') || rawHref.startsWith('mailto:') || rawHref.startsWith('tel:')) return;
+
+      let url;
+      try {
+        url = new URL(rawHref, origin + window.location.pathname);
+      } catch (_) {
+        return;
+      }
+
+      if (url.origin !== origin) return;
+
+      url.protocol = 'https:';
+
+      const paramsToRemove = [];
+      url.searchParams.forEach((_v, k) => {
+        if (k.toLowerCase().startsWith('utm_') || k.toLowerCase() === 'fbclid') paramsToRemove.push(k);
+      });
+      paramsToRemove.forEach((k) => url.searchParams.delete(k));
+
+      if (url.pathname === '/index.html' || url.pathname === '/index') {
+        url.pathname = '/';
+      }
+      if (url.pathname === '/blog' || url.pathname === '/blog/index.html') {
+        url.pathname = '/blog/';
+      }
+      if (url.pathname.endsWith('/index.html')) {
+        url.pathname = url.pathname.replace(/\/index\.html$/, '/');
+      }
+
+      const canonical = url.pathname + (url.search ? '?' + url.searchParams.toString() : '') + url.hash;
+      if (canonical !== rawHref) {
+        a.setAttribute('href', canonical);
+      }
+    });
+  } catch (_) {
+  }
+}
+
 // Initialize on page load
 document.addEventListener("DOMContentLoaded", () => {
   LanguageManager.init()
   SearchManager.init()
   CategoryManager.init()
+  normalizeInternalLinks()
   
   // Add popup demo button to main page
   if (window.location.pathname === '/' || window.location.pathname.endsWith('index.html')) {

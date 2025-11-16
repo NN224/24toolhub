@@ -21,12 +21,9 @@ const AdSense = {
     if (!window.adsbygoogle) {
       window.adsbygoogle = window.adsbygoogle || [];
     }
-    
-    // Replace all ad placeholders with actual ads
-    this.replacePlaceholders();
-    
-    // Setup lazy loading for ads below the fold
-    this.setupLazyLoading();
+    try {
+      document.querySelectorAll('.ad-space').forEach(el => { el.style.display = 'none'; });
+    } catch (_) {}
   },
 
   // Create an ad unit

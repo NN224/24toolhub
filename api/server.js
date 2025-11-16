@@ -23,6 +23,51 @@ try {
   toolsData = { tools: [] };
 }
 
+// Canonicalization middleware (production only) - must run BEFORE static handlers
+app.use((req, res, next) => {
+  try {
+    if (process.env.NODE_ENV !== 'production') return next();
+
+    const CANONICAL_HOST = '24toolhub.com';
+    const host = (req.headers['x-forwarded-host'] || req.headers.host || '').toString();
+    const proto = (req.headers['x-forwarded-proto'] || req.protocol || 'http').toString();
+
+    // Enforce HTTPS
+    if (proto !== 'https') {
+      const redirectUrl = `https://${host}${req.url}`;
+      return res.redirect(301, redirectUrl);
+    }
+
+    // Enforce canonical host (de-www)
+    if (host && host !== CANONICAL_HOST) {
+      const redirectUrl = `https://${CANONICAL_HOST}${req.url}`;
+      return res.redirect(301, redirectUrl);
+    }
+
+    // Path normalization for common index routes
+    if (req.method === 'GET') {
+      const url = new URL(req.url, `https://${CANONICAL_HOST}`);
+      const pathname = url.pathname;
+
+      // Normalize root index
+      if (pathname === '/index.html' || pathname === '/index') {
+        url.pathname = '/';
+        return res.redirect(301, url.pathname + url.search);
+      }
+
+      // Normalize blog index and trailing slash
+      if (pathname === '/blog' || pathname === '/blog/index.html') {
+        url.pathname = '/blog/';
+        return res.redirect(301, url.pathname + url.search);
+      }
+    }
+
+    return next();
+  } catch (_) {
+    return next();
+  }
+});
+
 // Static folders
 app.use('/css', express.static(path.join(process.cwd(), 'css')));
 app.use('/js', express.static(path.join(process.cwd(), 'js')));
@@ -34,11 +79,36 @@ app.use('/public', express.static(path.join(process.cwd(), 'public')));
 app.use(cors());
 app.use(express.json());
 
-app.use((req, res, next) => {
-  if (req.path.endsWith('.html') || req.path === '/') {
-    res.set('Cache-Control', 'no-store');
-  }
-  next();
+app.get('/ads.txt', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'ads.txt'));
+});
+
+app.get('/robots.txt', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'robots.txt'));
+});
+
+app.get('/sitemap.xml', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'sitemap.xml'));
+});
+
+app.get('/favicon.ico', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'favicon.ico'));
+});
+
+app.get('/favicon-16x16.png', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'favicon-16x16.png'));
+});
+
+app.get('/favicon-32x32.png', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'favicon-32x32.png'));
+});
+
+app.get('/apple-touch-icon.png', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'apple-touch-icon.png'));
+});
+
+app.get('/site.webmanifest', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'site.webmanifest'));
 });
 
 // Serve HTML pages
