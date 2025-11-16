@@ -8,9 +8,45 @@ class Chatbot {
         this.resetTime = Date.now() + 60000; // Reset after 1 minute
         this.cacheKey = 'chatbot_cache';
         this.historyKey = 'chatbot_history';
+        this.aiAvailable = false;
         this.init();
         this.loadConversationHistory();
         this.initCache();
+        this.checkAIStatus();
+    }
+
+    async checkAIStatus() {
+        try {
+            const response = await fetch('/ai-status');
+            const data = await response.json();
+            this.aiAvailable = data.available;
+            
+            const container = document.querySelector('.chatbot-container');
+            const subtitle = document.getElementById('chatbot-subtitle');
+            
+            if (!this.aiAvailable) {
+                // Hide chatbot if AI is not available
+                if (container) {
+                    container.style.display = 'none';
+                }
+                console.warn('AI Assistant is not available:', data.reasonAr || data.reason);
+            } else {
+                // Show chatbot if AI is available
+                if (container) {
+                    container.style.display = 'block';
+                }
+                if (subtitle) {
+                    subtitle.textContent = 'Always here to help';
+                }
+            }
+        } catch (error) {
+            console.error('Failed to check AI status:', error);
+            // Hide chatbot on error
+            const container = document.querySelector('.chatbot-container');
+            if (container) {
+                container.style.display = 'none';
+            }
+        }
     }
 
     init() {

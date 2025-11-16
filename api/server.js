@@ -125,6 +125,50 @@ app.get('/dns-lookup', async (req, res) => {
   res.json(results);
 });
 
+// AI Status Check API
+app.get('/ai-status', (req, res) => {
+  try {
+    const modelConfig = getModelForEndpoint('/chat', process.env);
+    
+    if (!modelConfig) {
+      return res.json({
+        available: false,
+        reason: 'No AI configuration found',
+        reasonAr: 'لم يتم العثور على إعدادات الذكاء الاصطناعي'
+      });
+    }
+
+    const { primary, fallbacks } = modelConfig;
+    const allModels = [primary, ...fallbacks];
+    
+    // Check if at least one model has a valid API key
+    const hasValidKey = allModels.some(model => {
+      const apiKey = process.env[model.requiresKey];
+      return apiKey && apiKey.length > 10;
+    });
+
+    if (hasValidKey) {
+      return res.json({
+        available: true,
+        primaryModel: `${primary.provider}/${primary.name}`,
+        fallbackCount: fallbacks.length
+      });
+    } else {
+      return res.json({
+        available: false,
+        reason: 'No valid API keys configured',
+        reasonAr: 'لم يتم تكوين مفاتيح API صالحة'
+      });
+    }
+  } catch (err) {
+    res.json({
+      available: false,
+      reason: err.message,
+      reasonAr: 'خطأ في التحقق من حالة الذكاء الاصطناعي'
+    });
+  }
+});
+
 // Chatbot API
 app.post('/chat', async (req, res) => {
   const { message, conversationHistory } = req.body;
