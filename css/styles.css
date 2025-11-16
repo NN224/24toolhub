@@ -464,16 +464,9 @@ body[dir="rtl"] .seo-section ol {
 }
 
 /* Ad Spaces */
+/* Hide manual ad containers – rely on Google Auto Ads instead */
 .ad-space {
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-muted);
-  font-size: 0.75rem;
-  margin: 2rem auto;
+  display: none;
 }
 
 .ad-leaderboard {
