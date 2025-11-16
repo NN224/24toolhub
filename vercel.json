@@ -28,6 +28,13 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "https://www.24toolhub.com/:path*",
+      "destination": "https://24toolhub.com/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/:path*",
