@@ -17,13 +17,6 @@ const MODEL_TIERS = {
         costPerMillionTokens: { input: 0.0375, output: 0.15 },
         maxTokens: 1000000,
         requiresKey: 'GEMINI_API_KEY'
-      },
-      {
-        provider: 'gemini',
-        name: 'gemini-2.0-flash-exp',
-        costPerMillionTokens: { input: 0, output: 0 }, // Free during preview
-        maxTokens: 1000000,
-        requiresKey: 'GEMINI_API_KEY'
       }
     ]
   },
