@@ -169,8 +169,8 @@
     button.setAttribute('aria-label', 'Back to top');
     button.style.cssText = `
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
+      bottom: 90px;
+      right: 20px;
       width: 50px;
       height: 50px;
       background: var(--accent-primary, #667eea);
@@ -182,7 +182,7 @@
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s ease;
-      z-index: 1000;
+      z-index: 9998;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     `;
 
