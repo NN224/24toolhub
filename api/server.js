@@ -239,6 +239,113 @@ app.get('/ai-status', (req, res) => {
   }
 });
 
+// PageSpeed Insights API
+app.get('/pagespeed', async (req, res) => {
+  const { url, strategy = 'desktop' } = req.query;
+  if (!url) return res.status(400).json({ error: 'URL required' });
+
+  try {
+    const apiKey = process.env.PAGESPEED_API_KEY;
+    if (!apiKey) {
+      return res.status(500).json({ 
+        error: 'PageSpeed API key not configured',
+        errorAr: 'مفتاح PageSpeed API غير مُكوّن'
+      });
+    }
+
+    const psiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=${strategy}&key=${apiKey}`;
+    const response = await fetch(psiUrl);
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error?.message || 'PageSpeed API request failed');
+    }
+
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Exchange Rates API
+app.get('/exchange-rates', async (req, res) => {
+  try {
+    const apiKey = process.env.EXCHANGE_RATE_API_KEY;
+    
+    // Try using API key if available (for better rate limits)
+    if (apiKey) {
+      try {
+        // Try fixer.io API format
+        const fixerUrl = `http://data.fixer.io/api/latest?access_key=${apiKey}&base=USD`;
+        const fixerResponse = await fetch(fixerUrl);
+        
+        if (fixerResponse.ok) {
+          const fixerData = await fixerResponse.json();
+          if (fixerData.success !== false && fixerData.rates) {
+            return res.json({ rates: fixerData.rates, source: 'fixer.io' });
+          }
+        }
+      } catch (fixerError) {
+        console.log('Fixer.io API failed, trying alternative...');
+      }
+      
+      // Try exchangerate-api.com with API key
+      try {
+        const exchangeUrl = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
+        const exchangeResponse = await fetch(exchangeUrl);
+        
+        if (exchangeResponse.ok) {
+          const exchangeData = await exchangeResponse.json();
+          if (exchangeData.result === 'success' && exchangeData.conversion_rates) {
+            return res.json({ rates: exchangeData.conversion_rates, source: 'exchangerate-api.com' });
+          }
+        }
+      } catch (exchangeError) {
+        console.log('ExchangeRate-API failed, using fallback...');
+      }
+    }
+    
+    // Fallback to free API (no key required)
+    const freeResponse = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+    if (freeResponse.ok) {
+      const freeData = await freeResponse.json();
+      return res.json({ rates: freeData.rates, source: 'exchangerate-api.com (free)' });
+    }
+    
+    throw new Error('All exchange rate APIs failed');
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Ping Test API
+app.get('/ping', async (req, res) => {
+  const { host, timeout = 5000 } = req.query;
+  if (!host) return res.status(400).json({ error: 'Host required' });
+
+  try {
+    const config = {
+      timeout: Math.min(parseInt(timeout) || 5000, 10000) / 1000, // Convert to seconds, max 10s
+      min_reply: 1
+    };
+
+    const result = await ping.promise.probe(host, config);
+    
+    res.json({
+      host: result.host,
+      time: result.time !== 'unknown' ? parseFloat(result.time) : null,
+      status: result.alive ? 'success' : 'timeout',
+      packetLoss: result.packetLoss || '0%'
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      error: error.message,
+      status: 'error'
+    });
+  }
+});
+
 // Chatbot API
 app.post('/chat', async (req, res) => {
   const { message, conversationHistory } = req.body;

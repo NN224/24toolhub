@@ -324,18 +324,75 @@ class TextSummarizer {
     }
 
     splitIntoSentences(text) {
-        // Simple sentence splitting (in real implementation, use more sophisticated NLP)
-        return text.split(/[.!?]+/).filter(s => s.trim().length > 10);
+        // Improved sentence splitting with better regex
+        // Handles abbreviations, decimals, and multiple punctuation
+        const sentenceEnders = /[.!?]+(?:\s|$)/g;
+        const sentences = text.split(sentenceEnders)
+            .map(s => s.trim())
+            .filter(s => s.length > 10 && s.length < 500); // Filter very short or very long sentences
+        
+        return sentences;
     }
 
     rankSentences(sentences, focus) {
-        // Simple ranking based on keywords and position (in real implementation, use TF-IDF or similar)
+        // Improved ranking using TF-IDF-like scoring
         const keywords = this.getFocusKeywords(focus);
         
-        return sentences.map(sentence => ({
-            text: sentence.trim(),
-            score: this.calculateSentenceScore(sentence, keywords)
-        })).sort((a, b) => b.score - a.score).map(item => item.text);
+        // Calculate word frequencies for TF-IDF
+        const allWords = sentences.flatMap(s => 
+            s.toLowerCase()
+             .replace(/[^\w\s]/g, ' ')
+             .split(/\s+/)
+             .filter(w => w.length > 2)
+        );
+        
+        const wordFreq = {};
+        allWords.forEach(word => {
+            wordFreq[word] = (wordFreq[word] || 0) + 1;
+        });
+        
+        const totalWords = allWords.length;
+        
+        return sentences.map((sentence, index) => {
+            const words = sentence.toLowerCase()
+                .replace(/[^\w\s]/g, ' ')
+                .split(/\s+/)
+                .filter(w => w.length > 2);
+            
+            let score = this.calculateSentenceScore(sentence, keywords);
+            
+            // TF-IDF-like scoring
+            let tfidfScore = 0;
+            words.forEach(word => {
+                const tf = words.filter(w => w === word).length / words.length;
+                const idf = Math.log(totalWords / (wordFreq[word] || 1));
+                tfidfScore += tf * idf;
+            });
+            score += tfidfScore * 2;
+            
+            // Boost sentences with keywords
+            const keywordMatches = words.filter(w => keywords.includes(w)).length;
+            score += keywordMatches * 3;
+            
+            // Position bonus (first and last sentences are often important)
+            if (index === 0 || index === sentences.length - 1) {
+                score += 2;
+            }
+            
+            // Length bonus (prefer medium-length sentences)
+            const length = words.length;
+            if (length >= 10 && length <= 25) {
+                score += 1.5;
+            } else if (length < 5 || length > 40) {
+                score -= 1; // Penalize very short or very long sentences
+            }
+            
+            return {
+                text: sentence.trim(),
+                score: score,
+                index: index
+            };
+        }).sort((a, b) => b.score - a.score).map(item => item.text);
     }
 
     getFocusKeywords(focus) {
@@ -351,24 +408,45 @@ class TextSummarizer {
     }
 
     calculateSentenceScore(sentence, keywords) {
-        const words = sentence.toLowerCase().split(/\s+/);
+        const words = sentence.toLowerCase()
+            .replace(/[^\w\s]/g, ' ')
+            .split(/\s+/)
+            .filter(w => w.length > 2);
+        
         let score = 0;
         
-        // Score based on keyword matches
+        // Score based on keyword matches (case-insensitive, partial matches)
         keywords.forEach(keyword => {
-            if (words.includes(keyword.toLowerCase())) {
-                score += 2;
+            const keywordLower = keyword.toLowerCase();
+            // Exact match
+            if (words.includes(keywordLower)) {
+                score += 3;
+            }
+            // Partial match (word contains keyword)
+            else if (words.some(w => w.includes(keywordLower) || keywordLower.includes(w))) {
+                score += 1.5;
             }
         });
         
-        // Score based on sentence length (prefer medium-length sentences)
-        const length = words.length;
-        if (length >= 10 && length <= 25) {
-            score += 1;
+        // Score based on important words (common in important sentences)
+        const importantWords = ['important', 'significant', 'key', 'main', 'primary', 
+                              'essential', 'critical', 'major', 'conclusion', 'summary',
+                              'result', 'finding', 'study', 'research', 'analysis'];
+        importantWords.forEach(word => {
+            if (words.includes(word)) {
+                score += 1;
+            }
+        });
+        
+        // Score based on numbers (sentences with numbers are often important)
+        if (/\d/.test(sentence)) {
+            score += 0.5;
         }
         
-        // Score based on position (first and last sentences are often important)
-        score += 0.5;
+        // Score based on question words (questions are often important)
+        if (/^(what|why|how|when|where|who|which)/i.test(sentence.trim())) {
+            score += 1;
+        }
         
         return score;
     }

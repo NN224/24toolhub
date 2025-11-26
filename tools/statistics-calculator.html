@@ -54,30 +54,80 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="tool-container">
             <h1 class="tool-title">Statistics Calculator</h1>
             
-            <div class="coming-soon-container" style="text-align: center; padding: 60px 20px; background: var(--bg-secondary); border-radius: 12px; margin: 40px 0;">
-                <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin: 0 auto 30px; opacity: 0.5;">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="12 6 12 12 16 14"></polyline>
-                </svg>
-                <h2 style="font-size: 2rem; margin-bottom: 20px;">Coming Soon</h2>
-                <p style="font-size: 1.2rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 30px;">
-                    We're developing a comprehensive statistics calculator to help you analyze your data with advanced statistical measures.
+            <div class="input-section" style="background: var(--bg-secondary); border-radius: 12px; padding: 2rem; margin: 2rem 0;">
+                <h2 style="margin-bottom: 1rem;">Enter Your Data</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                    Enter numbers separated by commas, spaces, or newlines (e.g., 1, 2, 3, 4, 5 or 1 2 3 4 5)
                 </p>
-                <div style="margin-top: 30px;">
-                    <a href="/" class="btn btn-primary">Back to Home</a>
-                    <a href="/tools/percentage-calculator.html" class="btn btn-secondary" style="margin-left: 15px;">Try Percentage Calculator</a>
+                <textarea id="dataInput" class="input-textarea" rows="6" placeholder="Enter your data here... (e.g., 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)" style="width: 100%; padding: 1rem; border: 1px solid var(--border-color); border-radius: 0.5rem; background: var(--bg-primary); color: var(--text-primary); font-family: monospace; font-size: 1rem;"></textarea>
+                <p id="dataPreview" style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-secondary);"></p>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                    <button id="calculateStats" class="btn btn-primary">Calculate Statistics</button>
+                    <button id="clearStats" class="btn btn-secondary">Clear</button>
                 </div>
             </div>
 
-            <div class="info-section" style="margin-top: 40px;">
-                <h2>What You'll Be Able To Do</h2>
-                <ul style="line-height: 2; color: var(--text-secondary);">
-                    <li>Calculate mean, median, and mode</li>
-                    <li>Find standard deviation and variance</li>
-                    <li>Determine quartiles and percentiles</li>
-                    <li>Calculate correlation coefficients</li>
-                    <li>Generate descriptive statistics reports</li>
-                </ul>
+            <div id="resultsSection" style="display: none;">
+                <h2 style="margin-bottom: 1.5rem;">Results</h2>
+                
+                <div class="stats-results">
+                    <div class="stat-card">
+                        <div class="stat-label">Count</div>
+                        <div class="stat-value" id="count">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Sum</div>
+                        <div class="stat-value" id="sum">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Mean (Average)</div>
+                        <div class="stat-value" id="mean">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Median</div>
+                        <div class="stat-value" id="median">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Mode</div>
+                        <div class="stat-value" id="mode">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Range</div>
+                        <div class="stat-value" id="range">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Variance</div>
+                        <div class="stat-value" id="variance">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Standard Deviation</div>
+                        <div class="stat-value" id="stdDev">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Minimum</div>
+                        <div class="stat-value" id="min">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Maximum</div>
+                        <div class="stat-value" id="max">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Q1 (First Quartile)</div>
+                        <div class="stat-value" id="q1">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Q2 (Median)</div>
+                        <div class="stat-value" id="q2">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Q3 (Third Quartile)</div>
+                        <div class="stat-value" id="q3">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">IQR (Interquartile Range)</div>
+                        <div class="stat-value" id="iqr">-</div>
+                    </div>
+                </div>
             </div>
 
             <div class="ad-space ad-rectangle"></div>
@@ -99,6 +149,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script src="../js/main.js"></script>
     <script src="../js/adsense.js"></script>
     <script src="../js/popup.js"></script>
+    <script src="../js/statistics-calculator.js"></script>
     <!-- AI Chatbot -->
     <link rel="stylesheet" href="../css/chatbot.css">
     <script src="../js/chatbot.js"></script>

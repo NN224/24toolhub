@@ -277,95 +277,28 @@ class QRScanner {
 
     async detectQRCode(imageData) {
         try {
-            // Use a simple QR detection algorithm
-            const result = await this.performQRDetection(imageData);
-            if (result) {
+            // Check if jsQR is available
+            if (typeof jsQR === 'undefined') {
+                this.showNotification('QR scanner library not loaded. Please refresh the page.', 'error');
+                return;
+            }
+
+            // Use jsQR library for real QR code detection
+            const code = jsQR(imageData.data, imageData.width, imageData.height, {
+                inversionAttempts: 'dontInvert',
+            });
+
+            if (code) {
+                // QR code detected!
+                const result = this.analyzeQRContent(code.data);
                 this.displayResult(result);
-            } else {
-                this.showNotification('No QR code detected in the image', 'info');
+                // Stop scanning after successful detection
+                this.stopScanning();
             }
         } catch (error) {
             console.error('QR detection error:', error);
             this.showNotification('Error detecting QR code: ' + error.message, 'error');
         }
-    }
-
-    async performQRDetection(imageData) {
-        // Simple QR code detection using pattern recognition
-        const width = imageData.width;
-        const height = imageData.height;
-        const data = imageData.data;
-        
-        // Look for QR code patterns (simplified version)
-        const qrPatterns = this.findQRPatterns(data, width, height);
-        
-        if (qrPatterns.length > 0) {
-            // Decode the QR pattern
-            const decodedData = this.decodeQRPattern(qrPatterns[0]);
-            return this.analyzeQRContent(decodedData);
-        }
-        
-        return null;
-    }
-
-    findQRPatterns(data, width, height) {
-        const patterns = [];
-        
-        // Look for the characteristic QR code finder patterns
-        for (let y = 0; y < height - 7; y++) {
-            for (let x = 0; x < width - 7; x++) {
-                if (this.isQRFinderPattern(data, width, x, y)) {
-                    patterns.push({ x, y, size: 7 });
-                }
-            }
-        }
-        
-        return patterns;
-    }
-
-    isQRFinderPattern(data, width, x, y) {
-        // Check for the 7x7 finder pattern: black-white-black-white-black-white-black
-        const pattern = [
-            [1,1,1,1,1,1,1], // black
-            [1,0,0,0,0,0,1], // black-white-white-white-white-white-black
-            [1,0,1,1,1,0,1], // black-white-black-black-black-white-black
-            [1,0,1,1,1,0,1], // black-white-black-black-black-white-black
-            [1,0,1,1,1,0,1], // black-white-black-black-black-white-black
-            [1,0,0,0,0,0,1], // black-white-white-white-white-white-black
-            [1,1,1,1,1,1,1]  // black
-        ];
-        
-        for (let py = 0; py < 7; py++) {
-            for (let px = 0; px < 7; px++) {
-                const pixelIndex = ((y + py) * width + (x + px)) * 4;
-                const isBlack = data[pixelIndex] < 128; // Simple threshold
-                const expected = pattern[py][px];
-                
-                if ((isBlack && expected === 0) || (!isBlack && expected === 1)) {
-                    return false;
-                }
-            }
-        }
-        
-        return true;
-    }
-
-    decodeQRPattern(pattern) {
-        // Simplified QR decoding - in a real implementation, this would be much more complex
-        const mockData = [
-            'https://24toolhub.com',
-            'Hello, this is a QR code!',
-            'contact@example.com',
-            '+1234567890',
-            'WIFI:T:WPA;S:MyNetwork;P:password123;H:false;',
-            'BEGIN:VCARD\nVERSION:3.0\nFN:John Doe\nORG:Company\nTEL:+1234567890\nEMAIL:john@example.com\nEND:VCARD'
-        ];
-        
-        // Show demo notice
-        this.showDemoNotice();
-        
-        // Return a demo result for demonstration
-        return mockData[0]; // Always return the first demo item for consistency
     }
 
     analyzeQRContent(data) {
@@ -544,35 +477,7 @@ class QRScanner {
         }
     }
 
-    showDemoNotice() {
-        // Create or update demo notice
-        let noticeElement = document.getElementById('qrDemoNotice');
-        if (!noticeElement) {
-            noticeElement = document.createElement('div');
-            noticeElement.id = 'qrDemoNotice';
-            noticeElement.className = 'demo-notice';
-            noticeElement.style.cssText = `
-                background: #fff3cd;
-                border: 1px solid #ffeaa7;
-                border-radius: 0.5rem;
-                padding: 1rem;
-                margin: 1rem 0;
-                color: #856404;
-                font-size: 0.875rem;
-            `;
-            
-            // Insert before results area
-            const resultsContainer = document.querySelector('.qr-results') || document.querySelector('.results-container');
-            if (resultsContainer) {
-                resultsContainer.parentNode.insertBefore(noticeElement, resultsContainer);
-            }
-        }
-        
-        noticeElement.innerHTML = `
-            <strong>⚠️ تحذير:</strong> هذه أداة تجريبية تعرض بيانات وهمية للتوضيح فقط. لمسح QR codes حقيقية، يرجى استخدام تطبيق الكاميرا في هاتفك أو تطبيقات QR scanner المتخصصة.
-        `;
-        noticeElement.style.display = 'block';
-    }
+    // Removed showDemoNotice - no longer needed with real QR scanning using jsQR
 }
 
 // Initialize when DOM is loaded
