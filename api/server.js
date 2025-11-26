@@ -152,6 +152,14 @@ app.get('/analyze-seo', async (req, res) => {
     const html = await response.text();
     const $ = cheerio.load(html);
 
+    // Extract Open Graph tags
+    const ogTags = {
+      title: $('meta[property="og:title"]').attr('content') || '',
+      description: $('meta[property="og:description"]').attr('content') || '',
+      image: $('meta[property="og:image"]').attr('content') || '',
+      url: $('meta[property="og:url"]').attr('content') || ''
+    };
+
     const analysis = {
       title: { text: $('title').text(), length: $('title').text().length },
       description: {
@@ -166,7 +174,8 @@ app.get('/analyze-seo', async (req, res) => {
       images: {
         total: $('img').length,
         missingAlt: $('img:not([alt]), img[alt=""]').length
-      }
+      },
+      ogTags: ogTags
     };
 
     res.json(analysis);
