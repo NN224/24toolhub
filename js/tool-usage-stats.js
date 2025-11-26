@@ -41,12 +41,9 @@
     badge.setAttribute('data-ar', `${count} استخدام`);
     badge.title = `${count} ${window.LanguageManager?.currentLang === 'ar' ? 'استخدام' : 'uses'}`;
 
-    // Add badge to card
-    const title = card.querySelector('.tool-card-title');
-    if (title) {
-      title.style.position = 'relative';
-      title.appendChild(badge);
-    }
+    // Add badge to card (in bottom right corner)
+    card.style.position = 'relative';
+    card.appendChild(badge);
   }
 
   // Add usage badges to all tool cards
@@ -115,8 +112,8 @@
   style.textContent = `
     .usage-badge {
       position: absolute;
-      top: -8px;
-      right: -8px;
+      bottom: 8px;
+      right: 8px;
       background: var(--accent-primary, #667eea);
       color: white;
       font-size: 0.7rem;
@@ -125,9 +122,21 @@
       border-radius: 10px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
       z-index: 1;
+      pointer-events: none;
+    }
+    .tool-card {
+      position: relative;
+      overflow: visible;
     }
     .tool-card-title {
       position: relative;
+    }
+    /* Ensure badge doesn't overlap with chatbot */
+    .chatbot-container ~ * .usage-badge {
+      z-index: 1;
+    }
+    .chatbot-container {
+      z-index: 9999;
     }
   `;
   document.head.appendChild(style);
