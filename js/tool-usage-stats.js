@@ -41,7 +41,17 @@
     badge.setAttribute('data-ar', `${count} استخدام`);
     badge.title = `${count} ${window.LanguageManager?.currentLang === 'ar' ? 'استخدام' : 'uses'}`;
 
-    // Add badge to card (in bottom right corner)
+    // Alternate between right and left to avoid overlap
+    const cardIndex = Array.from(document.querySelectorAll('.tool-card')).indexOf(card);
+    const isRight = cardIndex % 2 === 0;
+    
+    if (isRight) {
+      badge.classList.add('badge-right');
+    } else {
+      badge.classList.add('badge-left');
+    }
+
+    // Add badge to card
     card.style.position = 'relative';
     card.appendChild(badge);
   }
@@ -113,7 +123,6 @@
     .usage-badge {
       position: absolute;
       bottom: 8px;
-      right: 8px;
       background: var(--accent-primary, #667eea);
       color: white;
       font-size: 0.7rem;
@@ -123,6 +132,14 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
       z-index: 1;
       pointer-events: none;
+    }
+    .usage-badge.badge-right {
+      right: 8px;
+      left: auto;
+    }
+    .usage-badge.badge-left {
+      left: 8px;
+      right: auto;
     }
     .tool-card {
       position: relative;
