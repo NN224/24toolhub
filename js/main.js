@@ -245,6 +245,7 @@ const SearchManager = {
   filterTools(query) {
     const toolCards = document.querySelectorAll(".tool-card")
     const lowerQuery = query.toLowerCase()
+    let visibleCount = 0
 
     toolCards.forEach((card) => {
       const title = card.querySelector(".tool-card-title")?.textContent.toLowerCase() || ""
@@ -252,10 +253,44 @@ const SearchManager = {
 
       if (title.includes(lowerQuery) || description.includes(lowerQuery)) {
         card.style.display = "block"
+        visibleCount++
       } else {
         card.style.display = "none"
       }
     })
+
+    // Show empty state if no results
+    this.showEmptyState(visibleCount === 0 && query.length > 0, query)
+  },
+
+  showEmptyState(show, query) {
+    let emptyState = document.getElementById('search-empty-state')
+    
+    if (show && !emptyState) {
+      emptyState = document.createElement('div')
+      emptyState.id = 'search-empty-state'
+      emptyState.style.cssText = `
+        text-align: center;
+        padding: 3rem 1rem;
+        color: var(--text-secondary);
+      `
+      emptyState.innerHTML = `
+        <div style="font-size: 4rem; margin-bottom: 1rem;">🔍</div>
+        <h3 data-en="No tools found" data-ar="لم يتم العثور على أدوات">No tools found</h3>
+        <p data-en="Try searching with different keywords" data-ar="جرب البحث بكلمات مختلفة">Try searching with different keywords</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+          <span data-en="Searching for: " data-ar="البحث عن: ">Searching for: </span>
+          <strong>"${query}"</strong>
+        </p>
+      `
+      
+      const hero = document.querySelector('.hero')
+      if (hero) {
+        hero.parentNode.insertBefore(emptyState, hero.nextSibling)
+      }
+    } else if (!show && emptyState) {
+      emptyState.remove()
+    }
   },
 }
 
@@ -561,6 +596,37 @@ document.addEventListener("DOMContentLoaded", () => {
   SearchManager.init()
   CategoryManager.init()
   normalizeInternalLinks()
+  
+  // Auto-load libraries for tool pages
+  const isToolPage = window.location.pathname !== '/' && 
+                     !window.location.pathname.endsWith('index.html') &&
+                     window.location.pathname.includes('/tools/');
+  
+  if (isToolPage) {
+    const pathPrefix = '../js/';
+    const libraries = [
+      'security.js',
+      'lazyload-init.js',
+      'notifications.js',
+      'dialogs.js',
+      'animations.js',
+      'charts.js',
+      'tool-usage-stats.js',
+      'loading-states.js',
+      'expand-related-tools.js',
+      'date-fns-utils.js',
+      'user-journey.js'
+    ];
+    
+    libraries.forEach(lib => {
+      if (!document.querySelector(`script[src*="${lib}"]`)) {
+        const script = document.createElement('script');
+        script.src = pathPrefix + lib;
+        script.async = true;
+        document.head.appendChild(script);
+      }
+    });
+  }
   
   // Add popup demo button to main page
   if (window.location.pathname === '/' || window.location.pathname.endsWith('index.html')) {

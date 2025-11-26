@@ -123,6 +123,8 @@ body[dir="rtl"] {
 
 /* Hero Section */
 .hero {
+  position: relative;
+  overflow: hidden;
   text-align: center;
   padding: 3rem 0;
   background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);

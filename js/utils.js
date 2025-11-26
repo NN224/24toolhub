@@ -1,4 +1,13 @@
+// showNotification is now handled by notifications.js (Notyf)
+// This is a fallback in case Notyf is not loaded
 function showNotification(message, type = 'info') {
+    // Use Notyf if available (loaded in notifications.js)
+    if (window.notyf && typeof window.showNotification === 'function') {
+        window.showNotification(message, type);
+        return;
+    }
+    
+    // Fallback to old notification system
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.textContent = message;

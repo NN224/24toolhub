@@ -95,13 +95,25 @@ class WorkoutTracker {
         this.showNotification(`Workout ended! Duration: ${duration} minutes`, 'success');
     }
 
-    addExercise() {
+    async addExercise() {
         if (!this.currentWorkout) {
             this.showNotification('Please start a workout first', 'error');
             return;
         }
 
-        const exerciseName = prompt('Enter exercise name:');
+        // Use SweetAlert2 input if available, otherwise use prompt
+        let exerciseName;
+        if (window.showInput) {
+            exerciseName = await window.showInput(
+                'Enter exercise name:',
+                'Add Exercise',
+                'Exercise name',
+                'text'
+            );
+        } else {
+            exerciseName = prompt('Enter exercise name:');
+        }
+        
         if (!exerciseName) return;
 
         const exercise = {
@@ -114,13 +126,21 @@ class WorkoutTracker {
         this.updateWorkoutUI();
     }
 
-    addSet(exerciseId) {
+    async addSet(exerciseId) {
         const exercise = this.currentWorkout.exercises.find(e => e.id === exerciseId);
         if (!exercise) return;
 
-        const weight = parseFloat(prompt('Enter weight (kg):') || 0);
-        const reps = parseInt(prompt('Enter reps:') || 0);
-        const rest = parseInt(prompt('Enter rest time (seconds):') || 60);
+        let weight, reps, rest;
+        
+        if (window.showInput) {
+            weight = parseFloat(await window.showInput('Enter weight (kg):', 'Weight', '0', 'number') || 0);
+            reps = parseInt(await window.showInput('Enter reps:', 'Reps', '0', 'number') || 0);
+            rest = parseInt(await window.showInput('Enter rest time (seconds):', 'Rest Time', '60', 'number') || 60);
+        } else {
+            weight = parseFloat(prompt('Enter weight (kg):') || 0);
+            reps = parseInt(prompt('Enter reps:') || 0);
+            rest = parseInt(prompt('Enter rest time (seconds):') || 60);
+        }
 
         exercise.sets.push({
             id: Date.now(),
@@ -146,10 +166,26 @@ class WorkoutTracker {
         this.showNotification('Workout saved!', 'success');
     }
 
-    clearWorkout() {
-        if (confirm('Are you sure you want to clear the current workout?')) {
-            this.currentWorkout = null;
-            this.updateWorkoutUI();
+    async clearWorkout() {
+        // Use SweetAlert2 if available, otherwise use confirm
+        if (window.showConfirm) {
+            const confirmed = await window.showConfirm(
+                'Are you sure you want to clear the current workout?',
+                'Clear Workout',
+                'Yes, Clear',
+                'Cancel'
+            );
+            
+            if (confirmed) {
+                this.currentWorkout = null;
+                this.updateWorkoutUI();
+                this.showNotification('Workout cleared', 'success');
+            }
+        } else {
+            if (confirm('Are you sure you want to clear the current workout?')) {
+                this.currentWorkout = null;
+                this.updateWorkoutUI();
+            }
         }
     }
 

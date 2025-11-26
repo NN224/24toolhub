@@ -47,30 +47,51 @@ class AgeCalculator {
     }
 
     calculateDetailedAge(birth, current) {
-        const diff = current - birth;
-        
-        // Calculate years, months, days
-        let years = current.getFullYear() - birth.getFullYear();
-        let months = current.getMonth() - birth.getMonth();
-        let days = current.getDate() - birth.getDate();
+        // Use date-fns utilities if available, otherwise fallback to manual calculation
+        let years, months, days, totalDays, totalHours, totalMinutes;
 
-        // Adjust for negative days
-        if (days < 0) {
-            months--;
-            const prevMonth = new Date(current.getFullYear(), current.getMonth(), 0);
-            days += prevMonth.getDate();
+        if (window.differenceInYears && window.differenceInMonths && window.differenceInDays) {
+            // Use date-fns functions
+            years = window.differenceInYears(birth, current);
+            const totalMonths = window.differenceInMonths(birth, current);
+            months = totalMonths % 12;
+            totalDays = window.differenceInDays(birth, current);
+            
+            // Calculate days remaining after years and months
+            const dateAfterYearsMonths = new Date(birth);
+            dateAfterYearsMonths.setFullYear(birth.getFullYear() + years);
+            dateAfterYearsMonths.setMonth(birth.getMonth() + totalMonths);
+            days = window.differenceInDays(dateAfterYearsMonths, current);
+            
+            totalHours = window.differenceInHours(birth, current);
+            totalMinutes = window.differenceInMinutes(birth, current);
+        } else {
+            // Fallback to manual calculation
+            const diff = current - birth;
+            
+            // Calculate years, months, days
+            years = current.getFullYear() - birth.getFullYear();
+            months = current.getMonth() - birth.getMonth();
+            days = current.getDate() - birth.getDate();
+
+            // Adjust for negative days
+            if (days < 0) {
+                months--;
+                const prevMonth = new Date(current.getFullYear(), current.getMonth(), 0);
+                days += prevMonth.getDate();
+            }
+
+            // Adjust for negative months
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            // Calculate total days, hours, minutes
+            totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+            totalHours = Math.floor(diff / (1000 * 60 * 60));
+            totalMinutes = Math.floor(diff / (1000 * 60));
         }
-
-        // Adjust for negative months
-        if (months < 0) {
-            years--;
-            months += 12;
-        }
-
-        // Calculate total days, hours, minutes
-        const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const totalHours = Math.floor(diff / (1000 * 60 * 60));
-        const totalMinutes = Math.floor(diff / (1000 * 60));
 
         return {
             years,

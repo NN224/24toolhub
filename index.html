@@ -37,8 +37,54 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
     <link rel="stylesheet" href="./css/styles.css">
+    
+    <!-- Library: Notyf CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    
+    <!-- Library: AOS CSS (Animations) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    
+    <!-- Library: SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    
     <!-- Added Google AdSense script -->
     <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2446710277775155" crossorigin="anonymous"></script>
+    
+    <!-- Library: DOMPurify (Security) -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+    
+    <!-- Library: LazyLoad (Performance) -->
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js"></script>
+    
+    <!-- Library: Notyf JS (Notifications) -->
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    
+    <!-- Library: Fuse.js (Fuzzy Search) -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+    
+    <!-- Library: AOS JS (Animations) -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    
+    <!-- Library: SweetAlert2 JS (Alert Boxes) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    
+    <!-- Library: Chart.js (Charts & Analytics) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- Library: SortableJS (Drag & Drop) -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    
+    <!-- Library: Quicklink (Prefetch Links) -->
+    <script src="https://cdn.jsdelivr.net/npm/quicklink@2.3.0/dist/quicklink.umd.js"></script>
+    
+    <!-- Library: date-fns (Date Utilities) -->
+    <!-- Note: date-fns is ESM only, so we use our own implementation with fallbacks -->
+    
+    <!-- Library: Typed.js (Typing Animation) -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
+    
+    <!-- Library: Particles.js (Background Effects) -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     
     <!-- Google tag (gtag.js) -->
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-2ELW7FZKDW"></script>
@@ -61,7 +107,7 @@
       <div class="header-container">
         <div class="header-branding">
           <a href="/" class="logo-link">
-            <img src="./images/logo.png" alt="24ToolHub" class="logo" width="512" height="512">
+            <img src="./images/logo.png" alt="24ToolHub" class="logo lazy" width="512" height="512" data-src="./images/logo.png">
           </a>
           <h1 class="site-title" data-i18n="site.title">24ToolHub</h1>
         </div>
@@ -83,12 +129,14 @@
     <!-- Main Content -->
     <main class="main-content">
       <!-- Hero Section -->
-      <section class="hero">
-        <h2 class="hero-title" data-i18n="site.tagline">Free Online Tools - Available 24/7</h2>
-        <p class="hero-description">Access 85+ professional tools for text processing, conversion, generation, encoding, and more. All tools are free and work directly in your browser.</p>
+      <section class="hero" data-aos="fade-up">
+        <h2 class="hero-title" data-i18n="site.tagline" data-aos="fade-up" data-aos-delay="100">Free Online Tools - Available 24/7</h2>
+        <p class="hero-description" data-aos="fade-up" data-aos-delay="200">Access 85+ professional tools for text processing, conversion, generation, encoding, and more. All tools are free and work directly in your browser.</p>
+        
+        <!-- Particles.js container (will be created by particles-init.js) -->
 
         <!-- Search Box -->
-        <div class="search-container">
+        <div class="search-container" data-aos="fade-up" data-aos-delay="300">
           <input type="text" id="searchInput" class="search-input" placeholder="Search tools..." data-i18n-placeholder="search.placeholder">
           <span class="search-icon">🔍</span>
         </div>
@@ -114,7 +162,7 @@
       <section id="text" class="tools-section" data-category="text">
         <h2 class="section-title">Text &amp; String Tools</h2>
         <div class="tools-grid">
-          <a href="/tools/word-counter.html" class="tool-card">
+          <a href="/tools/word-counter.html" class="tool-card" data-aos="fade-up" data-aos-delay="0">
             <h3 class="tool-card-title">Word Counter</h3>
             <p class="tool-card-description">Count words, characters, sentences, and paragraphs in your text</p>
           </a>
@@ -583,7 +631,24 @@
       </div>
     </footer>
 
+    <script src="./js/security.js"></script>
+    <script src="./js/lazyload-init.js"></script>
+    <script src="./js/notifications.js"></script>
+    <script src="./js/search-enhanced.js"></script>
+    <script src="./js/animations.js"></script>
+    <script src="./js/apply-aos.js"></script>
+    <script src="./js/dialogs.js"></script>
+    <script src="./js/quicklink-init.js"></script>
+    <script src="./js/charts.js"></script>
+    <script src="./js/sortable-init.js"></script>
+    <script src="./js/tool-usage-stats.js"></script>
+    <script src="./js/loading-states.js"></script>
+    <script src="./js/expand-related-tools.js"></script>
+    <script src="./js/date-fns-utils.js"></script>
+    <script src="./js/typed-init.js"></script>
+    <script src="./js/particles-init.js"></script>
     <script src="./js/main.js"></script>
+    <script src="./js/user-journey.js"></script>
     <script src="./js/popup.js"></script>
     <!-- <script src="./js/adsense.js"></script> --> <!-- Disabled: Using Auto Ads only -->
     
