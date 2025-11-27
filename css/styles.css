@@ -221,6 +221,7 @@ body[dir="rtl"] .search-icon {
   margin-bottom: 3rem;
   position: relative;
   z-index: 1;
+  display: block;
 }
 
 .section-title {
@@ -230,14 +231,17 @@ body[dir="rtl"] .search-icon {
   color: var(--text-primary);
   position: relative;
   z-index: 1;
+  display: block;
 }
 
 .tools-grid {
-  display: grid;
+  display: grid !important;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
   position: relative;
   z-index: 1;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .tool-card {
@@ -248,7 +252,9 @@ body[dir="rtl"] .search-icon {
   transition: all 0.2s;
   text-decoration: none;
   color: var(--text-primary);
-  display: block;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 .tool-card:hover {
@@ -654,7 +660,15 @@ body[dir="rtl"] .seo-section ol {
   }
 
   .tools-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    position: relative;
+    z-index: 10;
+    display: grid !important;
+  }
+
+  /* Ensure tool cards are visible */
+  .tool-card {
+    display: block !important;
     position: relative;
     z-index: 10;
   }
@@ -664,25 +678,33 @@ body[dir="rtl"] .seo-section ol {
     position: relative;
     z-index: 10;
     background-color: var(--bg-primary);
+    display: block !important;
   }
 
   .tools-section {
     position: relative;
     z-index: 10;
     background-color: var(--bg-primary);
+    display: block !important;
   }
 
   .category-filters {
     position: relative;
     z-index: 10;
+    display: flex !important;
   }
 
   /* Ensure hero content is visible */
+  .hero {
+    display: block !important;
+  }
+
   .hero-title,
   .hero-description,
   .search-container {
     position: relative;
     z-index: 10;
+    display: block !important;
   }
 
   .ad-leaderboard,
