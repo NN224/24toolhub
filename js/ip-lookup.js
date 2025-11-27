@@ -49,11 +49,11 @@
           throw new Error(data.error);
         }
 
-        displayIPInfo(data);
+              displayIPInfo(data);
         
         if (window.Utils && window.Utils.hideLoadingIndicator) {
           window.Utils.hideLoadingIndicator();
-        }
+      }
 
       } catch (error) {
         if (window.Utils && window.Utils.hideLoadingIndicator) {
@@ -83,7 +83,7 @@
         }
 
         if (data.ip) {
-            ipAddress.value = data.ip;
+        ipAddress.value = data.ip;
             // Also display info for my IP immediately
             displayIPInfo(data);
         } else {

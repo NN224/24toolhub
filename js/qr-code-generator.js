@@ -239,7 +239,7 @@
                 if (img.src) {
                    currentQRCodeDataURL = img.src;
                    if (downloadBtn) downloadBtn.disabled = false;
-                   qrOutput.style.display = "block";
+            qrOutput.style.display = "block";
                 }
              }
           }

@@ -57,7 +57,7 @@ class WhatIsMyIP {
                 throw new Error('Failed to fetch IP info');
             }
 
-            const data = await response.json();
+                        const data = await response.json();
             
             if (data.error) {
                 throw new Error(data.error);
@@ -154,10 +154,10 @@ class WhatIsMyIP {
             this.showStatus('IP address copied to clipboard!', 'success');
             if (this.copyIpBtn) {
                 const originalText = this.copyIpBtn.textContent;
-                this.copyIpBtn.textContent = '✓ Copied!';
-                setTimeout(() => {
+            this.copyIpBtn.textContent = '✓ Copied!';
+            setTimeout(() => {
                     this.copyIpBtn.textContent = originalText;
-                }, 2000);
+            }, 2000);
             }
         } catch (error) {
             const textArea = document.createElement('textarea');
