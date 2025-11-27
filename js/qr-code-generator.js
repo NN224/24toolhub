@@ -21,9 +21,17 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
+    // Initialize immediately, then wait for library
     waitForQRCode(() => {
       initQRGenerator();
     });
+    
+    // Also try to initialize after a delay in case library loads differently
+    setTimeout(() => {
+      if (typeof QRCode !== 'undefined' && !window.generateQR) {
+        initQRGenerator();
+      }
+    }, 1000);
   });
 
   function initQRGenerator() {
@@ -144,18 +152,20 @@
       errorLevel.addEventListener("change", generateQR);
     }
 
-    // Global functions for buttons
+    // Global functions for buttons - make sure they're available immediately
     window.generateQR = generateQR;
+    window.clearQR = clearQR;
+    window.downloadQR = downloadQR;
 
-    window.clearQR = () => {
+    function clearQR() {
       qrContent.value = "";
       qrOutput.style.display = "none";
       qrCodeContainer.innerHTML = "";
       if (downloadBtn) downloadBtn.disabled = true;
       currentQRCodeDataURL = null;
-    };
+    }
 
-    window.downloadQR = () => {
+    function downloadQR() {
       if (!currentQRCodeDataURL) {
         if (window.Utils && window.Utils.showNotification) {
           window.Utils.showNotification("No QR code to download");
@@ -176,9 +186,11 @@
       if (window.Utils && window.Utils.showNotification) {
         window.Utils.showNotification("QR code downloaded successfully!");
       }
-    };
+    }
 
     // Don't generate on initial load (wait for user input)
     // generateQR();
+    
+    console.log('QR Code Generator initialized successfully');
   }
 })();
