@@ -1,6 +1,32 @@
 // QR Code Generator Tool Logic
 ;(() => {
+  // Wait for QRCode library to load
+  function waitForQRCode(callback) {
+    if (typeof QRCode !== 'undefined') {
+      callback();
+    } else {
+      // Check if script is loaded
+      const script = document.querySelector('script[src*="qrcode"]');
+      if (script) {
+        script.addEventListener('load', callback);
+        script.addEventListener('error', () => {
+          console.error('Failed to load QRCode library');
+          alert('Failed to load QR code library. Please refresh the page.');
+        });
+      } else {
+        // Try again after a short delay
+        setTimeout(() => waitForQRCode(callback), 100);
+      }
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
+    waitForQRCode(() => {
+      initQRGenerator();
+    });
+  });
+
+  function initQRGenerator() {
     const contentType = document.getElementById("contentType");
     const qrContent = document.getElementById("qrContent");
     const qrSize = document.getElementById("qrSize");
@@ -9,16 +35,29 @@
     const qrCodeContainer = document.getElementById("qrCodeContainer");
     const downloadBtn = document.getElementById("downloadBtn");
 
+    if (!contentType || !qrContent || !qrSize || !errorLevel || !qrOutput || !qrCodeContainer || !downloadBtn) {
+      console.error('QR Code Generator: Missing required elements');
+      return;
+    }
+
     let currentQRCodeDataURL = null;
 
     function generateQR() {
       const content = qrContent.value.trim();
-      const size = parseInt(qrSize.value);
-      const errorCorrectionLevel = errorLevel.value;
+      const size = parseInt(qrSize.value) || 256;
+      const errorCorrectionLevel = errorLevel.value || 'M';
 
       if (!content) {
         qrOutput.style.display = "none";
-        downloadBtn.disabled = true;
+        if (downloadBtn) downloadBtn.disabled = true;
+        return;
+      }
+
+      // Check if QRCode is available
+      if (typeof QRCode === 'undefined') {
+        console.error('QRCode library not loaded');
+        qrCodeContainer.innerHTML = '<p style="color: var(--error, #ef4444);">QR Code library not loaded. Please refresh the page.</p>';
+        qrOutput.style.display = "block";
         return;
       }
 
@@ -26,8 +65,8 @@
         // Clear previous QR code
         qrCodeContainer.innerHTML = "";
 
-        // Generate QR code
-        QRCode.toCanvas(qrCodeContainer, content, {
+        // Generate QR code using toDataURL method (more reliable)
+        QRCode.toDataURL(content, {
           width: size,
           margin: 2,
           color: {
@@ -35,26 +74,36 @@
             light: '#FFFFFF'
           },
           errorCorrectionLevel: errorCorrectionLevel
-        }, function (error, canvas) {
+        }, function (error, url) {
           if (error) {
             console.error('QR Code generation error:', error);
-            qrCodeContainer.innerHTML = '<p style="color: var(--error, #ef4444);">Error generating QR code. Please check your content.</p>';
+            qrCodeContainer.innerHTML = '<p style="color: var(--error, #ef4444);">Error generating QR code: ' + error.message + '</p>';
+            qrOutput.style.display = "block";
+            if (downloadBtn) downloadBtn.disabled = true;
             return;
           }
 
-          if (canvas) {
+          if (url) {
+            // Create img element to display QR code
+            const img = document.createElement('img');
+            img.src = url;
+            img.alt = 'QR Code';
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
+            qrCodeContainer.appendChild(img);
+
             // Store the data URL for downloading
-            currentQRCodeDataURL = canvas.toDataURL('image/png');
-            downloadBtn.disabled = false;
+            currentQRCodeDataURL = url;
+            if (downloadBtn) downloadBtn.disabled = false;
             qrOutput.style.display = "block";
           }
         });
 
       } catch (error) {
         console.error('QR Code generation error:', error);
-        qrCodeContainer.innerHTML = '<p style="color: var(--error, #ef4444);">Error generating QR code. Please check your content.</p>';
+        qrCodeContainer.innerHTML = '<p style="color: var(--error, #ef4444);">Error generating QR code: ' + error.message + '</p>';
         qrOutput.style.display = "block";
-        downloadBtn.disabled = true;
+        if (downloadBtn) downloadBtn.disabled = true;
       }
     }
 
@@ -80,7 +129,10 @@
     }
 
     if (contentType) {
-      contentType.addEventListener("change", updatePlaceholder);
+      contentType.addEventListener("change", () => {
+        updatePlaceholder();
+        generateQR(); // Regenerate when type changes
+      });
       updatePlaceholder(); // Set initial placeholder
     }
 
@@ -99,7 +151,7 @@
       qrContent.value = "";
       qrOutput.style.display = "none";
       qrCodeContainer.innerHTML = "";
-      downloadBtn.disabled = true;
+      if (downloadBtn) downloadBtn.disabled = true;
       currentQRCodeDataURL = null;
     };
 
@@ -126,7 +178,7 @@
       }
     };
 
-    // Initial generation
-    generateQR();
-  });
+    // Don't generate on initial load (wait for user input)
+    // generateQR();
+  }
 })();
