@@ -107,7 +107,16 @@ app.get('/apple-touch-icon.png', (req, res) => {
   res.sendFile(path.join(process.cwd(), 'apple-touch-icon.png'));
 });
 
+app.get('/android-chrome-192x192.png', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'android-chrome-192x192.png'));
+});
+
+app.get('/android-chrome-512x512.png', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'android-chrome-512x512.png'));
+});
+
 app.get('/site.webmanifest', (req, res) => {
+  res.setHeader('Content-Type', 'application/manifest+json');
   res.sendFile(path.join(process.cwd(), 'site.webmanifest'));
 });
 
