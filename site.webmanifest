@@ -1,1 +1,23 @@
-{"name":"24ToolHub - Free Online Tools","short_name":"24ToolHub","icons":[{"src":"/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},{"src":"/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}],"theme_color":"#667eea","background_color":"#ffffff","display":"standalone","start_url":"/","scope":"/"}
+{
+  "name": "24ToolHub - Free Online Tools",
+  "short_name": "24ToolHub",
+  "description": "Access 85+ free online tools for text processing, conversion, generation, encoding, and more.",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#667eea",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "start_url": "/",
+  "scope": "/"
+}
