@@ -30,6 +30,12 @@ class WhatIsMyIP {
         this.currentIP = '';
         this.isIPv6 = false;
 
+        // Check if all elements exist
+        if (!this.ipAddress) {
+            console.error('What is My IP: Missing required elements');
+            return;
+        }
+
         this.init();
     }
 
