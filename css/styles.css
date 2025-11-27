@@ -130,6 +130,13 @@ body[dir="rtl"] {
   background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
   border-radius: 1rem;
   margin-bottom: 3rem;
+  z-index: 1;
+}
+
+/* Ensure hero content is above particles */
+.hero > *:not(#particles-js) {
+  position: relative;
+  z-index: 2;
 }
 
 .hero-title {
@@ -212,6 +219,8 @@ body[dir="rtl"] .search-icon {
 /* Tool Grid */
 .tools-section {
   margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
 }
 
 .section-title {
@@ -219,12 +228,16 @@ body[dir="rtl"] .search-icon {
   font-weight: 700;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
+  position: relative;
+  z-index: 1;
 }
 
 .tools-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .tool-card {
@@ -612,12 +625,64 @@ body[dir="rtl"] .seo-section ol {
   }
 
   /* Hero section */
+  .hero {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+  }
+
   .hero-title {
     font-size: 1.75rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .hero-description {
+    position: relative;
+    z-index: 10;
+  }
+
+  .search-container {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Ensure particles don't cover content on mobile */
+  #particles-js {
+    z-index: 0 !important;
+    opacity: 0.3;
+    display: none; /* Hide particles on mobile for better performance */
   }
 
   .tools-grid {
     grid-template-columns: 1fr;
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Ensure main content is visible */
+  .main-content {
+    position: relative;
+    z-index: 10;
+    background-color: var(--bg-primary);
+  }
+
+  .tools-section {
+    position: relative;
+    z-index: 10;
+    background-color: var(--bg-primary);
+  }
+
+  .category-filters {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Ensure hero content is visible */
+  .hero-title,
+  .hero-description,
+  .search-container {
+    position: relative;
+    z-index: 10;
   }
 
   .ad-leaderboard,

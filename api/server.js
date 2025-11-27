@@ -120,6 +120,12 @@ app.get('/site.webmanifest', (req, res) => {
   res.sendFile(path.join(process.cwd(), 'site.webmanifest'));
 });
 
+// Serve tools database
+app.get('/tools-database.json', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.sendFile(path.join(process.cwd(), 'tools-database.json'));
+});
+
 // Serve HTML pages
 app.get('/', (req, res) => {
   res.sendFile(path.join(process.cwd(), 'index.html'));

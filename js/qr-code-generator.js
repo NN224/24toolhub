@@ -1,6 +1,6 @@
 // QR Code Generator Tool Logic
 ;(() => {
-  // Wait for QRCode library to load
+  // Wait for QRCode library to load (qrcodejs uses QRCode as global)
   function waitForQRCode(callback) {
     if (typeof QRCode !== 'undefined') {
       callback();
@@ -8,7 +8,17 @@
       // Check if script is loaded
       const script = document.querySelector('script[src*="qrcode"]');
       if (script) {
-        script.addEventListener('load', callback);
+        script.addEventListener('load', () => {
+          // Wait a bit for QRCode to be available
+          setTimeout(() => {
+            if (typeof QRCode !== 'undefined') {
+              callback();
+            } else {
+              console.error('QRCode library loaded but QRCode is undefined');
+              setTimeout(() => waitForQRCode(callback), 200);
+            }
+          }, 100);
+        });
         script.addEventListener('error', () => {
           console.error('Failed to load QRCode library');
           alert('Failed to load QR code library. Please refresh the page.');
@@ -20,19 +30,39 @@
     }
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    // Initialize immediately, then wait for library
-    waitForQRCode(() => {
-      initQRGenerator();
-    });
+  // Wait for both DOM and library to be ready
+  function initWhenReady() {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        waitForQRCode(() => {
+          initQRGenerator();
+        });
+      });
+    } else {
+      waitForQRCode(() => {
+        initQRGenerator();
+      });
+    }
     
-    // Also try to initialize after a delay in case library loads differently
+    // Fallback: try again after delays
     setTimeout(() => {
       if (typeof QRCode !== 'undefined' && !window.generateQR) {
-        initQRGenerator();
+        waitForQRCode(() => {
+          initQRGenerator();
+        });
       }
-    }, 1000);
-  });
+    }, 500);
+    
+    setTimeout(() => {
+      if (typeof QRCode !== 'undefined' && !window.generateQR) {
+        waitForQRCode(() => {
+          initQRGenerator();
+        });
+      }
+    }, 2000);
+  }
+
+  initWhenReady();
 
   function initQRGenerator() {
     const contentType = document.getElementById("contentType");
@@ -73,39 +103,35 @@
         // Clear previous QR code
         qrCodeContainer.innerHTML = "";
 
-        // Generate QR code using toDataURL method (more reliable)
-        QRCode.toDataURL(content, {
+        // qrcodejs uses different API - create QRCode instance
+        const qr = new QRCode(qrCodeContainer, {
+          text: content,
           width: size,
-          margin: 2,
-          color: {
-            dark: '#000000',
-            light: '#FFFFFF'
-          },
-          errorCorrectionLevel: errorCorrectionLevel
-        }, function (error, url) {
-          if (error) {
-            console.error('QR Code generation error:', error);
-            qrCodeContainer.innerHTML = '<p style="color: var(--error, #ef4444);">Error generating QR code: ' + error.message + '</p>';
-            qrOutput.style.display = "block";
-            if (downloadBtn) downloadBtn.disabled = true;
-            return;
-          }
+          height: size,
+          colorDark: '#000000',
+          colorLight: '#FFFFFF',
+          correctLevel: QRCode.CorrectLevel[errorCorrectionLevel] || QRCode.CorrectLevel.M
+        });
 
-          if (url) {
-            // Create img element to display QR code
-            const img = document.createElement('img');
-            img.src = url;
-            img.alt = 'QR Code';
-            img.style.maxWidth = '100%';
-            img.style.height = 'auto';
-            qrCodeContainer.appendChild(img);
-
-            // Store the data URL for downloading
-            currentQRCodeDataURL = url;
+        // Wait for QR code to be generated, then get the canvas
+        setTimeout(() => {
+          const canvas = qrCodeContainer.querySelector('canvas');
+          if (canvas) {
+            // Get data URL from canvas
+            currentQRCodeDataURL = canvas.toDataURL('image/png');
             if (downloadBtn) downloadBtn.disabled = false;
             qrOutput.style.display = "block";
+            
+            // Ensure image is visible
+            canvas.style.maxWidth = '100%';
+            canvas.style.height = 'auto';
+          } else {
+            console.error('QR Code canvas not found');
+            qrCodeContainer.innerHTML = '<p style="color: var(--error, #ef4444);">Error generating QR code canvas.</p>';
+            qrOutput.style.display = "block";
+            if (downloadBtn) downloadBtn.disabled = true;
           }
-        });
+        }, 100);
 
       } catch (error) {
         console.error('QR Code generation error:', error);
