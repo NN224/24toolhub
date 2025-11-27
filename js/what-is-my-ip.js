@@ -44,14 +44,58 @@ class WhatIsMyIP {
 
     async loadIPInfo() {
         try {
-            const apiUrl = this.isIPv6 
-                ? 'https://api64.ipify.org?format=json'
-                : 'https://api.ipify.org?format=json';
+            // Try multiple APIs with fallback
+            let ipData = null;
             
-            const ipResponse = await fetch(apiUrl);
-            const ipData = await ipResponse.json();
-            this.currentIP = ipData.ip;
+            // Try API 1: ipify.org
+            try {
+                const apiUrl = this.isIPv6 
+                    ? 'https://api64.ipify.org?format=json'
+                    : 'https://api.ipify.org?format=json';
+                
+                const ipResponse = await fetch(apiUrl);
+                if (ipResponse.ok) {
+                    ipData = await ipResponse.json();
+                }
+            } catch (e) {
+                console.log('ipify.org failed, trying fallback...');
+            }
 
+            // Fallback API 2: ipapi.co
+            if (!ipData || !ipData.ip) {
+                try {
+                    const response = await fetch('https://ipapi.co/json/');
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.ip) {
+                            ipData = { ip: data.ip };
+                        }
+                    }
+                } catch (e) {
+                    console.log('ipapi.co failed, trying fallback...');
+                }
+            }
+
+            // Fallback API 3: ip-api.com
+            if (!ipData || !ipData.ip) {
+                try {
+                    const response = await fetch('http://ip-api.com/json/');
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.query) {
+                            ipData = { ip: data.query };
+                        }
+                    }
+                } catch (e) {
+                    console.log('ip-api.com failed');
+                }
+            }
+
+            if (!ipData || !ipData.ip) {
+                throw new Error('All IP APIs failed');
+            }
+
+            this.currentIP = ipData.ip;
             this.ipAddress.textContent = this.currentIP;
             this.copyIpBtn.style.display = 'inline-block';
 
@@ -65,11 +109,66 @@ class WhatIsMyIP {
 
     async loadLocationInfo(ip) {
         try {
-            const response = await fetch(`https://ipapi.co/${ip}/json/`);
-            const data = await response.json();
+            let data = null;
 
-            if (data.error) {
-                throw new Error(data.reason || 'API Error');
+            // Try ipify.org first (with API key) - Best option
+            const ipifyKey = 'at_w6nDppgMN53XqLvHrYxFlhyil4oYS';
+            try {
+                const response = await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=${ipifyKey}&ipAddress=${ip}`);
+                if (response.ok) {
+                    const ipifyData = await response.json();
+                    if (ipifyData && !ipifyData.error) {
+                        data = {
+                            country_name: ipifyData.location?.country || '--',
+                            region: ipifyData.location?.region || '--',
+                            city: ipifyData.location?.city || '--',
+                            postal: ipifyData.location?.postalCode || '--',
+                            timezone: ipifyData.location?.timezone || '--',
+                            org: ipifyData.isp || '--',
+                            asn: ipifyData.as?.asn || '--',
+                            latitude: ipifyData.location?.lat || '--',
+                            longitude: ipifyData.location?.lng || '--'
+                        };
+                    }
+                }
+            } catch (e) {
+                console.log('ipify.org failed, trying fallback...', e);
+            }
+
+            // Fallback 1: apiip.net (with API key)
+            if (!data) {
+                const apiipKey = 'f129315d-5edf-47db-b502-697da18823ee';
+                try {
+                    const response = await fetch(`https://apiip.net/api/check?ip=${ip}&accessKey=${apiipKey}`);
+                    if (response.ok) {
+                        const apiipData = await response.json();
+                        if (apiipData && !apiipData.error) {
+                            data = {
+                                country_name: apiipData.countryName,
+                                region: apiipData.regionName,
+                                city: apiipData.city,
+                                postal: apiipData.postalCode,
+                                timezone: apiipData.timeZone,
+                                org: apiipData.org || apiipData.isp,
+                                asn: apiipData.asn,
+                                latitude: apiipData.latitude,
+                                longitude: apiipData.longitude
+                            };
+                        }
+                    }
+                } catch (e) {
+                    console.log('apiip.net failed, trying fallback...');
+                }
+            }
+
+            // Fallback 2: ipapi.co
+            if (!data) {
+                const response = await fetch(`https://ipapi.co/${ip}/json/`);
+                data = await response.json();
+
+                if (data.error) {
+                    throw new Error(data.reason || 'API Error');
+                }
             }
 
             this.country.textContent = data.country_name || '--';
@@ -88,6 +187,13 @@ class WhatIsMyIP {
             this.country.textContent = 'N/A';
             this.region.textContent = 'N/A';
             this.city.textContent = 'N/A';
+            this.postal.textContent = 'N/A';
+            this.timezone.textContent = 'N/A';
+            this.isp.textContent = 'N/A';
+            this.org.textContent = 'N/A';
+            this.asn.textContent = 'N/A';
+            this.latitude.textContent = 'N/A';
+            this.longitude.textContent = 'N/A';
         }
     }
 
