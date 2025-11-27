@@ -269,12 +269,118 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <option value="wifi">WiFi Network</option>
               <option value="vcard">Contact Card (vCard)</option>
             </select>
-    </div>
+          </div>
 
-          <div class="input-group">
-            <label class="input-label" data-en="Content:" data-ar="المحتوى:">Content:</label>
-            <textarea id="qrContent" class="input-textarea" placeholder="Enter the content for your QR code..." data-en-placeholder="Enter the content for your QR code..." data-ar-placeholder="أدخل المحتوى لرمز QR الخاص بك..." rows="4"></textarea>
+          <!-- Dynamic Input Forms -->
+          <div id="inputForms" class="input-forms-container">
+            <!-- Text Form -->
+            <div id="form-text" class="type-form">
+                <label class="input-label" data-en="Text Content:" data-ar="نص المحتوى:">Text Content:</label>
+                <textarea id="textInput" class="input-field" rows="4" placeholder="Enter your text..."></textarea>
+            </div>
+
+            <!-- URL Form -->
+            <div id="form-url" class="type-form" style="display:none;">
+                <label class="input-label" data-en="Website URL:" data-ar="رابط الموقع:">Website URL:</label>
+                <input type="url" id="urlInput" class="input-field" placeholder="https://example.com">
+            </div>
+
+            <!-- Email Form -->
+            <div id="form-email" class="type-form" style="display:none;">
+                <div class="form-group mb-3">
+                    <label class="input-label" data-en="Email Address:" data-ar="البريد الإلكتروني:">Email Address:</label>
+                    <input type="email" id="emailAddress" class="input-field" placeholder="name@example.com">
                 </div>
+                <div class="form-group mb-3">
+                    <label class="input-label" data-en="Subject:" data-ar="الموضوع:">Subject:</label>
+                    <input type="text" id="emailSubject" class="input-field" placeholder="Subject">
+                </div>
+                <div class="form-group">
+                    <label class="input-label" data-en="Message:" data-ar="الرسالة:">Message:</label>
+                    <textarea id="emailBody" class="input-field" rows="3" placeholder="Message content..."></textarea>
+                </div>
+            </div>
+
+            <!-- Phone Form -->
+            <div id="form-phone" class="type-form" style="display:none;">
+                <label class="input-label" data-en="Phone Number:" data-ar="رقم الهاتف:">Phone Number:</label>
+                <input type="tel" id="phoneInput" class="input-field" placeholder="+1 234 567 890">
+            </div>
+
+            <!-- SMS Form -->
+            <div id="form-sms" class="type-form" style="display:none;">
+                <div class="form-group mb-3">
+                    <label class="input-label" data-en="Phone Number:" data-ar="رقم الهاتف:">Phone Number:</label>
+                    <input type="tel" id="smsPhone" class="input-field" placeholder="+1 234 567 890">
+                </div>
+                <div class="form-group">
+                    <label class="input-label" data-en="Message:" data-ar="الرسالة:">Message:</label>
+                    <textarea id="smsMessage" class="input-field" rows="3" placeholder="SMS content..."></textarea>
+                </div>
+            </div>
+
+            <!-- WiFi Form -->
+            <div id="form-wifi" class="type-form" style="display:none;">
+                <div class="form-group mb-3">
+                    <label class="input-label" data-en="Network Name (SSID):" data-ar="اسم الشبكة (SSID):">Network Name (SSID):</label>
+                    <input type="text" id="wifiSSID" class="input-field" placeholder="WiFi Name">
+                </div>
+                <div class="form-group mb-3">
+                    <label class="input-label" data-en="Password:" data-ar="كلمة المرور:">Password:</label>
+                    <input type="text" id="wifiPassword" class="input-field" placeholder="WiFi Password">
+                </div>
+                <div class="form-group mb-3">
+                    <label class="input-label" data-en="Encryption:" data-ar="التشفير:">Encryption:</label>
+                    <select id="wifiEncryption" class="input-field">
+                        <option value="WPA">WPA/WPA2</option>
+                        <option value="WEP">WEP</option>
+                        <option value="nopass">None (Open)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                     <label class="checkbox-container">
+                        <input type="checkbox" id="wifiHidden"> 
+                        <span data-en="Hidden Network" data-ar="شبكة مخفية">Hidden Network</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- vCard Form -->
+            <div id="form-vcard" class="type-form" style="display:none;">
+                <div class="row" style="display: flex; gap: 10px;">
+                    <div class="form-group mb-3" style="flex: 1;">
+                        <label class="input-label" data-en="First Name:" data-ar="الاسم الأول:">First Name:</label>
+                        <input type="text" id="vcardFirst" class="input-field" placeholder="John">
+                    </div>
+                    <div class="form-group mb-3" style="flex: 1;">
+                        <label class="input-label" data-en="Last Name:" data-ar="اسم العائلة:">Last Name:</label>
+                        <input type="text" id="vcardLast" class="input-field" placeholder="Doe">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="input-label" data-en="Organization:" data-ar="المؤسسة:">Organization:</label>
+                    <input type="text" id="vcardOrg" class="input-field" placeholder="Company Name">
+                </div>
+                <div class="form-group mb-3">
+                    <label class="input-label" data-en="Phone:" data-ar="الهاتف:">Phone:</label>
+                    <input type="tel" id="vcardPhone" class="input-field" placeholder="+1 234 567 890">
+                </div>
+                <div class="form-group mb-3">
+                    <label class="input-label" data-en="Email:" data-ar="البريد الإلكتروني:">Email:</label>
+                    <input type="email" id="vcardEmail" class="input-field" placeholder="name@example.com">
+                </div>
+                <div class="form-group mb-3">
+                    <label class="input-label" data-en="Website:" data-ar="الموقع الإلكتروني:">Website:</label>
+                    <input type="url" id="vcardUrl" class="input-field" placeholder="https://example.com">
+                </div>
+                <div class="form-group">
+                    <label class="input-label" data-en="Address:" data-ar="العنوان:">Address:</label>
+                    <input type="text" id="vcardAddress" class="input-field" placeholder="Street, City, Country">
+                </div>
+            </div>
+          </div>
+
+          <input type="hidden" id="qrContent">
 
           <div class="input-group">
             <label class="input-label" data-en="QR Code Size:" data-ar="حجم QR Code:">QR Code Size:</label>

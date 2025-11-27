@@ -219,6 +219,121 @@ app.get('/dns-lookup', async (req, res) => {
   res.json(results);
 });
 
+// IP Information Lookup (Proxy)
+app.get('/ip-info', async (req, res) => {
+  let ip = req.query.ip;
+  
+  // If no IP provided, try to detect from request headers
+  if (!ip) {
+    ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    // Handle multiple IPs in x-forwarded-for (take the first one)
+    if (ip && ip.includes(',')) {
+      ip = ip.split(',')[0].trim();
+    }
+    // Handle IPv6 localhost
+    if (ip === '::1') {
+      ip = '127.0.0.1';
+    }
+  }
+
+  try {
+    let data = null;
+
+    // Try apiip.net with API key (if configured)
+    // Use environment variable or fallback to the known key (as a last resort/default)
+    const apiipKey = process.env.APIIP_KEY || 'f129315d-5edf-47db-b502-697da18823ee';
+    if (apiipKey) {
+      try {
+        // If ip is not provided or loopback, apiip.net usually detects caller IP automatically if we don't pass ip param
+        // But if we have an IP, we pass it.
+        const queryIp = (ip && ip !== '127.0.0.1') ? `ip=${ip}&` : '';
+        const response = await fetch(`https://apiip.net/api/check?${queryIp}accessKey=${apiipKey}`);
+        
+        if (response.ok) {
+          const apiipData = await response.json();
+          if (apiipData && !apiipData.error) {
+            data = {
+              ip: apiipData.ip,
+              country_name: apiipData.countryName || apiipData.country_name,
+              country_code: apiipData.countryCode || apiipData.country_code,
+              region: apiipData.regionName || apiipData.region,
+              city: apiipData.city,
+              postal: apiipData.postalCode || apiipData.postal,
+              latitude: apiipData.latitude,
+              longitude: apiipData.longitude,
+              timezone: apiipData.timeZone || apiipData.timezone,
+              org: apiipData.org || apiipData.isp || apiipData.organization,
+              asn: apiipData.asn,
+              currency: apiipData.currency,
+              currency_symbol: apiipData.currencySymbol
+            };
+          }
+        }
+      } catch (e) {
+        console.log('apiip.net failed, trying fallback...', e.message);
+      }
+    }
+
+    // Fallback to ipapi.co (free tier, rate limited)
+    if (!data) {
+      try {
+        const target = ip && ip !== '127.0.0.1' ? ip : '';
+        const url = target ? `https://ipapi.co/${target}/json/` : 'https://ipapi.co/json/';
+        const response = await fetch(url);
+        if (response.ok) {
+          const ipData = await response.json();
+          if (!ipData.error) {
+            data = ipData;
+          }
+        }
+      } catch (e) {
+        console.log('ipapi.co failed', e.message);
+      }
+    }
+
+    // Fallback to ip-api.com (free tier, HTTP only for free)
+    if (!data) {
+      try {
+        const target = ip && ip !== '127.0.0.1' ? ip : '';
+        const url = `http://ip-api.com/json/${target}?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,isp,org,as,query`;
+        const response = await fetch(url);
+        if (response.ok) {
+          const ipApiData = await response.json();
+          if (ipApiData.status === 'success') {
+            data = {
+              ip: ipApiData.query,
+              country_name: ipApiData.country,
+              country_code: ipApiData.countryCode,
+              region: ipApiData.regionName,
+              city: ipApiData.city,
+              postal: ipApiData.zip,
+              latitude: ipApiData.lat,
+              longitude: ipApiData.lon,
+              timezone: ipApiData.timezone,
+              org: ipApiData.org || ipApiData.isp,
+              asn: ipApiData.as
+            };
+          }
+        }
+      } catch (e) {
+        console.log('ip-api.com failed', e.message);
+      }
+    }
+
+    if (!data) {
+      // Return at least the IP if everything else fails
+      if (ip) {
+        return res.json({ ip, error: 'Could not fetch detailed location info' });
+      }
+      return res.status(500).json({ error: 'Failed to fetch IP information' });
+    }
+
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // AI Status Check API
 app.get('/ai-status', (req, res) => {
   try {
