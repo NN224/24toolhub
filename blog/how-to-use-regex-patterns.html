@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TQD2P5F7');</script>
+    <!-- End Google Tag Manager -->
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-2446710277775155">
+
+    <title>Complete Guide to Regex Patterns: Master Regular Expressions | 24ToolHub</title>
+    <meta name="description" content="Learn regular expressions with practical examples. Master regex patterns for text searching, validation, and data extraction. Free regex tester included.">
+    <meta name="keywords" content="regex tutorial, regular expressions, regex patterns, text matching, regex examples">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Complete Guide to Regex Patterns - 24ToolHub">
+    <meta property="og:description" content="Master regular expressions with practical examples and patterns for developers.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://24toolhub.com/blog/how-to-use-regex-patterns.html">
+    <meta property="og:image" content="https://24toolhub.com/images/blog/regex-patterns.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Complete Guide to Regex Patterns">
+    <meta name="twitter:description" content="Learn regular expressions with practical examples and patterns.">
+    <meta name="twitter:image" content="https://24toolhub.com/images/blog/regex-patterns.jpg">
+    
+    <link rel="canonical" href="https://24toolhub.com/blog/how-to-use-regex-patterns.html">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/blog.css">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2446710277775155" crossorigin="anonymous"></script>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2ELW7FZKDW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2ELW7FZKDW');
+    </script>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TQD2P5F7"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <div class="header-branding">
+          <a href="/" class="logo-link">
+            <img src="../images/logo.png" alt="24ToolHub" class="logo" width="512" height="512">
+          </a>
+          <div class="site-title">24ToolHub</div>
+        </div>
+        <div class="header-actions">
+          <a href="/" class="btn btn-secondary">Home</a>
+          <a href="/blog/" class="btn btn-secondary">Blog</a>
+          <a href="/contact.html" class="btn btn-secondary">Contact</a>
+          <a href="/about.html" class="btn btn-secondary">About</a>
+          <button id="langSwitcher" class="lang-switcher">العربية</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Ad Space - Top -->
+    <div class="ad-space ad-leaderboard" aria-label="Advertisement"></div>
+
+    <!-- Main Content -->
+    <article class="blog-post">
+        <div class="blog-container">
+            <div class="blog-header">
+                <div class="blog-meta">
+                    <time datetime="2025-12-03">📅 December 3, 2025</time>
+                    <span>⏱️ 12 min read</span>
+                    <span>👨‍💻 Development</span>
+                </div>
+                <h1>Complete Guide to Regex Patterns: Master Regular Expressions in 2025</h1>
+                <p class="blog-excerpt">Learn regular expressions from basics to advanced patterns. This comprehensive guide covers everything you need to know about regex with practical examples and use cases.</p>
+            </div>
+
+            <div class="blog-content">
+                <div class="table-of-contents">
+                    <h3>📋 Table of Contents</h3>
+                    <ul>
+                        <li><a href="#what-is-regex">What is Regex?</a></li>
+                        <li><a href="#basic-syntax">Basic Regex Syntax</a></li>
+                        <li><a href="#common-patterns">Common Patterns</a></li>
+                        <li><a href="#advanced-techniques">Advanced Techniques</a></li>
+                        <li><a href="#real-world-examples">Real-World Examples</a></li>
+                        <li><a href="#best-practices">Best Practices</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="what-is-regex">What is Regex?</h2>
+                <p>Regular Expressions (Regex) are powerful patterns used to match character combinations in strings. They're essential tools for developers, data analysts, and anyone working with text processing.</p>
+                
+                <div class="highlight-box">
+                    <h3>🎯 Why Learn Regex?</h3>
+                    <ul>
+                        <li><strong>Text Validation:</strong> Email, phone number, password validation</li>
+                        <li><strong>Data Extraction:</strong> Extract specific information from logs or documents</li>
+                        <li><strong>Find and Replace:</strong> Advanced search and replace operations</li>
+                        <li><strong>Data Cleaning:</strong> Remove unwanted characters or format data</li>
+                    </ul>
+                </div>
+
+                <h2 id="basic-syntax">Basic Regex Syntax</h2>
+                
+                <h3>Character Classes</h3>
+                <div class="code-block">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: var(--bg-secondary);">
+                                <th style="padding: 12px; border: 1px solid var(--border-color);">Pattern</th>
+                                <th style="padding: 12px; border: 1px solid var(--border-color);">Description</th>
+                                <th style="padding: 12px; border: 1px solid var(--border-color);">Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid var(--border-color);"><code>.</code></td>
+                                <td style="padding: 12px; border: 1px solid var(--border-color);">Any character except newline</td>
+                                <td style="padding: 12px; border: 1px solid var(--border-color);"><code>a.c</code> matches "abc", "a2c"</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid var(--border-color);"><code>[abc]</code></td>
+                                <td style="padding: 12px; border: 1px solid var(--border-color);">Any of the characters a, b, or c</td>
+                                <td style="padding: 12px; border: 1px solid var(--border-color);"><code>[aeiou]</code> matches vowels</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid var(--border-color);"><code>[^abc]</code></td>
+                                <td style="padding: 12px; border: 1px solid var(--border-color);">Any character except a, b, or c</td>
+                                <td style="padding: 12px; border: 1px solid var(--border-color);"><code>[^0-9]</code> matches non-digits</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid var(--border-color);"><code>\d</code></td>
+                                <td style="padding: 12px; border: 1px solid var(--border-color);">Any digit (0-9)</td>
+                                <td style="padding: 12px; border: 1px solid var(--border-color);"><code>\d{3}</code> matches 3 digits</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid var(--border-color);"><code>\w</code></td>
+                                <td style="padding: 12px; border: 1px solid var(--border-color);">Word character (a-z, A-Z, 0-9, _)</td>
+                                <td style="padding: 12px; border: 1px solid var(--border-color);"><code>\w+</code> matches words</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border: 1px solid var(--border-color);"><code>\s</code></td>
+                                <td style="padding: 12px; border: 1px solid var(--border-color);">Whitespace character</td>
+                                <td style="padding: 12px; border: 1px solid var(--border-color);"><code>\s+</code> matches spaces</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Quantifiers</h3>
+                <div class="code-block">
+                    <ul>
+                        <li><code>*</code> - Zero or more times</li>
+                        <li><code>+</code> - One or more times</li>
+                        <li><code>?</code> - Zero or one time (optional)</li>
+                        <li><code>{n}</code> - Exactly n times</li>
+                        <li><code>{n,m}</code> - Between n and m times</li>
+                    </ul>
+                </div>
+
+                <!-- Ad Space - Middle -->
+                <div class="ad-space ad-rectangle" aria-label="Advertisement"></div>
+
+                <h2 id="common-patterns">Common Patterns</h2>
+
+                <h3>Email Validation</h3>
+                <div class="code-example">
+                    <pre><code>^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$</code></pre>
+                    <p><strong>Explanation:</strong></p>
+                    <ul>
+                        <li><code>^</code> - Start of string</li>
+                        <li><code>[a-zA-Z0-9._%+-]+</code> - Username part (letters, numbers, special chars)</li>
+                        <li><code>@</code> - Literal @ symbol</li>
+                        <li><code>[a-zA-Z0-9.-]+</code> - Domain name</li>
+                        <li><code>\.</code> - Literal dot</li>
+                        <li><code>[a-zA-Z]{2,}</code> - Top-level domain (2+ letters)</li>
+                        <li><code>$</code> - End of string</li>
+                    </ul>
+                </div>
+
+                <h3>Phone Number Patterns</h3>
+                <div class="code-example">
+                    <pre><code>^\+?1?[-.\s]?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$</code></pre>
+                    <p>Matches formats like: (555) 123-4567, 555-123-4567, +1 555 123 4567</p>
+                </div>
+
+                <h3>URL Pattern</h3>
+                <div class="code-example">
+                    <pre><code>^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$</code></pre>
+                    <p>Validates HTTP and HTTPS URLs with optional www prefix</p>
+                </div>
+
+                <h3>Password Validation</h3>
+                <div class="code-example">
+                    <pre><code>^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$</code></pre>
+                    <p><strong>Requirements:</strong></p>
+                    <ul>
+                        <li>At least 8 characters</li>
+                        <li>At least one lowercase letter</li>
+                        <li>At least one uppercase letter</li>
+                        <li>At least one digit</li>
+                        <li>At least one special character</li>
+                    </ul>
+                </div>
+
+                <h2 id="advanced-techniques">Advanced Techniques</h2>
+
+                <h3>Lookaheads and Lookbehinds</h3>
+                <div class="code-block">
+                    <ul>
+                        <li><code>(?=pattern)</code> - Positive lookahead</li>
+                        <li><code>(?!pattern)</code> - Negative lookahead</li>
+                        <li><code>(?&lt;=pattern)</code> - Positive lookbehind</li>
+                        <li><code>(?&lt;!pattern)</code> - Negative lookbehind</li>
+                    </ul>
+                </div>
+
+                <h3>Groups and Capturing</h3>
+                <div class="code-example">
+                    <pre><code>^(\d{4})-(\d{2})-(\d{2})$</code></pre>
+                    <p>Captures date parts: $1 = year, $2 = month, $3 = day</p>
+                </div>
+
+                <h2 id="real-world-examples">Real-World Examples</h2>
+
+                <h3>Log File Analysis</h3>
+                <div class="code-example">
+                    <pre><code>^(\S+) - - \[([\w:/]+\s[+\-]\d{4})\] "(\S+) (\S+) (\S+)" (\d{3}) (\d+)$</code></pre>
+                    <p>Extracts IP, timestamp, method, URL, status code from Apache logs</p>
+                </div>
+
+                <h3>CSS Color Extraction</h3>
+                <div class="code-example">
+                    <pre><code>#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})</code></pre>
+                    <p>Matches hex color codes like #FF0000 or #F00</p>
+                </div>
+
+                <h3>Social Security Number</h3>
+                <div class="code-example">
+                    <pre><code>^\d{3}-?\d{2}-?\d{4}$</code></pre>
+                    <p>Matches SSN with or without dashes: 123-45-6789 or 123456789</p>
+                </div>
+
+                <h2 id="best-practices">Best Practices</h2>
+
+                <div class="tips-section">
+                    <h3>✅ Do's</h3>
+                    <ul>
+                        <li>Use non-capturing groups <code>(?:...)</code> when you don't need the match</li>
+                        <li>Escape special characters with backslash</li>
+                        <li>Use anchors <code>^</code> and <code>$</code> for exact matches</li>
+                        <li>Test your regex with multiple examples</li>
+                        <li>Comment complex patterns for clarity</li>
+                    </ul>
+
+                    <h3>❌ Don'ts</h3>
+                    <ul>
+                        <li>Don't use regex for parsing HTML/XML</li>
+                        <li>Avoid excessive backtracking with nested quantifiers</li>
+                        <li>Don't make patterns overly complex</li>
+                        <li>Don't forget to handle edge cases</li>
+                    </ul>
+                </div>
+
+                <div class="tool-promotion">
+                    <h3>🛠️ Try Our Free Regex Tester</h3>
+                    <p>Test and debug your regular expressions with our interactive regex tool. Features include real-time matching, explanation of patterns, and sample data testing.</p>
+                    <a href="/tools/regex-tester.html" class="cta-button">Use Regex Tester →</a>
+                </div>
+
+                <h2>Conclusion</h2>
+                <p>Regular expressions are powerful tools that can dramatically improve your text processing efficiency. While they have a steep learning curve, mastering regex patterns will save you countless hours in development and data manipulation tasks.</p>
+                
+                <p>Start with simple patterns and gradually work your way up to more complex expressions. Remember to test thoroughly and consider performance implications for large datasets.</p>
+
+                <div class="related-tools">
+                    <h3>Related Tools</h3>
+                    <ul>
+                        <li><a href="/tools/regex-tester.html">Regex Tester</a></li>
+                        <li><a href="/tools/find-replace.html">Find & Replace Tool</a></li>
+                        <li><a href="/tools/text-splitter.html">Text Splitter</a></li>
+                        <li><a href="/tools/pattern-matcher.html">Pattern Matcher</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Ad Space - Bottom -->
+    <div class="ad-space ad-leaderboard" aria-label="Advertisement"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <p>© 2025 24ToolHub. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../js/adsense.js"></script>
+    <link rel="stylesheet" href="../css/chatbot.css">
+    <script src="../js/chatbot.js"></script>
+</body>
+</html>
