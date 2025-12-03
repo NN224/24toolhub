@@ -59,7 +59,7 @@ class ImageCropper {
                 this.aspectButtons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 const ratio = btn.dataset.ratio;
-                this.aspectRatio = ratio === 'free' ? null : eval(ratio);
+                this.aspectRatio = ratio === 'free' ? null : this.parseRatio(ratio);
             });
         });
 
@@ -251,6 +251,25 @@ class ImageCropper {
         link.download = 'cropped-image.png';
         link.href = this.previewCanvas.toDataURL();
         link.click();
+    }
+
+    // Safe ratio parser - replaces eval()
+    parseRatio(ratioStr) {
+        // Handle common aspect ratios like "16/9", "4/3", "1/1"
+        const parts = ratioStr.split('/');
+        if (parts.length === 2) {
+            const numerator = parseFloat(parts[0]);
+            const denominator = parseFloat(parts[1]);
+            if (!isNaN(numerator) && !isNaN(denominator) && denominator !== 0) {
+                return numerator / denominator;
+            }
+        }
+        // Handle decimal ratios
+        const decimal = parseFloat(ratioStr);
+        if (!isNaN(decimal)) {
+            return decimal;
+        }
+        return null;
     }
 }
 

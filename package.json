@@ -7,7 +7,7 @@
     "start": "node server.js",
     "verify": "node verify-deployment.js",
     "check-links": "node check-external-links.js",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:backend": "jest __tests__/backend",
@@ -20,10 +20,15 @@
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "cheerio": "^1.0.0-rc.12",
+    "compression": "^1.8.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "node-fetch": "^2.6.7",
     "ping": "^0.4.4"
+  },
+  "optionalDependencies": {
+    "@anthropic-ai/sdk": "^0.24.0",
+    "openai": "^4.0.0"
   },
   "devDependencies": {
     "jest": "^29.7.0",

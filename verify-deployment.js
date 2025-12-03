@@ -169,10 +169,11 @@ try {
   allChecksPassed = false;
 }
 
-// Check 8: Server.js
+// Check 8: Server.js (main entry point that requires api/server.js)
 console.log('\n🖥️  Checking server.js...');
 try {
   const serverCode = fs.readFileSync(path.join(__dirname, 'server.js'), 'utf8');
+  const apiServerCode = fs.readFileSync(path.join(__dirname, 'api/server.js'), 'utf8');
   
   if (serverCode.includes('module.exports')) {
     console.log('  ✓ Exports app for Vercel');
@@ -181,14 +182,15 @@ try {
     allChecksPassed = false;
   }
   
-  if (serverCode.includes('getModelForEndpoint')) {
+  // Check in api/server.js for AI system usage
+  if (apiServerCode.includes('getModelForEndpoint')) {
     console.log('  ✓ Uses new AI configuration system');
   } else {
     console.log('  ⚠ May not be using new AI system');
     warnings.push('Server.js may not use new AI configuration');
   }
   
-  if (serverCode.includes('callAIWithFallback')) {
+  if (apiServerCode.includes('callAIWithFallback')) {
     console.log('  ✓ Uses AI fallback system');
   } else {
     console.log('  ⚠ May not use AI fallback system');

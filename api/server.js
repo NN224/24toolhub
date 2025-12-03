@@ -8,8 +8,31 @@ const path = require('path');
 const fs = require('fs');
 const { getModelForEndpoint } = require('../ai-config');
 
+// Optional compression middleware
+let compression;
+try {
+  compression = require('compression');
+} catch (e) {
+  compression = null;
+}
+
 const app = express();
 const port = process.env.PORT || 5000;
+
+// Enable gzip compression if available
+if (compression) {
+  app.use(compression({
+    level: 6,
+    threshold: 1024, // Only compress responses > 1KB
+    filter: (req, res) => {
+      // Don't compress already-compressed content
+      if (req.headers['x-no-compression']) {
+        return false;
+      }
+      return true;
+    }
+  }));
+}
 
 // Load tools database
 let toolsData = { tools: [] };
@@ -76,8 +99,75 @@ app.use('/blog', express.static(path.join(process.cwd(), 'blog')));
 app.use('/tools', express.static(path.join(process.cwd(), 'tools')));
 app.use('/public', express.static(path.join(process.cwd(), 'public')));
 
-app.use(cors());
-app.use(express.json());
+// CORS configuration - restrict to allowed origins in production
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://24toolhub.com', 'https://www.24toolhub.com', /\.vercel\.app$/]
+    : true, // Allow all origins in development
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  maxAge: 86400 // 24 hours
+};
+app.use(cors(corsOptions));
+app.use(express.json({ limit: '10mb' }));
+
+// Simple in-memory rate limiting
+const rateLimitStore = new Map();
+const RATE_LIMIT_WINDOW = 60000; // 1 minute
+const RATE_LIMIT_MAX = 60; // max requests per window
+
+function rateLimit(req, res, next) {
+  // Skip rate limiting in development
+  if (process.env.NODE_ENV !== 'production') return next();
+  
+  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  const now = Date.now();
+  
+  if (!rateLimitStore.has(ip)) {
+    rateLimitStore.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
+    return next();
+  }
+  
+  const record = rateLimitStore.get(ip);
+  
+  if (now > record.resetTime) {
+    record.count = 1;
+    record.resetTime = now + RATE_LIMIT_WINDOW;
+    return next();
+  }
+  
+  if (record.count >= RATE_LIMIT_MAX) {
+    return res.status(429).json({
+      error: 'Too many requests, please try again later',
+      errorAr: 'طلبات كثيرة جداً، يرجى المحاولة لاحقاً',
+      retryAfter: Math.ceil((record.resetTime - now) / 1000)
+    });
+  }
+  
+  record.count++;
+  next();
+}
+
+// Clean up old rate limit entries periodically
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, record] of rateLimitStore.entries()) {
+    if (now > record.resetTime) {
+      rateLimitStore.delete(ip);
+    }
+  }
+}, 60000);
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    version: require('../package.json').version || '1.0.0'
+  });
+});
 
 app.get('/ads.txt', (req, res) => {
   res.sendFile(path.join(process.cwd(), 'ads.txt'));
@@ -240,8 +330,7 @@ app.get('/ip-info', async (req, res) => {
     let data = null;
 
     // Try apiip.net with API key (if configured)
-    // Use environment variable or fallback to the known key (as a last resort/default)
-    const apiipKey = process.env.APIIP_KEY || 'f129315d-5edf-47db-b502-697da18823ee';
+    const apiipKey = process.env.APIIP_KEY;
     if (apiipKey) {
       try {
         // If ip is not provided or loopback, apiip.net usually detects caller IP automatically if we don't pass ip param
@@ -291,11 +380,11 @@ app.get('/ip-info', async (req, res) => {
       }
     }
 
-    // Fallback to ip-api.com (free tier, HTTP only for free)
+    // Fallback to ip-api.com (free tier)
     if (!data) {
       try {
         const target = ip && ip !== '127.0.0.1' ? ip : '';
-        const url = `http://ip-api.com/json/${target}?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,isp,org,as,query`;
+        const url = `https://ip-api.com/json/${target}?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,isp,org,as,query`;
         const response = await fetch(url);
         if (response.ok) {
           const ipApiData = await response.json();
@@ -416,7 +505,7 @@ app.get('/exchange-rates', async (req, res) => {
     if (apiKey) {
       try {
         // Try fixer.io API format
-        const fixerUrl = `http://data.fixer.io/api/latest?access_key=${apiKey}&base=USD`;
+        const fixerUrl = `https://data.fixer.io/api/latest?access_key=${apiKey}&base=USD`;
         const fixerResponse = await fetch(fixerUrl);
         
         if (fixerResponse.ok) {
@@ -485,8 +574,8 @@ app.get('/ping', async (req, res) => {
   }
 });
 
-// Chatbot API
-app.post('/chat', async (req, res) => {
+// Chatbot API - with rate limiting
+app.post('/chat', rateLimit, async (req, res) => {
   const { message, conversationHistory } = req.body;
   if (!message) return res.status(400).json({ error: 'Message required' });
 
@@ -520,8 +609,32 @@ ${JSON.stringify(toolsData.tools, null, 2)}`;
     });
 
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error('Chat API error:', err);
+    res.status(500).json({ 
+      error: err.message,
+      errorAr: 'حدث خطأ في معالجة الطلب'
+    });
   }
+});
+
+// Global error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Unhandled error:', err);
+  res.status(500).json({
+    error: process.env.NODE_ENV === 'production' 
+      ? 'Internal server error' 
+      : err.message,
+    errorAr: 'خطأ داخلي في الخادم'
+  });
+});
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({
+    error: 'Not found',
+    errorAr: 'الصفحة غير موجودة',
+    path: req.path
+  });
 });
 
 module.exports = app;
