@@ -597,6 +597,31 @@ document.addEventListener("DOMContentLoaded", () => {
   CategoryManager.init()
   normalizeInternalLinks()
   
+  // Add analytics tracking to tool cards
+  const toolCards = document.querySelectorAll('.tool-card');
+  toolCards.forEach(card => {
+    card.addEventListener('click', function() {
+      const toolName = this.querySelector('.tool-card-title')?.textContent;
+      const toolUrl = this.getAttribute('href');
+      
+      if (window.trackToolUsage && toolName) {
+        window.trackToolUsage(toolName, 'click');
+      }
+    });
+  });
+  
+  // Add analytics tracking to category buttons
+  const categoryBtns = document.querySelectorAll('.category-btn');
+  categoryBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const category = this.dataset.category;
+      
+      if (window.trackButtonClick) {
+        window.trackButtonClick(`category_${category}`, 'main_page');
+      }
+    });
+  });
+  
   // Auto-load libraries for tool pages
   const isToolPage = window.location.pathname !== '/' && 
                      !window.location.pathname.endsWith('index.html') &&

@@ -92,6 +92,11 @@
         }
       });
 
+      // Track search with Vercel Analytics
+      if (query.length >= 2 && window.trackSearch) {
+        window.trackSearch(query, visibleCount);
+      }
+
       // Show empty state
       this.showEmptyState(visibleCount === 0 && query.length >= 2, query);
     };

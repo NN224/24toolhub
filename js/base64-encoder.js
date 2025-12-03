@@ -7,6 +7,12 @@
 
     window.updateMode = () => {
       currentMode = document.querySelector('input[name="mode"]:checked').value
+      
+      // Track mode change
+      if (window.trackToolUsage) {
+        window.trackToolUsage('Base64 Encoder/Decoder', `mode_change_${currentMode}`);
+      }
+      
       processText()
     }
 
@@ -43,6 +49,11 @@
           output.value = decodeURIComponent(escape(atob(input)))
         }
 
+        // Track successful processing
+        if (window.trackToolUsage) {
+          window.trackToolUsage('Base64 Encoder/Decoder', `${currentMode}_success`);
+        }
+
         if (window.Utils) {
           window.Utils.hideLoadingIndicator()
         }
@@ -54,6 +65,11 @@
             : `خطأ: إدخال غير صالح لـ ${currentMode === "encode" ? "التشفير" : "فك التشفير"}`
 
         output.value = errorMsg
+
+        // Track error
+        if (window.trackError) {
+          window.trackError(`Base64 ${currentMode} error: ${e.message}`, 'base64-encoder');
+        }
 
         if (window.Utils) {
           window.Utils.hideLoadingIndicator()
@@ -85,11 +101,21 @@
           alert(msg);
         }
       }
+
+      // Track copy action
+      if (window.trackToolUsage) {
+        window.trackToolUsage('Base64 Encoder/Decoder', 'copy_output');
+      }
     }
 
     window.clearAll = () => {
       inputText.value = ""
       outputText.value = ""
+      
+      // Track clear action
+      if (window.trackToolUsage) {
+        window.trackToolUsage('Base64 Encoder/Decoder', 'clear_all');
+      }
     }
 
     // Initialize FAQ functionality
