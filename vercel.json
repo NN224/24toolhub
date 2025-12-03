@@ -2,7 +2,7 @@
   "version": 2,
   "functions": {
     "api/server.js": {
-      "includeFiles": "{tools-database.json,public/*.html,blog/*.html,tools/*.html,robots.txt,sitemap.xml,ads.txt,favicon.ico,favicon-16x16.png,favicon-32x32.png,apple-touch-icon.png,android-chrome-192x192.png,android-chrome-512x512.png,site.webmanifest,images/**,css/**,js/**}"
+      "includeFiles": "{tools-database.json,*.html,public/*.html,blog/*.html,tools/*.html,robots.txt,sitemap.xml,ads.txt,favicon.ico,favicon-16x16.png,favicon-32x32.png,apple-touch-icon.png,android-chrome-192x192.png,android-chrome-512x512.png,site.webmanifest,images/**,css/**,js/**}"
     }
   },
   "headers": [

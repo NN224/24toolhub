@@ -21,9 +21,12 @@ const AdSense = {
     if (!window.adsbygoogle) {
       window.adsbygoogle = window.adsbygoogle || [];
     }
-    try {
-      document.querySelectorAll('.ad-space').forEach(el => { el.style.display = 'none'; });
-    } catch (_) {}
+    
+    // Replace ad space placeholders with actual ads
+    this.replacePlaceholders();
+    
+    // Setup lazy loading for ads below the fold
+    this.setupLazyLoading();
   },
 
   // Create an ad unit
