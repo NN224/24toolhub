@@ -184,10 +184,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="site-title">24ToolHub</div>
         </div>
         <div class="header-actions">
-          <a href="/" class="btn btn-secondary">Home</a>
-          <a href="/blog/" class="btn btn-secondary">Blog</a>
-          <a href="/contact.html" class="btn btn-secondary">Contact</a>
-          <a href="/about.html" class="btn btn-secondary">About</a>
+          <a href="/" class="btn btn-secondary" data-en="Home" data-ar="الرئيسية">Home</a>
+          <a href="/blog/" class="btn btn-secondary" data-en="Blog" data-ar="المدونة">Blog</a>
+          <a href="/contact.html" class="btn btn-secondary" data-en="Contact" data-ar="اتصل بنا">Contact</a>
+          <a href="/about.html" class="btn btn-secondary" data-en="About" data-ar="عن الموقع">About</a>
         </div>
       </div>
     </header>
@@ -195,9 +195,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="ad-space ad-leaderboard"></div>
 
     <main class="main-content">
-      <a href="/" class="back-link">← Back to Home</a>
+      <a href="/" class="back-link" data-en="← Back to Home" data-ar="← العودة للرئيسية">← Back to Home</a>
       
-      <h1>✂️ Image Cropper</h1>
+      <h1 data-en="Image Cropper" data-ar="قاطع الصور">✂️ Image Cropper</h1>
       <p class="tool-description">Crop your images with precision. Choose aspect ratios or crop freely with drag and select.</p>
 
       <div class="cropper-container">
@@ -210,7 +210,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div class="editor-section" id="editorSection">
           <div class="controls-panel">
-            <label style="display: block; margin-bottom: 10px; font-weight: 600; color: var(--text-primary);">Aspect Ratio:</label>
+            <label style="display: block; margin-bottom: 10px; font-weight: 600; color: var(--text-primary);" data-en="Aspect Ratio:" data-ar="نسبة العرض للارتفاع:">Aspect Ratio:</label>
             <div class="aspect-buttons">
               <button class="aspect-btn active" data-ratio="free">Free</button>
               <button class="aspect-btn" data-ratio="1/1">1:1</button>
@@ -232,7 +232,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
           <div class="button-group" style="margin-top: 20px;">
             <button id="cropBtn" class="btn btn-primary">Crop Image</button>
-            <button id="resetBtn" class="btn btn-secondary">Reset</button>
+            <button id="resetBtn" class="btn btn-secondary" data-en="Reset" data-ar="إعادة تعيين">Reset</button>
             <button id="newImageBtn" class="btn btn-secondary">Upload New Image</button>
           </div>
 
@@ -240,7 +240,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <h3>Cropped Preview</h3>
             <canvas id="previewCanvas"></canvas>
             <div class="button-group" style="margin-top: 20px;">
-              <button id="downloadBtn" class="btn btn-primary">Download Cropped Image</button>
+              <button id="downloadBtn" class="btn btn-primary" data-en="Download Cropped Image" data-ar="تحميل الصورة المقصوصة">Download Cropped Image</button>
             </div>
           </div>
         </div>
@@ -255,4 +255,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="../js/chatbot.js"></script>
   
 
+    <script src="../js/translations-en.js"></script>
+    <script src="../js/translations-ar.js"></script>
+    <script src="../js/main.js"></script>
 </body></html>

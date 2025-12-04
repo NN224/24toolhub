@@ -52,7 +52,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <main class="main-content">
         <div class="tool-container">
-            <h1 class="tool-title">Statistics Calculator</h1>
+            <h1 class="tool-title" data-en="Statistics Calculator" data-ar="حاسبة الإحصائيات">Statistics Calculator</h1>
             
             <div class="input-section" style="background: var(--bg-secondary); border-radius: 12px; padding: 2rem; margin: 2rem 0;">
                 <h2 style="margin-bottom: 1rem;">Enter Your Data</h2>
@@ -63,12 +63,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <p id="dataPreview" style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-secondary);"></p>
                 <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
                     <button id="calculateStats" class="btn btn-primary">Calculate Statistics</button>
-                    <button id="clearStats" class="btn btn-secondary">Clear</button>
+                    <button id="clearStats" class="btn btn-secondary" data-en="Clear" data-ar="مسح">Clear</button>
                 </div>
             </div>
 
             <div id="resultsSection" style="display: none;">
-                <h2 style="margin-bottom: 1.5rem;">Results</h2>
+                <h2 style="margin-bottom: 1.5rem;" data-en="Results" data-ar="النتائج">Results</h2>
                 
                 <div class="stats-results">
                     <div class="stat-card">
@@ -100,7 +100,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         <div class="stat-value" id="variance">-</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">Standard Deviation</div>
+                        <div class="stat-label" data-en="Standard Deviation" data-ar="الانحراف المعياري">Standard Deviation</div>
                         <div class="stat-value" id="stdDev">-</div>
                     </div>
                     <div class="stat-card">
@@ -146,6 +146,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
     </footer>
 
+    <script src="../js/translations-en.js"></script>
+    <script src="../js/translations-ar.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/adsense.js"></script>
     <script src="../js/popup.js"></script>

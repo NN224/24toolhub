@@ -198,10 +198,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="site-title">24ToolHub</div>
         </div>
         <div class="header-actions">
-          <a href="/" class="btn btn-secondary">Home</a>
-          <a href="/blog/" class="btn btn-secondary">Blog</a>
-          <a href="/contact.html" class="btn btn-secondary">Contact</a>
-          <a href="/about.html" class="btn btn-secondary">About</a>
+          <a href="/" class="btn btn-secondary" data-en="Home" data-ar="الرئيسية">Home</a>
+          <a href="/blog/" class="btn btn-secondary" data-en="Blog" data-ar="المدونة">Blog</a>
+          <a href="/contact.html" class="btn btn-secondary" data-en="Contact" data-ar="اتصل بنا">Contact</a>
+          <a href="/about.html" class="btn btn-secondary" data-en="About" data-ar="عن الموقع">About</a>
         </div>
       </div>
     </header>
@@ -209,9 +209,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="ad-space ad-leaderboard"></div>
 
     <main class="main-content">
-      <a href="/" class="back-link">← Back to Home</a>
+      <a href="/" class="back-link" data-en="← Back to Home" data-ar="← العودة للرئيسية">← Back to Home</a>
       
-      <h1>💰 Tip Calculator</h1>
+      <h1 data-en="Tip Calculator" data-ar="حاسبة البقشيش">💰 Tip Calculator</h1>
       <p class="tool-description">Calculate tip amount and split your bill easily. Real-time calculations with customizable tip percentages.</p>
 
       <div class="calculator-container">
@@ -223,7 +223,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
           <div class="slider-container">
             <div class="slider-label">
-              <label>Tip Percentage</label>
+              <label data-en="Tip Percentage" data-ar="نسبة البقشيش">Tip Percentage</label>
               <span class="slider-value" id="tipPercentage">15%</span>
             </div>
             <input type="range" id="tipSlider" class="slider" min="0" max="30" value="15">
@@ -239,14 +239,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
 
           <div class="input-group">
-            <label for="numPeople">Number of People</label>
+            <label for="numPeople" data-en="Number of People" data-ar="عدد الأشخاص">Number of People</label>
             <input type="number" id="numPeople" value="1" min="1">
           </div>
         </div>
 
         <div class="results-grid">
           <div class="result-card">
-            <div class="result-label">Tip Amount</div>
+            <div class="result-label" data-en="Tip Amount" data-ar="مبلغ البقشيش">Tip Amount</div>
             <span class="result-amount" id="tipAmount">$0.00</span>
           </div>
           <div class="result-card">
@@ -254,7 +254,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="result-amount" id="totalAmount">$0.00</span>
           </div>
           <div class="result-card">
-            <div class="result-label">Per Person</div>
+            <div class="result-label" data-en="Per Person" data-ar="لكل شخص">Per Person</div>
             <span class="result-amount" id="perPerson">$0.00</span>
           </div>
         </div>
@@ -292,4 +292,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="../js/chatbot.js"></script>
   
 
+    <script src="../js/translations-en.js"></script>
+    <script src="../js/translations-ar.js"></script>
+    <script src="../js/main.js"></script>
 </body></html>

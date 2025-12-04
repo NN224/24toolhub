@@ -147,10 +147,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="site-title">24ToolHub</div>
         </div>
         <div class="header-actions">
-          <a href="/" class="btn btn-secondary">Home</a>
-          <a href="/blog/" class="btn btn-secondary">Blog</a>
-          <a href="/contact.html" class="btn btn-secondary">Contact</a>
-          <a href="/about.html" class="btn btn-secondary">About</a>
+          <a href="/" class="btn btn-secondary" data-en="Home" data-ar="الرئيسية">Home</a>
+          <a href="/blog/" class="btn btn-secondary" data-en="Blog" data-ar="المدونة">Blog</a>
+          <a href="/contact.html" class="btn btn-secondary" data-en="Contact" data-ar="اتصل بنا">Contact</a>
+          <a href="/about.html" class="btn btn-secondary" data-en="About" data-ar="عن الموقع">About</a>
         </div>
       </div>
     </header>
@@ -158,9 +158,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="ad-space ad-leaderboard"></div>
 
     <main class="main-content">
-      <a href="/" class="back-link">← Back to Home</a>
+      <a href="/" class="back-link" data-en="← Back to Home" data-ar="← العودة للرئيسية">← Back to Home</a>
       
-      <h1>🎤 Speech to Text Converter</h1>
+      <h1 data-en="Speech to Text" data-ar="تحويل الكلام إلى نص">🎤 Speech to Text Converter</h1>
       <p class="tool-description">Convert your voice to text instantly with real-time transcription. Perfect for dictation, note-taking, and content creation.</p>
 
       <div class="error-message" id="errorMessage"></div>
@@ -193,23 +193,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="stats">
           <div class="stat-box">
             <span class="stat-number" id="wordCount">0</span>
-            <span class="stat-label">Words</span>
+            <span class="stat-label" data-en="Words" data-ar="كلمات">Words</span>
           </div>
           <div class="stat-box">
             <span class="stat-number" id="charCount">0</span>
-            <span class="stat-label">Characters</span>
+            <span class="stat-label" data-en="Characters" data-ar="أحرف">Characters</span>
           </div>
           <div class="stat-box">
             <span class="stat-number" id="sentenceCount">0</span>
-            <span class="stat-label">Sentences</span>
+            <span class="stat-label" data-en="Sentences" data-ar="جمل">Sentences</span>
           </div>
         </div>
       </div>
 
       <div class="button-group">
         <button id="downloadBtn" class="btn btn-primary">Download Transcript</button>
-        <button id="copyBtn" class="btn btn-secondary">Copy Text</button>
-        <button id="clearBtn" class="btn btn-secondary">Clear</button>
+        <button id="copyBtn" class="btn btn-secondary" data-en="Copy Text" data-ar="نسخ النص">Copy Text</button>
+        <button id="clearBtn" class="btn btn-secondary" data-en="Clear" data-ar="مسح">Clear</button>
       </div>
 
       <div class="ad-space ad-rectangle"></div>
@@ -237,7 +237,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li>Language learning and pronunciation practice</li>
           </ul>
 
-          <h3>How to Use</h3>
+          <h3 data-en="How to use" data-ar="كيفية الاستخدام">How to use</h3>
           <p>1. Select your preferred language from the dropdown menu<br>
           2. Click the microphone button to start recording<br>
           3. Speak clearly into your device's microphone<br>
@@ -256,4 +256,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="../js/chatbot.js"></script>
   
 
+    <script src="../js/translations-en.js"></script>
+    <script src="../js/translations-ar.js"></script>
+    <script src="../js/main.js"></script>
 </body></html>

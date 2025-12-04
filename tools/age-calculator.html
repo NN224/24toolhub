@@ -141,10 +141,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="site-title">24ToolHub</div>
         </div>
         <div class="header-actions">
-          <a href="/" class="btn btn-secondary">Home</a>
-          <a href="/blog/" class="btn btn-secondary">Blog</a>
-          <a href="/contact.html" class="btn btn-secondary">Contact</a>
-          <a href="/about.html" class="btn btn-secondary">About</a>
+          <a href="/" class="btn btn-secondary" data-en="Home" data-ar="الرئيسية">Home</a>
+          <a href="/blog/" class="btn btn-secondary" data-en="Blog" data-ar="المدونة">Blog</a>
+          <a href="/contact.html" class="btn btn-secondary" data-en="Contact" data-ar="اتصل بنا">Contact</a>
+          <a href="/about.html" class="btn btn-secondary" data-en="About" data-ar="عن الموقع">About</a>
         </div>
       </div>
     </header>
@@ -152,54 +152,54 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="ad-space ad-leaderboard"></div>
 
     <main class="main-content">
-      <a href="/" class="back-link">← Back to Home</a>
+      <a href="/" class="back-link" data-en="← Back to Home" data-ar="← العودة للرئيسية">← Back to Home</a>
       
-      <h1>🎂 Age Calculator</h1>
-      <p class="tool-description">Calculate your exact age in years, months, days, hours, and minutes. Find out how old you are with precision!</p>
+      <h1 data-en="Age Calculator" data-ar="حاسبة العمر">🎂 Age Calculator</h1>
+      <p class="tool-description" data-en="Calculate your exact age in years, months, days, hours, and minutes. Find out how old you are with precision!" data-ar="احسب عمرك الدقيق بالسنوات والأشهر والأيام والساعات والدقائق. اكتشف كم عمرك بدقة!">Calculate your exact age in years, months, days, hours, and minutes. Find out how old you are with precision!</p>
 
       <div class="calculator-container">
         <div class="date-inputs">
           <div class="input-group">
-            <label for="birthDate">Date of Birth:</label>
+            <label for="birthDate" data-en="Date of Birth:" data-ar="تاريخ الميلاد:">Date of Birth:</label>
             <input type="date" id="birthDate" max="">
           </div>
           <div class="input-group">
-            <label for="currentDate">Calculate Age On:</label>
+            <label for="currentDate" data-en="Calculate Age On:" data-ar="حساب العمر في:">Calculate Age On:</label>
             <input type="date" id="currentDate">
           </div>
         </div>
 
         <div class="button-group">
-          <button id="calculateBtn" class="btn btn-primary">Calculate Age</button>
-          <button id="clearBtn" class="btn btn-secondary">Clear</button>
+          <button id="calculateBtn" class="btn btn-primary" data-en="Calculate Age" data-ar="حساب العمر">Calculate Age</button>
+          <button id="clearBtn" class="btn btn-secondary" data-en="Clear" data-ar="مسح">Clear</button>
         </div>
       </div>
 
       <div class="results-grid" id="resultsGrid">
         <div class="result-card">
           <span class="result-number" id="years">0</span>
-          <span class="result-label">Years</span>
+          <span class="result-label" data-en="Years" data-ar="سنوات">Years</span>
         </div>
         <div class="result-card">
           <span class="result-number" id="months">0</span>
-          <span class="result-label">Months</span>
+          <span class="result-label" data-en="Months" data-ar="أشهر">Months</span>
         </div>
         <div class="result-card">
           <span class="result-number" id="days">0</span>
-          <span class="result-label">Days</span>
+          <span class="result-label" data-en="Days" data-ar="أيام">Days</span>
         </div>
         <div class="result-card">
           <span class="result-number" id="hours">0</span>
-          <span class="result-label">Hours</span>
+          <span class="result-label" data-en="Hours" data-ar="ساعات">Hours</span>
         </div>
         <div class="result-card">
           <span class="result-number" id="minutes">0</span>
-          <span class="result-label">Minutes</span>
+          <span class="result-label" data-en="Minutes" data-ar="دقائق">Minutes</span>
         </div>
       </div>
 
       <div class="summary-card" id="summaryCard">
-        <h3>Age Summary</h3>
+        <h3 data-en="Age Summary" data-ar="ملخص العمر">Age Summary</h3>
         <p class="summary-text" id="summaryText"></p>
       </div>
 
@@ -217,4 +217,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="../js/chatbot.js"></script>
   
 
+    <script src="../js/translations-en.js"></script>
+    <script src="../js/translations-ar.js"></script>
+    <script src="../js/main.js"></script>
 </body></html>

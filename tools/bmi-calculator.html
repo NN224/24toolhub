@@ -236,10 +236,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="site-title">24ToolHub</div>
         </div>
         <div class="header-actions">
-                <a href="/" class="btn btn-secondary">Home</a>
-                <a href="/blog/" class="btn btn-secondary">Blog</a>
-                <a href="/contact.html" class="btn btn-secondary">Contact</a>
-                <a href="/about.html" class="btn btn-secondary">About</a>
+                <a href="/" class="btn btn-secondary" data-en="Home" data-ar="الرئيسية">Home</a>
+                <a href="/blog/" class="btn btn-secondary" data-en="Blog" data-ar="المدونة">Blog</a>
+                <a href="/contact.html" class="btn btn-secondary" data-en="Contact" data-ar="اتصل بنا">Contact</a>
+                <a href="/about.html" class="btn btn-secondary" data-en="About" data-ar="عن الموقع">About</a>
           <button id="langSwitcher" class="lang-switcher">العربية</button>
             </div>
         </div>
@@ -261,7 +261,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- Tool Interface -->
         <div class="tool-interface">
           <div class="input-group">
-            <label class="input-label" data-en="Height:" data-ar="الطول:">Height:</label>
+            <label class="input-label" data-en="Height:" data-ar="الطول:" data-en="Height:" data-ar="الارتفاع:">Height:</label>
             <div style="display: flex; gap: 0.5rem;">
               <input type="number" id="height" class="input-field" placeholder="Enter height" data-en-placeholder="Enter height" data-ar-placeholder="أدخل الطول" value="170" min="50" max="300" style="flex: 1;">
               <select id="heightUnit" class="input-field" style="flex: 1;">
@@ -529,6 +529,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </footer>
 
+    <script src="../js/translations-en.js"></script>
+    <script src="../js/translations-ar.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/adsense.js"></script>
     <script src="../js/popup.js"></script>

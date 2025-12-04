@@ -181,10 +181,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="site-title">24ToolHub</div>
         </div>
         <div class="header-actions">
-          <a href="/" class="btn btn-secondary">Home</a>
-          <a href="/blog/" class="btn btn-secondary">Blog</a>
-          <a href="/contact.html" class="btn btn-secondary">Contact</a>
-          <a href="/about.html" class="btn btn-secondary">About</a>
+          <a href="/" class="btn btn-secondary" data-en="Home" data-ar="الرئيسية">Home</a>
+          <a href="/blog/" class="btn btn-secondary" data-en="Blog" data-ar="المدونة">Blog</a>
+          <a href="/contact.html" class="btn btn-secondary" data-en="Contact" data-ar="اتصل بنا">Contact</a>
+          <a href="/about.html" class="btn btn-secondary" data-en="About" data-ar="عن الموقع">About</a>
         </div>
       </div>
     </header>
@@ -192,9 +192,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="ad-space ad-leaderboard"></div>
 
     <main class="main-content">
-      <a href="/" class="back-link">← Back to Home</a>
+      <a href="/" class="back-link" data-en="← Back to Home" data-ar="← العودة للرئيسية">← Back to Home</a>
       
-      <h1>🎨 SVG to PNG Converter</h1>
+      <h1 data-en="SVG to PNG Converter" data-ar="محول SVG إلى PNG">🎨 SVG to PNG Converter</h1>
       <p class="tool-description">Convert SVG vector graphics to PNG images with custom dimensions and resolution. Perfect for web graphics, icons, and social media.</p>
 
       <div class="converter-interface">
@@ -236,7 +236,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
           </div>
 
-          <button id="convertBtn" class="btn btn-primary" style="width: 100%; margin: 20px 0;">Convert to PNG</button>
+          <button id="convertBtn" class="btn btn-primary" style="width: 100%; margin: 20px 0;" data-en="Convert to PNG" data-ar="تحويل إلى PNG">Convert to PNG</button>
         </div>
 
         <div id="statsSection" class="hidden">
@@ -251,7 +251,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <div class="stat-box">
               <span class="stat-number" id="fileSize">0 KB</span>
-              <span class="stat-label">File Size</span>
+              <span class="stat-label" data-en="File Size" data-ar="حجم الملف">File Size</span>
             </div>
           </div>
         </div>
@@ -271,7 +271,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
 
       <div class="button-group" id="actionButtons" style="display: none;">
-        <button id="downloadBtn" class="btn btn-primary">Download PNG</button>
+        <button id="downloadBtn" class="btn btn-primary" data-en="Download PNG" data-ar="تحميل PNG">Download PNG</button>
         <button id="resetBtn" class="btn btn-secondary">Convert Another</button>
       </div>
 
@@ -323,4 +323,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <script src="../js/chatbot.js"></script>
   
 
+    <script src="../js/translations-en.js"></script>
+    <script src="../js/translations-ar.js"></script>
+    <script src="../js/main.js"></script>
 </body></html>

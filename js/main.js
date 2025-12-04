@@ -1,6 +1,7 @@
 // 24ToolHub - Main JavaScript File
 
 // Language Management
+// Uses separate translation files: translations-en.js and translations-ar.js
 const LanguageManager = {
   currentLang: localStorage.getItem("language") || "en",
 
@@ -17,10 +18,9 @@ const LanguageManager = {
     document.querySelectorAll("[data-i18n]").forEach((element) => {
       const key = element.getAttribute("data-i18n")
       const translation = this.getTranslation(key)
-      if (translation) {
+      if (translation && translation !== key) {
         element.textContent = translation
       }
-
     })
 
     // Update all translatable elements with data-en/data-ar
@@ -37,7 +37,7 @@ const LanguageManager = {
     document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
       const key = element.getAttribute("data-i18n-placeholder")
       const translation = this.getTranslation(key)
-      if (translation) {
+      if (translation && translation !== key) {
         element.placeholder = translation
       }
     })
@@ -71,7 +71,16 @@ const LanguageManager = {
   },
 
   getTranslation(key) {
-    const translations = {
+    // Use separate translation files if available
+    if (this.currentLang === "ar" && typeof TranslationsAR !== 'undefined') {
+      return TranslationsAR[key] || key;
+    }
+    if (this.currentLang === "en" && typeof TranslationsEN !== 'undefined') {
+      return TranslationsEN[key] || key;
+    }
+    
+    // Fallback to inline translations for backward compatibility
+    const fallbackTranslations = {
       en: {
         "site.title": "24ToolHub",
         "site.tagline": "Free Online Tools - Available 24/7",
@@ -99,11 +108,6 @@ const LanguageManager = {
         "btn.calculate": "Calculate",
         "input.placeholder": "Enter text here...",
         "output.placeholder": "Output will appear here...",
-        "stats.words": "Words",
-        "stats.characters": "Characters",
-        "stats.sentences": "Sentences",
-        "stats.paragraphs": "Paragraphs",
-        "tool.schemaGenerator": "Schema Generator",
       },
       ar: {
         "site.title": "24 أداة هب",
@@ -130,104 +134,12 @@ const LanguageManager = {
         "btn.convert": "تحويل",
         "btn.process": "معالجة",
         "btn.calculate": "حساب",
-        "btn.encode": "تشفير",
-        "btn.decode": "فك التشفير",
-        "btn.format": "تنسيق",
-        "btn.validate": "التحقق",
-        "btn.analyze": "تحليل",
-        "btn.parse": "تحليل",
-        "btn.compare": "مقارنة",
-        "btn.reset": "إعادة تعيين",
-        "btn.submit": "إرسال",
-        "btn.save": "حفظ",
-        "btn.load": "تحميل",
-        "btn.export": "تصدير",
-        "btn.import": "استيراد",
-        "btn.refresh": "تحديث",
-        "btn.search": "بحث",
         "input.placeholder": "أدخل النص هنا...",
         "output.placeholder": "ستظهر النتائج هنا...",
-        "stats.words": "كلمات",
-        "stats.characters": "أحرف",
-        "stats.sentences": "جمل",
-        "stats.paragraphs": "فقرات",
-        "stats.lines": "أسطر",
-        "stats.reading_time": "وقت القراءة",
-        "stats.minutes": "دقيقة",
-        "stats.seconds": "ثانية",
-        "tool.schemaGenerator": "مولد Schema",
-        "tool.wordCounter": "عداد الكلمات",
-        "tool.textCaseConverter": "محول حالة النص",
-        "tool.stringReverser": "عاكس النص",
-        "tool.removeDuplicates": "إزالة المكرر",
-        "tool.findReplace": "بحث واستبدال",
-        "tool.textSplitter": "فاصل النص",
-        "tool.trimWhitespace": "إزالة المسافات",
-        "tool.characterCounter": "عداد الأحرف",
-        "tool.lineCounter": "عداد الأسطر",
-        "tool.sentenceCounter": "عداد الجمل",
-        "tool.temperatureConverter": "محول الحرارة",
-        "tool.lengthConverter": "محول الطول",
-        "tool.weightConverter": "محول الوزن",
-        "tool.volumeConverter": "محول الحجم",
-        "tool.speedConverter": "محول السرعة",
-        "tool.timeConverter": "محول الوقت",
-        "tool.currencyConverter": "محول العملات",
-        "tool.percentageCalculator": "حاسبة النسبة المئوية",
-        "tool.loanCalculator": "حاسبة القروض",
-        "tool.bmiCalculator": "حاسبة مؤشر كتلة الجسم",
-        "tool.uuidGenerator": "مولد UUID",
-        "tool.qrCodeGenerator": "مولد رمز QR",
-        "tool.jsonFormatter": "منسق JSON",
-        "tool.xmlFormatter": "منسق XML",
-        "tool.csvToJson": "محول CSV إلى JSON",
-        "tool.markdownToHtml": "محول Markdown إلى HTML",
-        "tool.colorPaletteGenerator": "مولد لوحة الألوان",
-        "tool.dummyTextGenerator": "مولد النص التجريبي",
-        "tool.passwordGenerator": "مولد كلمات المرور",
-        "tool.slugGenerator": "مولد الروابط",
-        "tool.base64Encoder": "مشفر Base64",
-        "tool.urlEncoder": "مشفر URL",
-        "tool.htmlEntityEncoder": "مشفر HTML",
-        "tool.md5Hash": "تشفير MD5",
-        "tool.sha256Hash": "تشفير SHA256",
-        "tool.jwtDecoder": "محلل JWT",
-        "tool.hexToAscii": "محول Hex إلى ASCII",
-        "tool.asciiToHex": "محول ASCII إلى Hex",
-        "tool.rot13Cipher": "تشفير ROT13",
-        "tool.caesarCipher": "تشفير قيصر",
-        "message.copied": "تم النسخ إلى الحافظة!",
-        "message.cleared": "تم مسح المحتوى",
-        "message.error": "حدث خطأ",
-        "message.success": "تمت العملية بنجاح",
-        "message.warning": "تحذير",
-        "message.loading": "جاري التحميل...",
-        "message.processing": "جاري المعالجة...",
-        "message.noData": "لا توجد بيانات",
-        "message.invalidInput": "إدخال غير صالح",
-        "message.required": "هذا الحقل مطلوب",
-        "message.saved": "تم الحفظ بنجاح",
-        "message.deleted": "تم الحذف بنجاح",
-        "message.updated": "تم التحديث بنجاح",
-        "label.input": "الإدخال",
-        "label.output": "الناتج",
-        "label.options": "الخيارات",
-        "label.settings": "الإعدادات",
-        "label.result": "النتيجة",
-        "label.preview": "معاينة",
-        "label.example": "مثال",
-        "label.help": "مساعدة",
-        "label.about": "حول",
-        "label.version": "الإصدار",
-        "label.language": "اللغة",
-        "label.theme": "المظهر",
-        "label.darkMode": "الوضع الليلي",
-        "label.lightMode": "الوضع النهاري",
-        "label.auto": "تلقائي",
       },
     }
 
-    return translations[this.currentLang]?.[key] || key
+    return fallbackTranslations[this.currentLang]?.[key] || key
   },
 }
 

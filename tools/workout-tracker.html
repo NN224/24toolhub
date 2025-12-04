@@ -52,26 +52,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     <main class="main-content">
         <div class="tool-container">
-            <h1 class="tool-title">Workout Tracker</h1>
+            <h1 class="tool-title" data-en="Workout Tracker" data-ar="متتبع التمارين">Workout Tracker</h1>
             
             <div class="workout-controls" style="background: var(--bg-secondary); border-radius: 12px; padding: 2rem; margin: 2rem 0;">
-                <h2 style="margin-bottom: 1.5rem;">Workout Controls</h2>
+                <h2 style="margin-bottom: 1.5rem;" data-en="Workout Controls" data-ar="أدوات التمرين">Workout Controls</h2>
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <button id="startWorkout" class="btn btn-primary">Start Workout</button>
-                    <button id="endWorkout" class="btn btn-secondary">End Workout</button>
-                    <button id="addExercise" class="btn btn-secondary">Add Exercise</button>
-                    <button id="saveWorkout" class="btn btn-primary">Save Workout</button>
-                    <button id="clearWorkout" class="btn btn-secondary">Clear Workout</button>
+                    <button id="startWorkout" class="btn btn-primary" data-en="Start Workout" data-ar="بدء التمرين">Start Workout</button>
+                    <button id="endWorkout" class="btn btn-secondary" data-en="End Workout" data-ar="إنهاء التمرين">End Workout</button>
+                    <button id="addExercise" class="btn btn-secondary" data-en="Add Exercise" data-ar="إضافة تمرين">Add Exercise</button>
+                    <button id="saveWorkout" class="btn btn-primary" data-en="Save Workout" data-ar="حفظ التمرين">Save Workout</button>
+                    <button id="clearWorkout" class="btn btn-secondary" data-en="Clear Workout" data-ar="مسح التمرين">Clear Workout</button>
                 </div>
             </div>
 
             <div id="currentWorkout" class="workout-section">
-                <p>No active workout. Click "Start Workout" to begin.</p>
+                <p data-en="No active workout. Click Start Workout to begin." data-ar="لا يوجد تمرين نشط. انقر على بدء التمرين للبدء.">No active workout. Click "Start Workout" to begin.</p>
             </div>
 
             <div id="workoutHistory" class="workout-section">
-                <h3>Workout History</h3>
-                <p>No saved workouts yet.</p>
+                <h3 data-en="Workout History" data-ar="سجل التمارين">Workout History</h3>
+                <p data-en="No saved workouts yet." data-ar="لا توجد تمارين محفوظة بعد.">No saved workouts yet.</p>
             </div>
 
             <div class="ad-space ad-rectangle"></div>
@@ -90,6 +90,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
     </footer>
 
+    <script src="../js/translations-en.js"></script>
+    <script src="../js/translations-ar.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/adsense.js"></script>
     <script src="../js/popup.js"></script>
