@@ -52,6 +52,11 @@
       "source": "/blog/index.html",
       "destination": "/blog/",
       "permanent": true
+    },
+    {
+      "source": "/sitemap",
+      "destination": "/sitemap-html.html",
+      "permanent": true
     }
   ],
   "rewrites": [
