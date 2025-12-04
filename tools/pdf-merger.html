@@ -245,21 +245,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="tool-container">
             <div class="tool-header">
                 <h1 data-en="PDF Merger" data-ar="دامج PDF">📄 PDF Merger</h1>
-                <p class="tool-description">Combine multiple PDF files into one document. Upload PDF files, arrange them in order, and merge them instantly.</p>
+                <p class="tool-description" data-en="Combine multiple PDF files into one document. Upload PDF files, arrange them in order, and merge them instantly." data-ar="دمج ملفات PDF متعددة في مستند واحد. ارفع ملفات PDF، رتبها بالترتيب، وادمجها فوراً.">Combine multiple PDF files into one document. Upload PDF files, arrange them in order, and merge them instantly.</p>
             </div>
 
             <!-- Upload Area -->
             <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
                 <div class="upload-icon">📤</div>
-                <h3>Click to upload or drag &amp; drop PDF files</h3>
-                <p>Select multiple PDF files to merge</p>
+                <h3 data-en="Click to upload or drag & drop PDF files" data-ar="انقر للرفع أو اسحب وأفلت ملفات PDF">Click to upload or drag &amp; drop PDF files</h3>
+                <p data-en="Select multiple PDF files to merge" data-ar="اختر ملفات PDF متعددة للدمج">Select multiple PDF files to merge</p>
                 <input type="file" id="fileInput" accept=".pdf,application/pdf" multiple="">
             </div>
 
             <!-- Files List -->
             <div id="filesContainer">
                 <div class="empty-state" id="emptyState">
-                    <p>No PDF files added yet. Upload files to get started.</p>
+                    <p data-en="No PDF files added yet. Upload files to get started." data-ar="لم تتم إضافة ملفات PDF بعد. ارفع الملفات للبدء.">No PDF files added yet. Upload files to get started.</p>
                 </div>
                 <div class="files-list" id="filesList" style="display: none;"></div>
             </div>
@@ -271,10 +271,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <!-- Merge Section -->
             <div class="merge-section">
-                <button id="mergeBtn" class="merge-btn" onclick="mergePDFs()" disabled="">
+                <button id="mergeBtn" class="merge-btn" onclick="mergePDFs()" disabled="" data-en="Merge PDFs" data-ar="دمج ملفات PDF">
                     📑 Merge PDFs
                 </button>
-                <p style="color: #6c757d; margin-top: 15px;">Drag files to reorder them before merging</p>
+                <p style="color: #6c757d; margin-top: 15px;" data-en="Drag files to reorder them before merging" data-ar="اسحب الملفات لإعادة ترتيبها قبل الدمج">Drag files to reorder them before merging</p>
             </div>
 
             <!-- Ad Space -->
@@ -282,42 +282,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <!-- How to Use -->
             <div class="tool-section">
-                <h2>📖 How to Use</h2>
+                <h2 data-en="How to Use" data-ar="كيفية الاستخدام">📖 How to Use</h2>
                 <ol>
-                    <li>Click the upload area or drag &amp; drop your PDF files</li>
-                    <li>Arrange the files in your desired order by dragging</li>
-                    <li>Click "Merge PDFs" to combine them</li>
-                    <li>Download your merged PDF file</li>
+                    <li data-en="Click the upload area or drag & drop your PDF files" data-ar="انقر على منطقة الرفع أو اسحب وأفلت ملفات PDF">Click the upload area or drag &amp; drop your PDF files</li>
+                    <li data-en="Arrange the files in your desired order by dragging" data-ar="رتب الملفات بالترتيب الذي تريده عن طريق السحب">Arrange the files in your desired order by dragging</li>
+                    <li data-en="Click Merge PDFs to combine them" data-ar="انقر على دمج ملفات PDF لدمجها">Click "Merge PDFs" to combine them</li>
+                    <li data-en="Download your merged PDF file" data-ar="حمّل ملف PDF المدمج">Download your merged PDF file</li>
                 </ol>
             </div>
 
             <!-- Features -->
             <div class="tool-section">
-                <h2>✨ Features</h2>
+                <h2 data-en="Features" data-ar="الميزات">✨ Features</h2>
                 <ul>
-                    <li><strong>Multiple Files:</strong> Merge unlimited PDF files</li>
-                    <li><strong>Drag to Reorder:</strong> Easily arrange files in any order</li>
-                    <li><strong>Fast Processing:</strong> Instant merging in your browser</li>
-                    <li><strong>Privacy First:</strong> All processing happens locally</li>
-                    <li><strong>No Upload:</strong> Your files never leave your device</li>
-                    <li><strong>Free Forever:</strong> No limits, no registration required</li>
+                    <li data-en="Multiple Files: Merge unlimited PDF files" data-ar="ملفات متعددة: دمج عدد غير محدود من ملفات PDF"><strong>Multiple Files:</strong> Merge unlimited PDF files</li>
+                    <li data-en="Drag to Reorder: Easily arrange files in any order" data-ar="اسحب لإعادة الترتيب: رتب الملفات بسهولة بأي ترتيب"><strong>Drag to Reorder:</strong> Easily arrange files in any order</li>
+                    <li data-en="Fast Processing: Instant merging in your browser" data-ar="معالجة سريعة: دمج فوري في متصفحك"><strong>Fast Processing:</strong> Instant merging in your browser</li>
+                    <li data-en="Privacy First: All processing happens locally" data-ar="الخصوصية أولاً: كل المعالجة تتم محلياً"><strong>Privacy First:</strong> All processing happens locally</li>
+                    <li data-en="No Upload: Your files never leave your device" data-ar="بدون رفع: ملفاتك لا تغادر جهازك أبداً"><strong>No Upload:</strong> Your files never leave your device</li>
+                    <li data-en="Free Forever: No limits, no registration required" data-ar="مجاني للأبد: بدون حدود، بدون تسجيل"><strong>Free Forever:</strong> No limits, no registration required</li>
                 </ul>
             </div>
 
             <!-- FAQ -->
             <div class="tool-section">
-                <h2>❓ FAQ</h2>
+                <h2 data-en="FAQ" data-ar="الأسئلة الشائعة">❓ FAQ</h2>
                 
-                <h3>How many PDF files can I merge?</h3>
-                <p>You can merge unlimited PDF files. The tool processes everything in your browser.</p>
+                <h3 data-en="How many PDF files can I merge?" data-ar="كم عدد ملفات PDF التي يمكنني دمجها؟">How many PDF files can I merge?</h3>
+                <p data-en="You can merge unlimited PDF files. The tool processes everything in your browser." data-ar="يمكنك دمج عدد غير محدود من ملفات PDF. تعالج الأداة كل شيء في متصفحك.">You can merge unlimited PDF files. The tool processes everything in your browser.</p>
 
-                <h3>Is there a file size limit?</h3>
-                <p>While there's no hard limit, very large files (&gt;50MB) may take longer to process depending on your device.</p>
+                <h3 data-en="Is there a file size limit?" data-ar="هل هناك حد لحجم الملف؟">Is there a file size limit?</h3>
+                <p data-en="While there's no hard limit, very large files (>50MB) may take longer to process depending on your device." data-ar="على الرغم من عدم وجود حد صارم، قد تستغرق الملفات الكبيرة جداً (>50 ميجابايت) وقتاً أطول للمعالجة حسب جهازك.">While there's no hard limit, very large files (&gt;50MB) may take longer to process depending on your device.</p>
 
-                <h3>Are my files uploaded to a server?</h3>
-                <p>No! All merging happens in your browser. Your PDFs stay on your device and are never uploaded.</p>
+                <h3 data-en="Are my files uploaded to a server?" data-ar="هل يتم رفع ملفاتي إلى خادم؟">Are my files uploaded to a server?</h3>
+                <p data-en="No! All merging happens in your browser. Your PDFs stay on your device and are never uploaded." data-ar="لا! كل عملية الدمج تتم في متصفحك. ملفات PDF تبقى على جهازك ولا يتم رفعها أبداً.">No! All merging happens in your browser. Your PDFs stay on your device and are never uploaded.</p>
 
-                <h3>Can I change the order of files?</h3>
+                <h3 data-en="Can I change the order of files?" data-ar="هل يمكنني تغيير ترتيب الملفات?">Can I change the order of files?</h3>
                 <p>Yes! Just drag and drop the files in the list to reorder them before merging.</p>
 
                 <h3>What happens to my original files?</h3>

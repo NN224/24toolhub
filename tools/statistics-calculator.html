@@ -55,14 +55,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <h1 class="tool-title" data-en="Statistics Calculator" data-ar="حاسبة الإحصائيات">Statistics Calculator</h1>
             
             <div class="input-section" style="background: var(--bg-secondary); border-radius: 12px; padding: 2rem; margin: 2rem 0;">
-                <h2 style="margin-bottom: 1rem;">Enter Your Data</h2>
-                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                <h2 style="margin-bottom: 1rem;" data-en="Enter Your Data" data-ar="أدخل بياناتك">Enter Your Data</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem;" data-en="Enter numbers separated by commas, spaces, or newlines (e.g., 1, 2, 3, 4, 5 or 1 2 3 4 5)" data-ar="أدخل الأرقام مفصولة بفواصل أو مسافات أو أسطر جديدة (مثال: 1، 2، 3، 4، 5)">
                     Enter numbers separated by commas, spaces, or newlines (e.g., 1, 2, 3, 4, 5 or 1 2 3 4 5)
                 </p>
-                <textarea id="dataInput" class="input-textarea" rows="6" placeholder="Enter your data here... (e.g., 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)" style="width: 100%; padding: 1rem; border: 1px solid var(--border-color); border-radius: 0.5rem; background: var(--bg-primary); color: var(--text-primary); font-family: monospace; font-size: 1rem;"></textarea>
+                <textarea id="dataInput" class="input-textarea" rows="6" placeholder="Enter your data here... (e.g., 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)" data-en-placeholder="Enter your data here..." data-ar-placeholder="أدخل بياناتك هنا..." style="width: 100%; padding: 1rem; border: 1px solid var(--border-color); border-radius: 0.5rem; background: var(--bg-primary); color: var(--text-primary); font-family: monospace; font-size: 1rem;"></textarea>
                 <p id="dataPreview" style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-secondary);"></p>
                 <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
-                    <button id="calculateStats" class="btn btn-primary">Calculate Statistics</button>
+                    <button id="calculateStats" class="btn btn-primary" data-en="Calculate Statistics" data-ar="حساب الإحصائيات">Calculate Statistics</button>
                     <button id="clearStats" class="btn btn-secondary" data-en="Clear" data-ar="مسح">Clear</button>
                 </div>
             </div>
@@ -72,31 +72,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 
                 <div class="stats-results">
                     <div class="stat-card">
-                        <div class="stat-label">Count</div>
+                        <div class="stat-label" data-en="Count" data-ar="العدد">Count</div>
                         <div class="stat-value" id="count">-</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">Sum</div>
+                        <div class="stat-label" data-en="Sum" data-ar="المجموع">Sum</div>
                         <div class="stat-value" id="sum">-</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">Mean (Average)</div>
+                        <div class="stat-label" data-en="Mean (Average)" data-ar="المتوسط الحسابي">Mean (Average)</div>
                         <div class="stat-value" id="mean">-</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">Median</div>
+                        <div class="stat-label" data-en="Median" data-ar="الوسيط">Median</div>
                         <div class="stat-value" id="median">-</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">Mode</div>
+                        <div class="stat-label" data-en="Mode" data-ar="المنوال">Mode</div>
                         <div class="stat-value" id="mode">-</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">Range</div>
+                        <div class="stat-label" data-en="Range" data-ar="المدى">Range</div>
                         <div class="stat-value" id="range">-</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">Variance</div>
+                        <div class="stat-label" data-en="Variance" data-ar="التباين">Variance</div>
                         <div class="stat-value" id="variance">-</div>
                     </div>
                     <div class="stat-card">
@@ -104,27 +104,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         <div class="stat-value" id="stdDev">-</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">Minimum</div>
+                        <div class="stat-label" data-en="Minimum" data-ar="الحد الأدنى">Minimum</div>
                         <div class="stat-value" id="min">-</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">Maximum</div>
+                        <div class="stat-label" data-en="Maximum" data-ar="الحد الأقصى">Maximum</div>
                         <div class="stat-value" id="max">-</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">Q1 (First Quartile)</div>
+                        <div class="stat-label" data-en="Q1 (First Quartile)" data-ar="الربع الأول">Q1 (First Quartile)</div>
                         <div class="stat-value" id="q1">-</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">Q2 (Median)</div>
+                        <div class="stat-label" data-en="Q2 (Median)" data-ar="الربع الثاني (الوسيط)">Q2 (Median)</div>
                         <div class="stat-value" id="q2">-</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">Q3 (Third Quartile)</div>
+                        <div class="stat-label" data-en="Q3 (Third Quartile)" data-ar="الربع الثالث">Q3 (Third Quartile)</div>
                         <div class="stat-value" id="q3">-</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-label">IQR (Interquartile Range)</div>
+                        <div class="stat-label" data-en="IQR (Interquartile Range)" data-ar="المدى الربيعي">IQR (Interquartile Range)</div>
                         <div class="stat-value" id="iqr">-</div>
                     </div>
                 </div>
