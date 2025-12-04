@@ -161,13 +161,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/" class="back-link" data-en="← Back to Home" data-ar="← العودة للرئيسية">← Back to Home</a>
       
       <h1 data-en="Speech to Text" data-ar="تحويل الكلام إلى نص">🎤 Speech to Text Converter</h1>
-      <p class="tool-description">Convert your voice to text instantly with real-time transcription. Perfect for dictation, note-taking, and content creation.</p>
+      <p class="tool-description" data-en="Convert your voice to text instantly with real-time transcription. Perfect for dictation, note-taking, and content creation." data-ar="حوّل صوتك إلى نص فوراً مع التفريغ في الوقت الفعلي. مثالي للإملاء وتدوين الملاحظات وإنشاء المحتوى.">Convert your voice to text instantly with real-time transcription. Perfect for dictation, note-taking, and content creation.</p>
 
       <div class="error-message" id="errorMessage"></div>
 
       <div class="speech-interface">
         <div class="language-selector">
-          <label for="languageSelect" style="color: var(--text-primary); display: block; margin-bottom: 10px;">Select Language:</label>
+          <label for="languageSelect" style="color: var(--text-primary); display: block; margin-bottom: 10px;" data-en="Select Language:" data-ar="اختر اللغة:">Select Language:</label>
           <select id="languageSelect">
             <option value="en-US">English (United States)</option>
             <option value="en-GB">English (United Kingdom)</option>
@@ -186,9 +186,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <button id="micButton" class="microphone-button">🎤</button>
-        <p class="status-text" id="statusText">Click the microphone to start</p>
+        <p class="status-text" id="statusText" data-en="Click the microphone to start" data-ar="انقر على الميكروفون للبدء">Click the microphone to start</p>
 
-        <textarea id="transcriptArea" class="transcript-area" placeholder="Your transcribed text will appear here..."></textarea>
+        <textarea id="transcriptArea" class="transcript-area" placeholder="Your transcribed text will appear here..." data-en-placeholder="Your transcribed text will appear here..." data-ar-placeholder="سيظهر النص المفرغ هنا..."></textarea>
 
         <div class="stats">
           <div class="stat-box">
@@ -207,7 +207,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
 
       <div class="button-group">
-        <button id="downloadBtn" class="btn btn-primary">Download Transcript</button>
+        <button id="downloadBtn" class="btn btn-primary" data-en="Download Transcript" data-ar="تحميل النص المفرغ">Download Transcript</button>
         <button id="copyBtn" class="btn btn-secondary" data-en="Copy Text" data-ar="نسخ النص">Copy Text</button>
         <button id="clearBtn" class="btn btn-secondary" data-en="Clear" data-ar="مسح">Clear</button>
       </div>

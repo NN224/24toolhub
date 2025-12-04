@@ -193,23 +193,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="tool-container">
             <div class="tool-header">
                 <h1 data-en="Image Compressor" data-ar="ضاغط الصور">🖼️ Image Compressor</h1>
-                <p class="tool-description">Compress images without losing quality. Reduce file sizes for faster loading and storage. Supports JPEG, PNG, and WebP formats.</p>
+                <p class="tool-description" data-en="Compress images without losing quality. Reduce file sizes for faster loading and storage. Supports JPEG, PNG, and WebP formats." data-ar="ضغط الصور دون فقدان الجودة. تقليل أحجام الملفات لتحميل وتخزين أسرع. يدعم صيغ JPEG وPNG وWebP.">Compress images without losing quality. Reduce file sizes for faster loading and storage. Supports JPEG, PNG, and WebP formats.</p>
             </div>
 
             <!-- Upload Area -->
             <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
                 <div class="upload-icon">📤</div>
-                <h3>Click to upload or drag &amp; drop</h3>
-                <p>Supports: JPEG, PNG, WebP (Max 10MB)</p>
+                <h3 data-en="Click to upload or drag & drop" data-ar="انقر للرفع أو اسحب وأفلت">Click to upload or drag &amp; drop</h3>
+                <p data-en="Supports: JPEG, PNG, WebP (Max 10MB)" data-ar="يدعم: JPEG, PNG, WebP (حد أقصى 10 ميجابايت)">Supports: JPEG, PNG, WebP (Max 10MB)</p>
                 <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" multiple="">
             </div>
 
             <!-- Quality Control -->
             <div id="qualityControl" class="quality-control" style="display: none;">
-                <h3 data-en="Quality" data-ar="الجودة">Compression Quality</h3>
+                <h3 data-en="Compression Quality" data-ar="جودة الضغط">Compression Quality</h3>
                 <div class="quality-value"><span id="qualityDisplay">80</span>%</div>
                 <input type="range" id="qualitySlider" class="quality-slider" min="10" max="100" value="80">
-                <p style="color: #6c757d; margin-top: 10px;">Higher quality = larger file size. Lower quality = smaller file size.</p>
+                <p style="color: #6c757d; margin-top: 10px;" data-en="Higher quality = larger file size. Lower quality = smaller file size." data-ar="جودة أعلى = حجم ملف أكبر. جودة أقل = حجم ملف أصغر.">Higher quality = larger file size. Lower quality = smaller file size.</p>
             </div>
 
             <!-- Comparison -->

@@ -132,22 +132,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/" class="back-link" data-en="← Back to Home" data-ar="← العودة للرئيسية">← Back to Home</a>
       
       <h1 data-en="YAML to JSON Converter" data-ar="محول YAML إلى JSON">📝 YAML to JSON Converter</h1>
-      <p class="tool-description">Convert YAML data to JSON format instantly. Perfect for configuration files, data transformation, and API development.</p>
+      <p class="tool-description" data-en="Convert YAML data to JSON format instantly. Perfect for configuration files, data transformation, and API development." data-ar="تحويل بيانات YAML إلى صيغة JSON فوراً. مثالي لملفات التكوين وتحويل البيانات وتطوير API.">Convert YAML data to JSON format instantly. Perfect for configuration files, data transformation, and API development.</p>
 
       <div class="stats" id="stats" style="display: none;">
         <div class="stat-box">
           <span class="stat-number" id="yamlSize">0</span>
-          <span class="stat-label">YAML Size (bytes)</span>
+          <span class="stat-label" data-en="YAML Size (bytes)" data-ar="حجم YAML (بايت)">YAML Size (bytes)</span>
         </div>
         <div class="stat-box">
           <span class="stat-number" id="jsonSize">0</span>
-          <span class="stat-label">JSON Size (bytes)</span>
+          <span class="stat-label" data-en="JSON Size (bytes)" data-ar="حجم JSON (بايت)">JSON Size (bytes)</span>
         </div>
       </div>
 
       <div class="converter-container">
         <div class="input-section">
-          <h3>YAML Input</h3>
+          <h3 data-en="YAML Input" data-ar="إدخال YAML">YAML Input</h3>
           <textarea id="yamlInput" class="converter-textarea" placeholder="name: John Doe
 age: 30
 address:
@@ -168,22 +168,22 @@ hobbies:
       <div class="options-section">
         <div class="option-group">
           <input type="checkbox" id="prettyPrint" checked="">
-          <label for="prettyPrint">Pretty Print (Formatted)</label>
+          <label for="prettyPrint" data-en="Pretty Print (Formatted)" data-ar="طباعة منسقة">Pretty Print (Formatted)</label>
         </div>
         <div class="option-group">
           <label for="indentSize" data-en="Indent Size:" data-ar="حجم المسافة البادئة:">Indent Size:</label>
           <select id="indentSize">
-            <option value="2" selected="">2 spaces</option>
-            <option value="4">4 spaces</option>
-            <option value="8">8 spaces</option>
+            <option value="2" selected="" data-en="2 spaces" data-ar="2 مسافات">2 spaces</option>
+            <option value="4" data-en="4 spaces" data-ar="4 مسافات">4 spaces</option>
+            <option value="8" data-en="8 spaces" data-ar="8 مسافات">8 spaces</option>
           </select>
         </div>
       </div>
 
       <div class="button-group">
-        <button id="convertBtn" class="btn btn-primary">Convert to JSON</button>
+        <button id="convertBtn" class="btn btn-primary" data-en="Convert to JSON" data-ar="تحويل إلى JSON">Convert to JSON</button>
         <button id="downloadBtn" class="btn btn-primary" style="display: none;" data-en="Download JSON" data-ar="تحميل JSON">Download JSON</button>
-        <button id="copyBtn" class="btn btn-secondary" style="display: none;">Copy JSON</button>
+        <button id="copyBtn" class="btn btn-secondary" style="display: none;" data-en="Copy JSON" data-ar="نسخ JSON">Copy JSON</button>
         <button id="clearBtn" class="btn btn-secondary" data-en="Clear" data-ar="مسح">Clear</button>
       </div>
 

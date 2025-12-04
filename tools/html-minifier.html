@@ -136,42 +136,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/" class="back-link" data-en="← Back to Home" data-ar="← العودة للرئيسية">← Back to Home</a>
       
       <h1 data-en="HTML Minifier" data-ar="مصغر HTML">📄 HTML Minifier</h1>
-      <p class="tool-description">Compress and minify HTML code to reduce file size and improve website loading speed. Remove comments, whitespace, and optimize your markup.</p>
+      <p class="tool-description" data-en="Compress and minify HTML code to reduce file size and improve website loading speed. Remove comments, whitespace, and optimize your markup." data-ar="ضغط وتصغير كود HTML لتقليل حجم الملف وتحسين سرعة تحميل الموقع. إزالة التعليقات والمسافات وتحسين الترميز.">Compress and minify HTML code to reduce file size and improve website loading speed. Remove comments, whitespace, and optimize your markup.</p>
 
       <div class="options-panel">
-        <h3>Minification Options:</h3>
+        <h3 data-en="Minification Options:" data-ar="خيارات التصغير:">Minification Options:</h3>
         <div class="checkbox-group">
           <input type="checkbox" id="removeComments" checked="">
-          <label for="removeComments">Remove HTML comments</label>
+          <label for="removeComments" data-en="Remove HTML comments" data-ar="إزالة تعليقات HTML">Remove HTML comments</label>
         </div>
         <div class="checkbox-group">
           <input type="checkbox" id="collapseWhitespace" checked="">
-          <label for="collapseWhitespace">Collapse whitespace</label>
+          <label for="collapseWhitespace" data-en="Collapse whitespace" data-ar="ضغط المسافات البيضاء">Collapse whitespace</label>
         </div>
         <div class="checkbox-group">
           <input type="checkbox" id="removeAttributes" checked="">
-          <label for="removeAttributes">Remove optional attributes</label>
+          <label for="removeAttributes" data-en="Remove optional attributes" data-ar="إزالة الخصائص الاختيارية">Remove optional attributes</label>
         </div>
       </div>
 
       <div class="stats" id="stats" style="display: none;">
         <div class="stat-box">
           <span class="stat-number" id="originalSize">0</span>
-          <span class="stat-label">Original Size (bytes)</span>
+          <span class="stat-label" data-en="Original Size (bytes)" data-ar="الحجم الأصلي (بايت)">Original Size (bytes)</span>
         </div>
         <div class="stat-box">
           <span class="stat-number" id="minifiedSize">0</span>
-          <span class="stat-label">Minified Size (bytes)</span>
+          <span class="stat-label" data-en="Minified Size (bytes)" data-ar="الحجم المصغر (بايت)">Minified Size (bytes)</span>
         </div>
         <div class="stat-box">
           <span class="stat-number savings" id="savings">0%</span>
-          <span class="stat-label">Size Reduction</span>
+          <span class="stat-label" data-en="Size Reduction" data-ar="نسبة التقليل">Size Reduction</span>
         </div>
       </div>
 
       <div class="minifier-container">
         <div class="code-section">
-          <h3>Input HTML:</h3>
+          <h3 data-en="Input HTML:" data-ar="إدخال HTML:">Input HTML:</h3>
           <textarea id="htmlInput" class="code-textarea" placeholder="<!-- Paste your HTML code here -->
 <!DOCTYPE html>
 <html lang=&quot;en&quot;>
@@ -204,7 +204,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src=
       </div>
 
       <div class="button-group">
-        <button id="minifyBtn" class="btn btn-primary">Minify HTML</button>
+        <button id="minifyBtn" class="btn btn-primary" data-en="Minify HTML" data-ar="تصغير HTML">Minify HTML</button>
         <button id="downloadBtn" class="btn btn-primary" style="display: none;" data-en="Download" data-ar="تحميل">Download</button>
         <button id="copyBtn" class="btn btn-secondary" style="display: none;" data-en="Copy" data-ar="نسخ">Copy</button>
         <button id="clearBtn" class="btn btn-secondary" data-en="Clear" data-ar="مسح">Clear</button>

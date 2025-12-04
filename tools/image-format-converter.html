@@ -177,19 +177,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/" class="back-link" data-en="← Back to Home" data-ar="← العودة للرئيسية">← Back to Home</a>
       
       <h1 data-en="Image Format Converter" data-ar="محول صيغ الصور">🖼️ Image Format Converter</h1>
-      <p class="tool-description">Convert images between PNG, JPG, and WebP formats. Adjust quality, compare file sizes, and optimize your images.</p>
+      <p class="tool-description" data-en="Convert images between PNG, JPG, and WebP formats. Adjust quality, compare file sizes, and optimize your images." data-ar="تحويل الصور بين صيغ PNG وJPG وWebP. ضبط الجودة ومقارنة أحجام الملفات وتحسين صورك.">Convert images between PNG, JPG, and WebP formats. Adjust quality, compare file sizes, and optimize your images.</p>
 
       <div class="converter-interface">
         <div class="upload-zone" id="uploadZone">
           <div class="upload-icon">📁</div>
-          <div class="upload-text">Drop an image here or click to browse</div>
-          <div class="upload-subtext">Supports: PNG, JPG, JPEG, WebP</div>
+          <div class="upload-text" data-en="Drop an image here or click to browse" data-ar="اسحب صورة هنا أو انقر للتصفح">Drop an image here or click to browse</div>
+          <div class="upload-subtext" data-en="Supports: PNG, JPG, JPEG, WebP" data-ar="يدعم: PNG, JPG, JPEG, WebP">Supports: PNG, JPG, JPEG, WebP</div>
           <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp" style="display: none;">
         </div>
 
         <div id="converterOptions" class="hidden">
           <div class="format-selector">
-            <label for="outputFormat" style="display: block; color: var(--text-primary); margin-bottom: 10px;">Convert to:</label>
+            <label for="outputFormat" style="display: block; color: var(--text-primary); margin-bottom: 10px;" data-en="Convert to:" data-ar="تحويل إلى:">Convert to:</label>
             <select id="outputFormat">
               <option value="image/png">PNG</option>
               <option value="image/jpeg">JPG</option>
@@ -198,7 +198,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
 
           <div class="quality-slider" id="qualitySlider">
-            <label>Quality: <span class="quality-value" id="qualityValue">90</span>%</label>
+            <label data-en="Quality:" data-ar="الجودة:">Quality: <span class="quality-value" id="qualityValue">90</span>%</label>
             <input type="range" id="qualityInput" min="1" max="100" value="90">
           </div>
 

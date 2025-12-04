@@ -198,13 +198,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/" class="back-link" data-en="← Back to Home" data-ar="← العودة للرئيسية">← Back to Home</a>
       
       <h1 data-en="Image Cropper" data-ar="قاطع الصور">✂️ Image Cropper</h1>
-      <p class="tool-description">Crop your images with precision. Choose aspect ratios or crop freely with drag and select.</p>
+      <p class="tool-description" data-en="Crop your images with precision. Choose aspect ratios or crop freely with drag and select." data-ar="قص صورك بدقة. اختر نسب العرض للارتفاع أو قص بحرية بالسحب والتحديد.">Crop your images with precision. Choose aspect ratios or crop freely with drag and select.</p>
 
       <div class="cropper-container">
         <div class="upload-zone" id="uploadZone">
           <div class="upload-icon">🖼️</div>
-          <div class="upload-text">Drop an image here or click to browse</div>
-          <div class="upload-subtext">Supports: JPG, PNG, WebP, GIF</div>
+          <div class="upload-text" data-en="Drop an image here or click to browse" data-ar="اسحب صورة هنا أو انقر للتصفح">Drop an image here or click to browse</div>
+          <div class="upload-subtext" data-en="Supports: JPG, PNG, WebP, GIF" data-ar="يدعم: JPG, PNG, WebP, GIF">Supports: JPG, PNG, WebP, GIF</div>
           <input type="file" id="fileInput" accept="image/*" style="display: none;">
         </div>
 
@@ -221,7 +221,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
           </div>
 
-          <div class="dimensions-display" id="dimensionsDisplay">
+          <div class="dimensions-display" id="dimensionsDisplay" data-en="Select an area to crop" data-ar="حدد منطقة للقص">
             Select an area to crop
           </div>
 
@@ -231,13 +231,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
 
           <div class="button-group" style="margin-top: 20px;">
-            <button id="cropBtn" class="btn btn-primary">Crop Image</button>
+            <button id="cropBtn" class="btn btn-primary" data-en="Crop Image" data-ar="قص الصورة">Crop Image</button>
             <button id="resetBtn" class="btn btn-secondary" data-en="Reset" data-ar="إعادة تعيين">Reset</button>
-            <button id="newImageBtn" class="btn btn-secondary">Upload New Image</button>
+            <button id="newImageBtn" class="btn btn-secondary" data-en="Upload New Image" data-ar="رفع صورة جديدة">Upload New Image</button>
           </div>
 
           <div class="preview-section" id="previewSection">
-            <h3 data-en="Crop" data-ar="قص">Cropped Preview</h3>
+            <h3 data-en="Cropped Preview" data-ar="معاينة المقصوص">Cropped Preview</h3>
             <canvas id="previewCanvas"></canvas>
             <div class="button-group" style="margin-top: 20px;">
               <button id="downloadBtn" class="btn btn-primary" data-en="Download Cropped Image" data-ar="تحميل الصورة المقصوصة">Download Cropped Image</button>

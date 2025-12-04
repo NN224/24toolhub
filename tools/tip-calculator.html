@@ -212,12 +212,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/" class="back-link" data-en="← Back to Home" data-ar="← العودة للرئيسية">← Back to Home</a>
       
       <h1 data-en="Tip Calculator" data-ar="حاسبة البقشيش">💰 Tip Calculator</h1>
-      <p class="tool-description">Calculate tip amount and split your bill easily. Real-time calculations with customizable tip percentages.</p>
+      <p class="tool-description" data-en="Calculate tip amount and split your bill easily. Real-time calculations with customizable tip percentages." data-ar="احسب مبلغ البقشيش وقسّم فاتورتك بسهولة. حسابات فورية مع نسب بقشيش قابلة للتخصيص.">Calculate tip amount and split your bill easily. Real-time calculations with customizable tip percentages.</p>
 
       <div class="calculator-container">
         <div class="input-section">
           <div class="input-group">
-            <label for="billAmount">Bill Amount ($)</label>
+            <label for="billAmount" data-en="Bill Amount ($)" data-ar="مبلغ الفاتورة ($)">Bill Amount ($)</label>
             <input type="number" id="billAmount" placeholder="0.00" step="0.01" min="0">
           </div>
 
@@ -229,7 +229,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <input type="range" id="tipSlider" class="slider" min="0" max="30" value="15">
           </div>
 
-          <label style="display: block; margin-bottom: 10px; font-weight: 600; color: var(--text-primary);">Quick Tip Presets:</label>
+          <label style="display: block; margin-bottom: 10px; font-weight: 600; color: var(--text-primary);" data-en="Quick Tip Presets:" data-ar="نسب بقشيش سريعة:">Quick Tip Presets:</label>
           <div class="preset-buttons">
             <button class="preset-btn" data-tip="10">10%</button>
             <button class="preset-btn" data-tip="15">15%</button>
@@ -250,7 +250,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="result-amount" id="tipAmount">$0.00</span>
           </div>
           <div class="result-card">
-            <div class="result-label">Total Bill</div>
+            <div class="result-label" data-en="Total Bill" data-ar="إجمالي الفاتورة">Total Bill</div>
             <span class="result-amount" id="totalAmount">$0.00</span>
           </div>
           <div class="result-card">
@@ -261,19 +261,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div class="summary-box">
           <div class="summary-row">
-            <span>Bill Amount:</span>
+            <span data-en="Bill Amount:" data-ar="مبلغ الفاتورة:">Bill Amount:</span>
             <span id="summaryBill">$0.00</span>
           </div>
           <div class="summary-row">
-            <span>Tip (<span id="summaryTipPercent">15</span>%):</span>
+            <span data-en="Tip" data-ar="البقشيش">Tip (<span id="summaryTipPercent">15</span>%):</span>
             <span id="summaryTip">$0.00</span>
           </div>
           <div class="summary-row">
-            <span>Number of People:</span>
+            <span data-en="Number of People:" data-ar="عدد الأشخاص:">Number of People:</span>
             <span id="summaryPeople">1</span>
           </div>
           <div class="summary-row">
-            <span>Total:</span>
+            <span data-en="Total:" data-ar="الإجمالي:">Total:</span>
             <span id="summaryTotal">$0.00</span>
           </div>
         </div>
