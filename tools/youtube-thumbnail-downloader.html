@@ -204,16 +204,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="tool-container">
             <div class="tool-header">
                 <h1 data-en="YouTube Thumbnail Downloader" data-ar="تحميل صور يوتيوب المصغرة">📺 YouTube Thumbnail Downloader</h1>
-                <p class="tool-description">Download high-quality thumbnails from any YouTube video. Get HD, SD, and default resolution thumbnails instantly.</p>
+                <p class="tool-description" data-en="Download high-quality thumbnails from any YouTube video. Get HD, SD, and default resolution thumbnails instantly." data-ar="تحميل صور مصغرة عالية الجودة من أي فيديو يوتيوب. احصل على صور بدقة HD وSD والدقة الافتراضية فوراً.">Download high-quality thumbnails from any YouTube video. Get HD, SD, and default resolution thumbnails instantly.</p>
             </div>
 
             <!-- Input Section -->
             <div class="tool-section">
-                <label for="videoUrl" class="input-label">
+                <label for="videoUrl" class="input-label" data-en="YouTube Video URL:" data-ar="رابط فيديو يوتيوب:">
                     <strong>YouTube Video URL:</strong>
                 </label>
                 <div class="input-group">
-                    <input type="text" id="videoUrl" class="text-input" placeholder="https://www.youtube.com/watch?v=VIDEO_ID or https://youtu.be/VIDEO_ID" style="flex: 1;">
+                    <input type="text" id="videoUrl" class="text-input" placeholder="https://www.youtube.com/watch?v=VIDEO_ID or https://youtu.be/VIDEO_ID" data-en-placeholder="Paste YouTube URL here..." data-ar-placeholder="الصق رابط يوتيوب هنا..." style="flex: 1;">
                     <button onclick="getThumbnails()" class="btn btn-primary" data-en="Get Thumbnails" data-ar="الحصول على الصور المصغرة">Get Thumbnails</button>
                     <button onclick="clearAll()" class="btn btn-secondary" data-en="Clear" data-ar="مسح">Clear</button>
                 </div>
@@ -221,17 +221,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <!-- Example Section -->
             <div class="example-section">
-                <h3>💡 Try with example videos:</h3>
+                <h3 data-en="Try with example videos:" data-ar="جرب مع فيديوهات تجريبية:">💡 Try with example videos:</h3>
                 <div class="example-urls">
-                    <button class="example-btn" onclick="useExample('dQw4w9WgXcQ')">Example 1</button>
-                    <button class="example-btn" onclick="useExample('9bZkp7q19f0')">Example 2</button>
-                    <button class="example-btn" onclick="useExample('jNQXAC9IVRw')">Example 3</button>
+                    <button class="example-btn" onclick="useExample('dQw4w9WgXcQ')" data-en="Example 1" data-ar="مثال 1">Example 1</button>
+                    <button class="example-btn" onclick="useExample('9bZkp7q19f0')" data-en="Example 2" data-ar="مثال 2">Example 2</button>
+                    <button class="example-btn" onclick="useExample('jNQXAC9IVRw')" data-en="Example 3" data-ar="مثال 3">Example 3</button>
                 </div>
             </div>
 
             <!-- Video Preview -->
             <div id="videoPreview" class="video-preview">
-                <div class="video-title" id="videoTitle">Video ID: <span id="videoId"></span></div>
+                <div class="video-title" id="videoTitle" data-en="Video ID:" data-ar="معرف الفيديو:">Video ID: <span id="videoId"></span></div>
             </div>
 
             <!-- Thumbnails Grid -->
@@ -239,24 +239,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <!-- How to Use -->
             <div class="tool-section">
-                <h2>📖 How to Use</h2>
+                <h2 data-en="How to Use" data-ar="كيفية الاستخدام">📖 How to Use</h2>
                 <ol>
-                    <li>Copy the YouTube video URL from your browser</li>
-                    <li>Paste it in the input field above</li>
-                    <li>Click "Get Thumbnails" to see all available sizes</li>
-                    <li>Click "Download" on your preferred quality to save the image</li>
+                    <li data-en="Copy the YouTube video URL from your browser" data-ar="انسخ رابط فيديو يوتيوب من متصفحك">Copy the YouTube video URL from your browser</li>
+                    <li data-en="Paste it in the input field above" data-ar="الصقه في حقل الإدخال أعلاه">Paste it in the input field above</li>
+                    <li data-en="Click Get Thumbnails to see all available sizes" data-ar="انقر على الحصول على الصور المصغرة لرؤية جميع الأحجام المتاحة">Click "Get Thumbnails" to see all available sizes</li>
+                    <li data-en="Click Download on your preferred quality to save the image" data-ar="انقر على تحميل بالجودة المفضلة لحفظ الصورة">Click "Download" on your preferred quality to save the image</li>
                 </ol>
             </div>
 
             <!-- Features -->
             <div class="tool-section">
-                <h2>✨ Features</h2>
+                <h2 data-en="Features" data-ar="الميزات">✨ Features</h2>
                 <ul>
-                    <li><strong>Multiple Resolutions:</strong> Get thumbnails in MaxRes (1280x720), SD (640x480), HQ (480x360), MQ (320x180), and Default (120x90)</li>
-                    <li><strong>Instant Download:</strong> Download any thumbnail with a single click</li>
-                    <li><strong>No Login Required:</strong> Use completely free without any registration</li>
-                    <li><strong>Works Offline:</strong> All processing happens in your browser</li>
-                    <li><strong>Privacy First:</strong> Your data never leaves your device</li>
+                    <li data-en="Multiple Resolutions: Get thumbnails in MaxRes (1280x720), SD (640x480), HQ (480x360), MQ (320x180), and Default (120x90)" data-ar="دقات متعددة: احصل على صور بدقة MaxRes وSD وHQ وMQ والافتراضية"><strong>Multiple Resolutions:</strong> Get thumbnails in MaxRes (1280x720), SD (640x480), HQ (480x360), MQ (320x180), and Default (120x90)</li>
+                    <li data-en="Instant Download: Download any thumbnail with a single click" data-ar="تحميل فوري: حمّل أي صورة بنقرة واحدة"><strong>Instant Download:</strong> Download any thumbnail with a single click</li>
+                    <li data-en="No Login Required: Use completely free without any registration" data-ar="بدون تسجيل: استخدم مجاناً بدون أي تسجيل"><strong>No Login Required:</strong> Use completely free without any registration</li>
+                    <li data-en="Works Offline: All processing happens in your browser" data-ar="يعمل بدون إنترنت: كل المعالجة تتم في متصفحك"><strong>Works Offline:</strong> All processing happens in your browser</li>
+                    <li data-en="Privacy First: Your data never leaves your device" data-ar="الخصوصية أولاً: بياناتك لا تغادر جهازك أبداً"><strong>Privacy First:</strong> Your data never leaves your device</li>
                 </ul>
             </div>
 
@@ -265,18 +265,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <!-- FAQ -->
             <div class="tool-section">
-                <h2>❓ Frequently Asked Questions</h2>
+                <h2 data-en="Frequently Asked Questions" data-ar="الأسئلة الشائعة">❓ Frequently Asked Questions</h2>
                 
-                <h3>What video URL formats are supported?</h3>
-                <p>We support all YouTube URL formats including:</p>
+                <h3 data-en="What video URL formats are supported?" data-ar="ما صيغ روابط الفيديو المدعومة؟">What video URL formats are supported?</h3>
+                <p data-en="We support all YouTube URL formats including:" data-ar="ندعم جميع صيغ روابط يوتيوب بما في ذلك:">We support all YouTube URL formats including:</p>
                 <ul>
                     <li>https://www.youtube.com/watch?v=VIDEO_ID</li>
                     <li>https://youtu.be/VIDEO_ID</li>
                     <li>https://m.youtube.com/watch?v=VIDEO_ID</li>
                 </ul>
 
-                <h3 data-en="High Quality" data-ar="جودة عالية">Are the thumbnails high quality?</h3>
-                <p>Yes! We provide access to all available thumbnail resolutions, including MaxRes (1280x720) which is the highest quality available.</p>
+                <h3 data-en="Are the thumbnails high quality?" data-ar="هل الصور المصغرة عالية الجودة؟">Are the thumbnails high quality?</h3>
+                <p data-en="Yes! We provide access to all available thumbnail resolutions, including MaxRes (1280x720) which is the highest quality available." data-ar="نعم! نوفر الوصول إلى جميع دقات الصور المصغرة المتاحة، بما في ذلك MaxRes وهي أعلى جودة متاحة.">Yes! We provide access to all available thumbnail resolutions, including MaxRes (1280x720) which is the highest quality available.</p>
 
                 <h3>Is this tool free?</h3>
                 <p>Absolutely! This tool is completely free to use with no limitations.</p>

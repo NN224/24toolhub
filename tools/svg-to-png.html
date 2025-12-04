@@ -195,13 +195,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/" class="back-link" data-en="← Back to Home" data-ar="← العودة للرئيسية">← Back to Home</a>
       
       <h1 data-en="SVG to PNG Converter" data-ar="محول SVG إلى PNG">🎨 SVG to PNG Converter</h1>
-      <p class="tool-description">Convert SVG vector graphics to PNG images with custom dimensions and resolution. Perfect for web graphics, icons, and social media.</p>
+      <p class="tool-description" data-en="Convert SVG vector graphics to PNG images with custom dimensions and resolution. Perfect for web graphics, icons, and social media." data-ar="تحويل رسومات SVG المتجهة إلى صور PNG بأبعاد ودقة مخصصة. مثالي لرسومات الويب والأيقونات ووسائل التواصل الاجتماعي.">Convert SVG vector graphics to PNG images with custom dimensions and resolution. Perfect for web graphics, icons, and social media.</p>
 
       <div class="converter-interface">
         <div class="upload-zone" id="uploadZone">
           <div class="upload-icon">📄</div>
-          <div class="upload-text">Drop an SVG file here or click to browse</div>
-          <div class="upload-subtext">Supports: .svg files</div>
+          <div class="upload-text" data-en="Drop an SVG file here or click to browse" data-ar="اسحب ملف SVG هنا أو انقر للتصفح">Drop an SVG file here or click to browse</div>
+          <div class="upload-subtext" data-en="Supports: .svg files" data-ar="يدعم: ملفات .svg">Supports: .svg files</div>
           <input type="file" id="fileInput" accept=".svg,image/svg+xml" style="display: none;">
         </div>
 
@@ -209,28 +209,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="settings-section">
             <div>
               <div class="setting-group">
-                <label for="widthInput">Width (px):</label>
+                <label for="widthInput" data-en="Width (px):" data-ar="العرض (بكسل):">Width (px):</label>
                 <input type="number" id="widthInput" value="800" min="1" max="10000">
               </div>
               <div class="setting-group">
-                <label for="heightInput">Height (px):</label>
+                <label for="heightInput" data-en="Height (px):" data-ar="الارتفاع (بكسل):">Height (px):</label>
                 <input type="number" id="heightInput" value="600" min="1" max="10000">
               </div>
             </div>
             <div>
               <div class="setting-group">
-                <label for="scaleInput">Scale Factor:</label>
+                <label for="scaleInput" data-en="Scale Factor:" data-ar="عامل المقياس:">Scale Factor:</label>
                 <select id="scaleInput">
-                  <option value="1">1x (Standard)</option>
-                  <option value="2" selected="">2x (Retina)</option>
-                  <option value="3">3x (High DPI)</option>
-                  <option value="4">4x (Ultra HD)</option>
+                  <option value="1" data-en="1x (Standard)" data-ar="1x (قياسي)">1x (Standard)</option>
+                  <option value="2" selected="" data-en="2x (Retina)" data-ar="2x (ريتينا)">2x (Retina)</option>
+                  <option value="3" data-en="3x (High DPI)" data-ar="3x (دقة عالية)">3x (High DPI)</option>
+                  <option value="4" data-en="4x (Ultra HD)" data-ar="4x (ألترا HD)">4x (Ultra HD)</option>
                 </select>
               </div>
               <div class="setting-group">
                 <label>
                   <input type="checkbox" id="maintainRatio" checked="">
-                  Maintain Aspect Ratio
+                  <span data-en="Maintain Aspect Ratio" data-ar="الحفاظ على نسبة العرض للارتفاع">Maintain Aspect Ratio</span>
                 </label>
               </div>
             </div>

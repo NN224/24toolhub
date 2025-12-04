@@ -131,23 +131,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/" class="back-link" data-en="← Back to Home" data-ar="← العودة للرئيسية">← Back to Home</a>
       
       <h1 data-en="JSON to CSV Converter" data-ar="محول JSON إلى CSV">📊 JSON to CSV Converter</h1>
-      <p class="tool-description">Convert JSON data to CSV format instantly. Perfect for data export, Excel import, and data analysis.</p>
+      <p class="tool-description" data-en="Convert JSON data to CSV format instantly. Perfect for data export, Excel import, and data analysis." data-ar="تحويل بيانات JSON إلى صيغة CSV فوراً. مثالي لتصدير البيانات واستيرادها إلى Excel وتحليل البيانات.">Convert JSON data to CSV format instantly. Perfect for data export, Excel import, and data analysis.</p>
 
       <div class="stats" id="stats" style="display: none;">
         <div class="stat-box">
           <span class="stat-number" id="rowCount">0</span>
-          <span class="stat-label">Rows</span>
+          <span class="stat-label" data-en="Rows" data-ar="صفوف">Rows</span>
         </div>
         <div class="stat-box">
           <span class="stat-number" id="columnCount">0</span>
-          <span class="stat-label">Columns</span>
+          <span class="stat-label" data-en="Columns" data-ar="أعمدة">Columns</span>
         </div>
       </div>
 
       <div class="converter-container">
         <div class="input-section">
-          <h3>JSON Input</h3>
-          <textarea id="jsonInput" class="converter-textarea" placeholder="[{&quot;name&quot;: &quot;John&quot;, &quot;age&quot;: 30, &quot;city&quot;: &quot;New York&quot;}, {&quot;name&quot;: &quot;Jane&quot;, &quot;age&quot;: 25, &quot;city&quot;: &quot;London&quot;}]"></textarea>
+          <h3 data-en="JSON Input" data-ar="إدخال JSON">JSON Input</h3>
+          <textarea id="jsonInput" class="converter-textarea" placeholder="[{&quot;name&quot;: &quot;John&quot;, &quot;age&quot;: 30, &quot;city&quot;: &quot;New York&quot;}, {&quot;name&quot;: &quot;Jane&quot;, &quot;age&quot;: 25, &quot;city&quot;: &quot;London&quot;}]" data-en-placeholder="Paste your JSON here..." data-ar-placeholder="الصق JSON هنا..."></textarea>
         </div>
 
         <div class="output-section">
@@ -159,23 +159,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="options-section">
         <div class="option-group">
           <input type="checkbox" id="includeHeaders" checked="">
-          <label for="includeHeaders">Include Column Headers</label>
+          <label for="includeHeaders" data-en="Include Column Headers" data-ar="تضمين رؤوس الأعمدة">Include Column Headers</label>
         </div>
         <div class="option-group">
-          <label for="delimiter">Delimiter:</label>
+          <label for="delimiter" data-en="Delimiter:" data-ar="الفاصل:">Delimiter:</label>
           <select id="delimiter">
-            <option value=",">Comma (,)</option>
-            <option value=";">Semicolon (;)</option>
-            <option value="\t">Tab</option>
-            <option value="|">Pipe (|)</option>
+            <option value="," data-en="Comma (,)" data-ar="فاصلة (,)">Comma (,)</option>
+            <option value=";" data-en="Semicolon (;)" data-ar="فاصلة منقوطة (;)">Semicolon (;)</option>
+            <option value="\t" data-en="Tab" data-ar="مسافة Tab">Tab</option>
+            <option value="|" data-en="Pipe (|)" data-ar="خط عمودي (|)">Pipe (|)</option>
           </select>
         </div>
       </div>
 
       <div class="button-group">
-        <button id="convertBtn" class="btn btn-primary">Convert to CSV</button>
+        <button id="convertBtn" class="btn btn-primary" data-en="Convert to CSV" data-ar="تحويل إلى CSV">Convert to CSV</button>
         <button id="downloadBtn" class="btn btn-primary" style="display: none;" data-en="Download CSV" data-ar="تحميل CSV">Download CSV</button>
-        <button id="copyBtn" class="btn btn-secondary" style="display: none;">Copy CSV</button>
+        <button id="copyBtn" class="btn btn-secondary" style="display: none;" data-en="Copy CSV" data-ar="نسخ CSV">Copy CSV</button>
         <button id="clearBtn" class="btn btn-secondary" data-en="Clear" data-ar="مسح">Clear</button>
       </div>
 

@@ -142,27 +142,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/" class="back-link" data-en="← Back to Home" data-ar="← العودة للرئيسية">← Back to Home</a>
       
       <h1 data-en="JSON to XML Converter" data-ar="محول JSON إلى XML">🔄 JSON to XML Converter</h1>
-      <p class="tool-description">Convert JSON data to XML format instantly. Perfect for data transformation, API integration, and XML generation.</p>
+      <p class="tool-description" data-en="Convert JSON data to XML format instantly. Perfect for data transformation, API integration, and XML generation." data-ar="تحويل بيانات JSON إلى صيغة XML فوراً. مثالي لتحويل البيانات ودمج API وإنشاء XML.">Convert JSON data to XML format instantly. Perfect for data transformation, API integration, and XML generation.</p>
 
       <div class="stats" id="stats" style="display: none;">
         <div class="stat-box">
           <span class="stat-number" id="elementCount">0</span>
-          <span class="stat-label">Elements</span>
+          <span class="stat-label" data-en="Elements" data-ar="عناصر">Elements</span>
         </div>
         <div class="stat-box">
           <span class="stat-number" id="depthLevel">0</span>
-          <span class="stat-label">Depth</span>
+          <span class="stat-label" data-en="Depth" data-ar="عمق">Depth</span>
         </div>
         <div class="stat-box">
           <span class="stat-number" id="byteSize">0</span>
-          <span class="stat-label">Bytes</span>
+          <span class="stat-label" data-en="Bytes" data-ar="بايت">Bytes</span>
         </div>
       </div>
 
       <div class="converter-container">
         <div class="input-section">
-          <h3>JSON Input</h3>
-          <textarea id="jsonInput" class="converter-textarea" placeholder="{&quot;name&quot;: &quot;John&quot;, &quot;age&quot;: 30, &quot;city&quot;: &quot;New York&quot;}"></textarea>
+          <h3 data-en="JSON Input" data-ar="إدخال JSON">JSON Input</h3>
+          <textarea id="jsonInput" class="converter-textarea" placeholder="{&quot;name&quot;: &quot;John&quot;, &quot;age&quot;: 30, &quot;city&quot;: &quot;New York&quot;}" data-en-placeholder="Paste your JSON here..." data-ar-placeholder="الصق JSON هنا..."></textarea>
         </div>
 
         <div class="output-section">
@@ -173,23 +173,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="options-section">
         <div class="option-group">
-          <label for="rootElement">Root Element Name:</label>
+          <label for="rootElement" data-en="Root Element Name:" data-ar="اسم العنصر الجذر:">Root Element Name:</label>
           <input type="text" id="rootElement" value="root" placeholder="root">
         </div>
         <div class="option-group">
           <input type="checkbox" id="prettyPrint" checked="">
-          <label for="prettyPrint">Pretty Print (Formatted)</label>
+          <label for="prettyPrint" data-en="Pretty Print (Formatted)" data-ar="طباعة منسقة">Pretty Print (Formatted)</label>
         </div>
         <div class="option-group">
           <input type="checkbox" id="includeDeclaration" checked="">
-          <label for="includeDeclaration">Include XML Declaration</label>
+          <label for="includeDeclaration" data-en="Include XML Declaration" data-ar="تضمين إعلان XML">Include XML Declaration</label>
         </div>
       </div>
 
       <div class="button-group">
-        <button id="convertBtn" class="btn btn-primary">Convert to XML</button>
+        <button id="convertBtn" class="btn btn-primary" data-en="Convert to XML" data-ar="تحويل إلى XML">Convert to XML</button>
         <button id="downloadBtn" class="btn btn-primary" style="display: none;" data-en="Download XML" data-ar="تحميل XML">Download XML</button>
-        <button id="copyBtn" class="btn btn-secondary" style="display: none;">Copy XML</button>
+        <button id="copyBtn" class="btn btn-secondary" style="display: none;" data-en="Copy XML" data-ar="نسخ XML">Copy XML</button>
         <button id="clearBtn" class="btn btn-secondary" data-en="Clear" data-ar="مسح">Clear</button>
       </div>
 
