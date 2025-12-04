@@ -141,10 +141,10 @@
           <span class="logo-text">24ToolHub</span>
         </a>
         <div class="header-actions">
-          <a href="/" class="btn btn-secondary">Home</a>
-          <a href="/blog/" class="btn btn-secondary">Blog</a>
-          <a href="/contact.html" class="btn btn-secondary">Contact</a>
-          <a href="/about.html" class="btn btn-secondary">About</a>
+          <a href="/" class="btn btn-secondary" data-en="Home" data-ar="الرئيسية">Home</a>
+          <a href="/blog/" class="btn btn-secondary" data-en="Blog" data-ar="المدونة">Blog</a>
+          <a href="/contact.html" class="btn btn-secondary" data-en="Contact" data-ar="اتصل بنا">Contact</a>
+          <a href="/about.html" class="btn btn-secondary" data-en="About" data-ar="عن الموقع">About</a>
           <button id="langSwitcher" class="lang-switcher">العربية</button>
         </div>
       </div>
@@ -157,13 +157,13 @@
     <main class="main-content">
       <div class="tool-container">
         <div class="tool-header">
-          <a href="/" class="back-link">← Back to Home</a>
-          <h1 class="tool-title">Contact Us</h1>
-          <p class="tool-description">We'd love to hear from you! Get in touch with our team.</p>
+          <a href="/" class="back-link" data-en="← Back to Home" data-ar="← العودة للرئيسية">← Back to Home</a>
+          <h1 class="tool-title" data-en="Contact Us" data-ar="اتصل بنا">Contact Us</h1>
+          <p class="tool-description" data-en="We'd love to hear from you! Get in touch with our team." data-ar="نحب أن نسمع منك! تواصل مع فريقنا.">We'd love to hear from you! Get in touch with our team.</p>
         </div>
 
         <!-- Success Message -->
-        <div id="successMessage" class="success-message">
+        <div id="successMessage" class="success-message" data-en="Thank you! Your message has been sent successfully. We'll get back to you as soon as possible." data-ar="شكراً لك! تم إرسال رسالتك بنجاح. سنرد عليك في أقرب وقت ممكن.">
           <strong>✅ Thank you!</strong> Your message has been sent successfully. We'll get back to you as soon as possible.
         </div>
 
@@ -180,35 +180,35 @@
             <input type="checkbox" name="botcheck" style="display: none;">
 
             <div class="form-group">
-              <label for="name" class="form-label">Your Name *</label>
-              <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" required>
+              <label for="name" class="form-label" data-en="Your Name *" data-ar="اسمك *">Your Name *</label>
+              <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" data-en-placeholder="John Doe" data-ar-placeholder="محمد أحمد" required>
             </div>
 
             <div class="form-group">
-              <label for="email" class="form-label">Email Address *</label>
+              <label for="email" class="form-label" data-en="Email Address *" data-ar="البريد الإلكتروني *">Email Address *</label>
               <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com" required>
             </div>
 
             <div class="form-group">
-              <label for="subject" class="form-label">Subject *</label>
+              <label for="subject" class="form-label" data-en="Subject *" data-ar="الموضوع *">Subject *</label>
               <select id="subject" name="inquiry_type" class="form-select" required>
-                <option value="">Select a topic...</option>
-                <option value="Tool Suggestion">💡 Tool Suggestion</option>
-                <option value="Bug Report">🐛 Bug Report</option>
-                <option value="Feature Request">✨ Feature Request</option>
-                <option value="General Feedback">💬 General Feedback</option>
-                <option value="Business Inquiry">💼 Business Inquiry</option>
-                <option value="Technical Support">🔧 Technical Support</option>
-                <option value="Other">📝 Other</option>
+                <option value="" data-en="Select a topic..." data-ar="اختر موضوعاً...">Select a topic...</option>
+                <option value="Tool Suggestion" data-en="💡 Tool Suggestion" data-ar="💡 اقتراح أداة">💡 Tool Suggestion</option>
+                <option value="Bug Report" data-en="🐛 Bug Report" data-ar="🐛 تقرير خطأ">🐛 Bug Report</option>
+                <option value="Feature Request" data-en="✨ Feature Request" data-ar="✨ طلب ميزة">✨ Feature Request</option>
+                <option value="General Feedback" data-en="💬 General Feedback" data-ar="💬 ملاحظات عامة">💬 General Feedback</option>
+                <option value="Business Inquiry" data-en="💼 Business Inquiry" data-ar="💼 استفسار تجاري">💼 Business Inquiry</option>
+                <option value="Technical Support" data-en="🔧 Technical Support" data-ar="🔧 دعم تقني">🔧 Technical Support</option>
+                <option value="Other" data-en="📝 Other" data-ar="📝 أخرى">📝 Other</option>
               </select>
             </div>
 
             <div class="form-group">
-              <label for="message" class="form-label">Your Message *</label>
-              <textarea id="message" name="message" class="form-textarea" placeholder="Tell us how we can help you..." required></textarea>
+              <label for="message" class="form-label" data-en="Your Message *" data-ar="رسالتك *">Your Message *</label>
+              <textarea id="message" name="message" class="form-textarea" placeholder="Tell us how we can help you..." data-en-placeholder="Tell us how we can help you..." data-ar-placeholder="أخبرنا كيف يمكننا مساعدتك..." required></textarea>
             </div>
 
-            <button type="submit" class="submit-btn">Send Message →</button>
+            <button type="submit" class="submit-btn" data-en="Send Message →" data-ar="إرسال الرسالة →">Send Message →</button>
           </form>
         </div>
 
@@ -216,38 +216,38 @@
         <div class="contact-info-grid">
           <div class="contact-card">
             <div class="contact-card-icon">💬</div>
-            <h3>General Inquiries</h3>
-            <p>Use the contact form for any questions or feedback about our tools.</p>
+            <h3 data-en="General Inquiries" data-ar="استفسارات عامة">General Inquiries</h3>
+            <p data-en="Use the contact form for any questions or feedback about our tools." data-ar="استخدم نموذج الاتصال لأي أسئلة أو ملاحظات حول أدواتنا.">Use the contact form for any questions or feedback about our tools.</p>
           </div>
           <div class="contact-card">
             <div class="contact-card-icon">🐛</div>
-            <h3>Report Issues</h3>
-            <p>Found a bug? Let us know and we'll fix it as soon as possible.</p>
+            <h3 data-en="Report Issues" data-ar="الإبلاغ عن مشاكل">Report Issues</h3>
+            <p data-en="Found a bug? Let us know and we'll fix it as soon as possible." data-ar="وجدت خطأ؟ أخبرنا وسنصلحه في أقرب وقت ممكن.">Found a bug? Let us know and we'll fix it as soon as possible.</p>
           </div>
           <div class="contact-card">
             <div class="contact-card-icon">💡</div>
-            <h3>Suggestions</h3>
-            <p>Have an idea for a new tool? We'd love to hear your suggestions!</p>
+            <h3 data-en="Suggestions" data-ar="اقتراحات">Suggestions</h3>
+            <p data-en="Have an idea for a new tool? We'd love to hear your suggestions!" data-ar="لديك فكرة لأداة جديدة؟ نحب أن نسمع اقتراحاتك!">Have an idea for a new tool? We'd love to hear your suggestions!</p>
           </div>
           <div class="contact-card">
             <div class="contact-card-icon">⏱️</div>
-            <h3>Response Time</h3>
-            <p>We typically respond within 24-48 hours during business days.</p>
+            <h3 data-en="Response Time" data-ar="وقت الاستجابة">Response Time</h3>
+            <p data-en="We typically respond within 24-48 hours during business days." data-ar="نرد عادة خلال 24-48 ساعة خلال أيام العمل.">We typically respond within 24-48 hours during business days.</p>
           </div>
         </div>
 
         <div class="seo-content">
           <div class="seo-section">
-            <h2>Frequently Asked Questions</h2>
+            <h2 data-en="Frequently Asked Questions" data-ar="الأسئلة الشائعة">Frequently Asked Questions</h2>
             
-            <h3>How can I suggest a new tool?</h3>
-            <p>Use the contact form above and select "Tool Suggestion" as the subject. Describe the tool you'd like to see and how it would help you. We review all suggestions and prioritize based on user demand.</p>
+            <h3 data-en="How can I suggest a new tool?" data-ar="كيف يمكنني اقتراح أداة جديدة؟">How can I suggest a new tool?</h3>
+            <p data-en="Use the contact form above and select 'Tool Suggestion' as the subject. Describe the tool you'd like to see and how it would help you. We review all suggestions and prioritize based on user demand." data-ar="استخدم نموذج الاتصال أعلاه واختر 'اقتراح أداة' كموضوع. صف الأداة التي ترغب في رؤيتها وكيف ستساعدك. نراجع جميع الاقتراحات ونرتبها حسب طلب المستخدمين.">Use the contact form above and select "Tool Suggestion" as the subject. Describe the tool you'd like to see and how it would help you. We review all suggestions and prioritize based on user demand.</p>
 
-            <h3>I found a bug. How do I report it?</h3>
-            <p>Please use the contact form and select "Bug Report." Include as much detail as possible: which tool has the issue, what you were trying to do, what happened, and what browser/device you're using.</p>
+            <h3 data-en="I found a bug. How do I report it?" data-ar="وجدت خطأ. كيف أبلغ عنه؟">I found a bug. How do I report it?</h3>
+            <p data-en="Please use the contact form and select 'Bug Report.' Include as much detail as possible: which tool has the issue, what you were trying to do, what happened, and what browser/device you're using." data-ar="يرجى استخدام نموذج الاتصال واختيار 'تقرير خطأ'. قم بتضمين أكبر قدر ممكن من التفاصيل: أي أداة بها المشكلة، ماذا كنت تحاول فعله، ماذا حدث، وما المتصفح/الجهاز الذي تستخدمه.">Please use the contact form and select "Bug Report." Include as much detail as possible: which tool has the issue, what you were trying to do, what happened, and what browser/device you're using.</p>
 
-            <h3>Are your tools really free?</h3>
-            <p>Yes! All tools on 24ToolHub are completely free to use. We're supported by advertising, which allows us to keep everything free for our users.</p>
+            <h3 data-en="Are your tools really free?" data-ar="هل أدواتكم مجانية حقاً؟">Are your tools really free?</h3>
+            <p data-en="Yes! All tools on 24ToolHub are completely free to use. We're supported by advertising, which allows us to keep everything free for our users." data-ar="نعم! جميع الأدوات على 24ToolHub مجانية تماماً للاستخدام. نحن مدعومون بالإعلانات، مما يتيح لنا إبقاء كل شيء مجانياً لمستخدمينا.">Yes! All tools on 24ToolHub are completely free to use. We're supported by advertising, which allows us to keep everything free for our users.</p>
 
             <h3>Do you store my data?</h3>
             <p>Most of our tools process data directly in your browser—your data never leaves your device. For details, please review our <a href="/privacy.html" style="color: var(--accent-primary);">Privacy Policy</a>.</p>
