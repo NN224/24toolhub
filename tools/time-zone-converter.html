@@ -191,21 +191,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="/" class="back-link" data-en="← Back to Home" data-ar="← العودة للرئيسية">← Back to Home</a>
       
       <h1 data-en="Time Zone Converter" data-ar="محول المنطقة الزمنية">🌍 Time Zone Converter</h1>
-      <p class="tool-description">Convert time between different time zones instantly. See current times and calculate time differences.</p>
+      <p class="tool-description" data-en="Convert time between different time zones instantly. See current times and calculate time differences." data-ar="تحويل الوقت بين المناطق الزمنية المختلفة فوراً. شاهد الأوقات الحالية واحسب فروقات الوقت.">Convert time between different time zones instantly. See current times and calculate time differences.</p>
 
       <div class="converter-container">
         <div class="timezone-selector">
           <div class="timezone-box">
-            <label for="sourceTimezone">From Time Zone:</label>
+            <label for="sourceTimezone" data-en="From Time Zone:" data-ar="من المنطقة الزمنية:">From Time Zone:</label>
             <select id="sourceTimezone"></select>
             <div class="current-time" id="sourceCurrentTime">--:--</div>
             <div class="timezone-name" id="sourceTimezoneName"></div>
           </div>
 
-          <button class="swap-btn" id="swapBtn" title="Swap timezones">⇄</button>
+          <button class="swap-btn" id="swapBtn" title="Swap timezones" data-en="Swap" data-ar="تبديل">⇄</button>
 
           <div class="timezone-box">
-            <label for="targetTimezone">To Time Zone:</label>
+            <label for="targetTimezone" data-en="To Time Zone:" data-ar="إلى المنطقة الزمنية:">To Time Zone:</label>
             <select id="targetTimezone"></select>
             <div class="current-time" id="targetCurrentTime">--:--</div>
             <div class="timezone-name" id="targetTimezoneName"></div>
@@ -213,13 +213,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <div class="datetime-input">
-          <label for="dateTimeInput">Select Date &amp; Time to Convert:</label>
+          <label for="dateTimeInput" data-en="Select Date & Time to Convert:" data-ar="اختر التاريخ والوقت للتحويل:">Select Date &amp; Time to Convert:</label>
           <input type="datetime-local" id="dateTimeInput">
         </div>
 
         <div class="button-group">
-          <button id="convertBtn" class="btn btn-primary">Convert Time</button>
-          <button id="useNowBtn" class="btn btn-secondary">Use Current Time</button>
+          <button id="convertBtn" class="btn btn-primary" data-en="Convert Time" data-ar="تحويل الوقت">Convert Time</button>
+          <button id="useNowBtn" class="btn btn-secondary" data-en="Use Current Time" data-ar="استخدم الوقت الحالي">Use Current Time</button>
         </div>
 
         <div class="result-box" id="resultBox" style="display: none;">
@@ -229,7 +229,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <div class="time-difference" id="timeDifference">
-          <h3>Time Difference</h3>
+          <h3 data-en="Time Difference" data-ar="فرق الوقت">Time Difference</h3>
           <div class="difference-text" id="differenceText">--</div>
         </div>
       </div>
